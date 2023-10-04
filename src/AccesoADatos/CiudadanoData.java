@@ -69,4 +69,29 @@ public class CiudadanoData {
         return ciudadanos;
     }
     
+    public void modificarCiudadano(Ciudadano ciudadano) {
+
+        String sql = "UPDATE ciudadano SET nombre_completo = ?, correo_electronico = ?, telefono = ? ,patologia = ?, ambito_laboral = ? WHERE dni = ?";
+        PreparedStatement ps = null;
+
+        try {
+            ps = con.prepareStatement(sql);
+           
+            ps.setString(1, ciudadano.getNombre_completo());
+            ps.setString(2, ciudadano.getCorreo_electronico());
+            ps.setInt(3, ciudadano.getTelefono());
+            ps.setString(4, ciudadano.getPatologia());
+            ps.setString(5, ciudadano.getAmbito_laboral());
+            ps.setInt(6, ciudadano.getDni());
+            int exito = ps.executeUpdate();
+
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Modificado Exitosamente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "El ciudadano no existe");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Ciudadano " + ex.getMessage());
+        }
+    }
 }
