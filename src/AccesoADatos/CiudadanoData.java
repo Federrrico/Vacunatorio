@@ -33,7 +33,7 @@ public class CiudadanoData {
         String sql = "INSERT INTO ciudadano (dni, nombre_completo, correo_electronico, telefono, patologia, ambito_laboral) VALUES (?, ?, ?, ?, ?, ?)";
 
         try {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, ciudadano.getDni());
             ps.setString(2, ciudadano.getNombre_completo());
             ps.setString(3, ciudadano.getCorreo_electronico());
@@ -41,17 +41,11 @@ public class CiudadanoData {
             ps.setString(5, ciudadano.getPatologia());
             ps.setString(6, ciudadano.getAmbito_laboral());
             ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) {
-                ciudadano.setDni(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Ciudadano añadido con exito.");
-            }
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Ciudadano existente");
         }
     }
-    
     
     public List<Ciudadano> listarCiudadanos() {
         List<Ciudadano> ciudadanos = new ArrayList<>();
