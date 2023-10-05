@@ -41,6 +41,8 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
+        setClosable(true);
+
         jLabel5.setText("Patología:");
 
         jLabel6.setText("Ambito laboral:");

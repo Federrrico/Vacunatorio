@@ -5,6 +5,8 @@
  */
 package Vistas;
 
+import javax.swing.JInternalFrame;
+
 /**
  *
  * @author federico.acenjo
@@ -30,7 +32,7 @@ public class Menu extends javax.swing.JFrame {
         escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jCiudadano = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jFormularioCiudadano = new javax.swing.JMenuItem();
         jLaboratorio = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jVacuna = new javax.swing.JMenu();
@@ -55,8 +57,13 @@ public class Menu extends javax.swing.JFrame {
 
         jCiudadano.setText("Ciudadano");
 
-        jMenuItem1.setText("Formulario Ciudadano");
-        jCiudadano.add(jMenuItem1);
+        jFormularioCiudadano.setText("Formulario Ciudadano");
+        jFormularioCiudadano.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormularioCiudadanoActionPerformed(evt);
+            }
+        });
+        jCiudadano.add(jFormularioCiudadano);
 
         jMenuBar1.add(jCiudadano);
 
@@ -97,6 +104,18 @@ public class Menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jFormularioCiudadanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormularioCiudadanoActionPerformed
+        // TODO add your handling code here:
+        for (JInternalFrame iframe : escritorio.getAllFrames()) {
+            escritorio.remove(iframe);
+        }
+        escritorio.repaint();
+        FormularioCiudadano fc = new FormularioCiudadano();
+        fc.setVisible(true);
+        escritorio.add(fc);
+        escritorio.moveToFront(fc);
+    }//GEN-LAST:event_jFormularioCiudadanoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -136,9 +155,9 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jCita;
     private javax.swing.JMenu jCiudadano;
+    private javax.swing.JMenuItem jFormularioCiudadano;
     private javax.swing.JMenu jLaboratorio;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
