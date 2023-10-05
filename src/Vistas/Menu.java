@@ -40,7 +40,7 @@ public class Menu extends javax.swing.JFrame {
         jVacuna = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jCita = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jtCita = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,8 +90,13 @@ public class Menu extends javax.swing.JFrame {
 
         jCita.setText("Cita");
 
-        jMenuItem4.setText("jMenuItem4");
-        jCita.add(jMenuItem4);
+        jtCita.setText("Registro de Cita");
+        jtCita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtCitaActionPerformed(evt);
+            }
+        });
+        jCita.add(jtCita);
 
         jMenuBar1.add(jCita);
 
@@ -122,6 +127,17 @@ public class Menu extends javax.swing.JFrame {
         escritorio.add(fc);
         escritorio.moveToFront(fc);
     }//GEN-LAST:event_jFormularioCiudadanoActionPerformed
+
+    private void jtCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtCitaActionPerformed
+       for (JInternalFrame iframe : escritorio.getAllFrames()) {
+            escritorio.remove(iframe);
+        }
+        escritorio.repaint();
+        Cita fc = new Cita();
+        fc.setVisible(true);
+        escritorio.add(fc);
+        escritorio.moveToFront(fc);
+    }//GEN-LAST:event_jtCitaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,7 +184,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenu jVacuna;
+    private javax.swing.JMenuItem jtCita;
     // End of variables declaration//GEN-END:variables
 }

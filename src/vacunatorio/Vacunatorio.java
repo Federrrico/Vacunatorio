@@ -35,7 +35,7 @@ public class Vacunatorio {
         //cd.guardarCiudadano(fede);
         //ld.guardarLaboratorio(labP1);
         //vd.guardarVacuna(vacP1);
-        cid.guardarCita(citP1);
+        //cid.guardarCita(citP1);
         
         System.out.println("Traemos los Ciudadanos");
         for (Ciudadano ciudadano : cd.listarCiudadanos()) {
