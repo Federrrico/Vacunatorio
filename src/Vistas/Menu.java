@@ -31,7 +31,7 @@ public class Menu extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jCiudadano = new javax.swing.JMenu();
-        jFormualrioCiudadano = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jLaboratorio = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jVacuna = new javax.swing.JMenu();
@@ -61,8 +61,8 @@ public class Menu extends javax.swing.JFrame {
 
         jCiudadano.setText("Ciudadano");
 
-        jFormualrioCiudadano.setText("Formulario Ciudadano");
-        jCiudadano.add(jFormualrioCiudadano);
+        jMenuItem1.setText("Formulario Ciudadano");
+        jCiudadano.add(jMenuItem1);
 
         jMenuBar1.add(jCiudadano);
 
@@ -142,10 +142,10 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jCita;
     private javax.swing.JMenu jCiudadano;
-    private javax.swing.JMenuItem jFormualrioCiudadano;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jLaboratorio;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

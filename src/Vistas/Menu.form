@@ -9,7 +9,7 @@
             <Property name="text" type="java.lang.String" value="Ciudadano"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jFormualrioCiudadano">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Formulario Ciudadano"/>
               </Properties>
