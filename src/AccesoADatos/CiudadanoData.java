@@ -45,6 +45,32 @@ public class CiudadanoData {
         }
     }
     
+    public Ciudadano buscarCiudadano(int dni) {
+        Ciudadano ciudadano = null;
+        String sql = "SELECT * FROM ciudadano WHERE dni = ?";
+        try {
+            PreparedStatement ps;
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, dni);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                ciudadano=new Ciudadano();
+                ciudadano.setDni(dni);
+                ciudadano.setNombre_completo(rs.getString(2));
+                ciudadano.setCorreo_electronico(rs.getString(3));
+                ciudadano.setTelefono(rs.getInt(4));
+                ciudadano.setPatologia(rs.getString(5));
+                ciudadano.setAmbito_laboral(rs.getString(6));
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe el ciudadano");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Ciudadano ");
+        }
+        return ciudadano;
+    }
+    
     public List<Ciudadano> listarCiudadanos() {
         List<Ciudadano> ciudadanos = new ArrayList<>();
         

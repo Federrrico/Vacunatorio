@@ -17,14 +17,14 @@ public class Cita {
     private Ciudadano ciudadano;
     private Date fecha_cita;
     private String centro_vacunacion;
-    private LocalDateTime fecha_colocacion;
+    private Date fecha_colocacion;
     private Vacuna vacuna;
     private int codigo_refuerzo;
 
     public Cita() {
     }
 
-    public Cita(Ciudadano ciudadano, Date fecha_cita, String centro_vacunacion, LocalDateTime fecha_colocacion, Vacuna vacuna, int codigo_refuerzo) {
+    public Cita(Ciudadano ciudadano, Date fecha_cita, String centro_vacunacion, Date fecha_colocacion, Vacuna vacuna, int codigo_refuerzo) {
         this.ciudadano = ciudadano;
         this.fecha_cita = fecha_cita;
         this.centro_vacunacion = centro_vacunacion;
@@ -33,7 +33,7 @@ public class Cita {
         this.codigo_refuerzo = codigo_refuerzo;
     }
 
-    public Cita(int id_cita, Ciudadano ciudadano, Date fecha_cita, String centro_vacunacion, LocalDateTime fecha_colocacion, Vacuna vacuna, int codigo_refuerzo) {
+    public Cita(int id_cita, Ciudadano ciudadano, Date fecha_cita, String centro_vacunacion, Date fecha_colocacion, Vacuna vacuna, int codigo_refuerzo) {
         this.id_cita = id_cita;
         this.ciudadano = ciudadano;
         this.fecha_cita = fecha_cita;
@@ -75,11 +75,11 @@ public class Cita {
         this.centro_vacunacion = centro_vacunacion;
     }
 
-    public LocalDateTime getFecha_colocacion() {
+    public Date getFecha_colocacion() {
         return fecha_colocacion;
     }
 
-    public void setFecha_colocacion(LocalDateTime fecha_colocacion) {
+    public void setFecha_colocacion(Date fecha_colocacion) {
         this.fecha_colocacion = fecha_colocacion;
     }
 
@@ -101,9 +101,8 @@ public class Cita {
 
     @Override
     public String toString() {
-        return "Cita{" + "id_cita=" + id_cita + ", ciudadano=" + ciudadano.getNombre_completo() + ", fecha_cita=" + fecha_cita + ", centro_vacunacion=" + centro_vacunacion + ", fecha_colocacion=" + fecha_colocacion + ", vacuna=" + vacuna.getNombre_vacuna() + ", codigo_refuerzo=" + codigo_refuerzo + '}';
+        return "Cita{" + "id_cita=" + id_cita + ", ciudadano=" + ciudadano + ", fecha_cita=" + fecha_cita + ", centro_vacunacion=" + centro_vacunacion + ", fecha_colocacion=" + fecha_colocacion + ", vacuna=" + vacuna + ", codigo_refuerzo=" + codigo_refuerzo + '}';
     }
-    
-    
-    
+
+
 }
