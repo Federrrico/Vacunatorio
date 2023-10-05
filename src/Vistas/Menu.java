@@ -30,6 +30,7 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         escritorio = new javax.swing.JDesktopPane();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jCiudadano = new javax.swing.JMenu();
         jFormularioCiudadano = new javax.swing.JMenuItem();
@@ -44,15 +45,20 @@ public class Menu extends javax.swing.JFrame {
 
         escritorio.setPreferredSize(new java.awt.Dimension(1080, 507));
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/covid.jpg"))); // NOI18N
+        jLabel1.setText("jLabel1");
+
+        escritorio.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1080, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 507, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jCiudadano.setText("Ciudadano");
@@ -156,6 +162,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jCita;
     private javax.swing.JMenu jCiudadano;
     private javax.swing.JMenuItem jFormularioCiudadano;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jLaboratorio;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
