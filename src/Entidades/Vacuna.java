@@ -25,15 +25,16 @@ public class Vacuna {
     }
 
     public Vacuna(Laboratorio laboratorio, String nombre_vacuna, double dosis, String antigeno, LocalDate fecha_vencimiento, Boolean aplicada) {
+        this.laboratorio = laboratorio;
         this.nombre_vacuna = nombre_vacuna;
         this.dosis = dosis;
         this.antigeno = antigeno;
         this.fecha_vencimiento = fecha_vencimiento;
         this.aplicada = aplicada;
-        this.laboratorio = laboratorio;
     }
 
     public Vacuna(int nro_serie, Laboratorio laboratorio, String nombre_vacuna, double dosis, String antigeno, LocalDate fecha_vencimiento, Boolean aplicada) {
+        this.laboratorio = laboratorio;
         this.nro_serie = nro_serie;
         this.nombre_vacuna = nombre_vacuna;
         this.dosis = dosis;
@@ -100,7 +101,7 @@ public class Vacuna {
 
     @Override
     public String toString() {
-        return "Vacuna{" + "nro_serie=" + nro_serie + ", laboratorio=" + laboratorio + ", nombre_vacuna=" + nombre_vacuna + ", dosis=" + dosis + ", antigeno=" + antigeno + ", fecha_vencimiento=" + fecha_vencimiento + ", aplicada=" + aplicada + '}';
+        return "Vacuna{" + "nro_serie=" + nro_serie + ", laboratorio=" + laboratorio.getCuit() + ", nombre_vacuna=" + nombre_vacuna + ", dosis=" + dosis + ", antigeno=" + antigeno + ", fecha_vencimiento=" + fecha_vencimiento + ", aplicada=" + aplicada + '}';
     }
 
  

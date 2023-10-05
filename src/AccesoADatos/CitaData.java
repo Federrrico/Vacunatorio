@@ -13,6 +13,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -40,11 +43,11 @@ public class CitaData {
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
-            ps.setInt(2, cita.getCiudadano().getDni());
-            ps.setTimestamp(3, new Timestamp(cita.getFecha_cita().getTime()));
-            ps.setString(4, cita.getCentro_vacunacion());
-            ps.setObject(5, cita.getFecha_colocacion());
-            ps.setInt(6, cita.getVacuna().getNro_serie());
+            ps.setInt(1, cita.getCiudadano().getDni());
+            ps.setTimestamp(2, Timestamp.valueOf(cita.getFecha_cita()));
+            ps.setString(3, cita.getCentro_vacunacion());
+            ps.setTimestamp(4, Timestamp.valueOf(cita.getFecha_colocacion()));
+            ps.setInt(5, cita.getVacuna().getNro_serie());
             ps.setInt(6, cita.getCodigo_refuerzo());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -70,9 +73,10 @@ public class CitaData {
                 cita=new Cita();
                 cita.setId_cita(id);
                 cita.setCiudadano(ciudadanoD.buscarCiudadano(rs.getInt(2)));
-                cita.setFecha_cita(new Date (rs.getTimestamp(3).getTime()));
+                //LocalDateTime.of(LocalDate.of(2023, 12, 10), LocalTime.MIN)
+                cita.setFecha_cita(rs.getTimestamp(3).toLocalDateTime());
                 cita.setCentro_vacunacion(rs.getString(4));
-                cita.setFecha_colocacion(new Date (rs.getTimestamp(5).getTime()));
+                cita.setFecha_colocacion(rs.getTimestamp(5).toLocalDateTime());
                 cita.setVacuna(vacunaD.buscarVacuna(rs.getInt(6)));
                 cita.setCodigo_refuerzo(rs.getInt(7));
             } else {
@@ -96,9 +100,9 @@ public class CitaData {
                 Cita cita = new Cita();
                 cita.setId_cita(rs.getInt("id_cita"));
                 cita.setCiudadano(ciudadanoD.buscarCiudadano(rs.getInt("ciudadano")));
-                cita.setFecha_cita(new Date (rs.getTimestamp("fecha_cita").getTime()));
+                cita.setFecha_cita(rs.getTimestamp("fecha_cita").toLocalDateTime());
                 cita.setCentro_vacunacion(rs.getString("centro_vacunacion"));
-                cita.setFecha_colocacion(new Date (rs.getTimestamp("fecha_colocacion").getTime()));
+                cita.setFecha_colocacion(rs.getTimestamp("fecha_colocacion").toLocalDateTime());
                 cita.setVacuna(vacunaD.buscarVacuna(rs.getInt("vacuna")));
                 cita.setCodigo_refuerzo(rs.getInt("codigo_refuerzo"));
                 citas.add(cita);

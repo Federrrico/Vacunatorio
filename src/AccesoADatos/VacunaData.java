@@ -5,11 +5,9 @@
  */
 package AccesoADatos;
 
-import Entidades.Laboratorio;
 import Entidades.Vacuna;
 import java.sql.Connection;
 import java.sql.*;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -19,8 +17,7 @@ import javax.swing.JOptionPane;
  * @author federico.acenjo
  */
 public class VacunaData {
-    private Laboratorio laboratorio;
-    LaboratorioData labD;
+    private LaboratorioData labD;
     private Connection con = null;
 
     public VacunaData() {
@@ -29,8 +26,7 @@ public class VacunaData {
     }
 
     public void guardarVacuna(Vacuna vacuna) {
-
-        String sql = "INSERT INTO vacuna (nro_serie, cuit, dosis, nombre_vacuna, antigeno, fecha_vencimiento, aplicada) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO vacuna (nro_serie, cuit, dosis, nombre_vacuna, antigeno, fecha_vencimiento, aplicada) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -39,11 +35,14 @@ public class VacunaData {
             ps.setDouble(3, vacuna.getDosis());
             ps.setString(4, vacuna.getNombre_vacuna());
             ps.setString(5, vacuna.getAntigeno());
-            ps.setDate(6, Date.valueOf(vacuna.getFecha_vencimiento()));
+            ps.setTimestamp(6, Timestamp.valueOf(vacuna.getFecha_vencimiento().atStartOfDay()));
+            ps.setBoolean(7, vacuna.getAplicada());
             ps.executeUpdate();
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Vacuna existente");
+        } catch (NullPointerException ex) {
+            System.out.println("Null pointer ex: " + ex);
         }
     }
     
@@ -62,7 +61,7 @@ public class VacunaData {
                 vacuna.setDosis(rs.getDouble(3));
                 vacuna.setNombre_vacuna(rs.getString(4));
                 vacuna.setAntigeno(rs.getString(5));
-                vacuna.setFecha_vencimiento(rs.getDate(6).toLocalDate());
+                vacuna.setFecha_vencimiento(rs.getTimestamp(6).toLocalDateTime().toLocalDate());
                 vacuna.setAplicada(rs.getBoolean(7));
             } else {
                 JOptionPane.showMessageDialog(null, "No existe el vacuna");
@@ -84,11 +83,11 @@ public class VacunaData {
             while (rs.next()) {
                 Vacuna vacuna = new Vacuna();
                 vacuna.setNro_serie(rs.getInt("nro_serie"));
-                vacuna.setLaboratorio(labD.buscarLaboratorio(laboratorio.getCuit()));
+                vacuna.setLaboratorio(labD.buscarLaboratorio(rs.getInt("cuit")));
                 vacuna.setDosis(rs.getDouble("dosis"));
                 vacuna.setNombre_vacuna(rs.getString("nombre_vacuna"));
                 vacuna.setAntigeno(rs.getString("antigeno"));
-                vacuna.setFecha_vencimiento(rs.getDate("fecha_vencimiento").toLocalDate());
+                vacuna.setFecha_vencimiento(rs.getTimestamp("fecha_vencimiento").toLocalDateTime().toLocalDate());
                 vacuna.setAplicada(rs.getBoolean("aplicada"));
                 vacunas.add(vacuna);
             }
@@ -111,7 +110,7 @@ public class VacunaData {
             ps.setDouble(2, vacuna.getDosis());
             ps.setString(3, vacuna.getNombre_vacuna());
             ps.setString(4, vacuna.getAntigeno());
-            ps.setDate(5, Date.valueOf(vacuna.getFecha_vencimiento()));
+            ps.setTimestamp(5, Timestamp.valueOf(vacuna.getFecha_vencimiento().atStartOfDay()));
             ps.setBoolean(6, vacuna.getAplicada());
             int exito = ps.executeUpdate();
 

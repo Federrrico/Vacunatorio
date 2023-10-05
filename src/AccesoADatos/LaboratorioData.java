@@ -36,11 +36,11 @@ public class LaboratorioData {
             ps.setInt(1, laboratorio.getCuit());
             ps.setString(2, laboratorio.getNombre());
             ps.setString(3, laboratorio.getPais_origen());
-            ps.setString(5, laboratorio.getDireccion_fiscal());
+            ps.setString(4, laboratorio.getDireccion_fiscal());
             ps.executeUpdate();
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Laboratorio existente");
+            JOptionPane.showMessageDialog(null, "Laboratorio existente " + ex);
         }
     }
     
