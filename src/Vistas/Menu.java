@@ -27,17 +27,77 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        escritorio = new javax.swing.JDesktopPane();
+        jLabel2 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jCiudadano = new javax.swing.JMenu();
+        jFormualrioCiudadano = new javax.swing.JMenuItem();
+        jLaboratorio = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jVacuna = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jCita = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        escritorio.setPreferredSize(new java.awt.Dimension(1080, 507));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/covid.jpg"))); // NOI18N
+        jLabel2.setText("jLabel2");
+
+        escritorio.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
+        escritorio.setLayout(escritorioLayout);
+        escritorioLayout.setHorizontalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        escritorioLayout.setVerticalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jCiudadano.setText("Ciudadano");
+
+        jFormualrioCiudadano.setText("Formulario Ciudadano");
+        jCiudadano.add(jFormualrioCiudadano);
+
+        jMenuBar1.add(jCiudadano);
+
+        jLaboratorio.setText("Laboratorio");
+
+        jMenuItem2.setText("jMenuItem2");
+        jLaboratorio.add(jMenuItem2);
+
+        jMenuBar1.add(jLaboratorio);
+
+        jVacuna.setText("Vacuna");
+
+        jMenuItem3.setText("jMenuItem3");
+        jVacuna.add(jMenuItem3);
+
+        jMenuBar1.add(jVacuna);
+
+        jCita.setText("Cita");
+
+        jMenuItem4.setText("jMenuItem4");
+        jCita.add(jMenuItem4);
+
+        jMenuBar1.add(jCita);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -79,5 +139,16 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDesktopPane escritorio;
+    private javax.swing.JMenu jCita;
+    private javax.swing.JMenu jCiudadano;
+    private javax.swing.JMenuItem jFormualrioCiudadano;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenu jLaboratorio;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenu jVacuna;
     // End of variables declaration//GEN-END:variables
 }
