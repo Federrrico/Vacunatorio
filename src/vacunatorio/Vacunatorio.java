@@ -31,11 +31,11 @@ public class Vacunatorio {
         Vacuna vacP1 = new Vacuna(222555888, labP1, "UZ1", 0.3, "Z01", LocalDate.of(2024, 12, 10), true);
         Cita citP1 = new Cita (fede, LocalDateTime.of(LocalDate.of(2023, 12, 10), LocalTime.of(15, 00)), "Springfield", LocalDateTime.of(LocalDate.of(2023, 12, 10), LocalTime.of(15, 15)), vacP1, 1);
         
-        
         //cd.guardarCiudadano(fede);
         //ld.guardarLaboratorio(labP1);
         //vd.guardarVacuna(vacP1);
         //cid.guardarCita(citP1);
+        cd.modificarCiudadano(new Ciudadano(34155039, "Federico Acenjo", "fedeacen@lkjlkj.com", 1144422255, "casa"));
         
         System.out.println("Traemos los Ciudadanos");
         for (Ciudadano ciudadano : cd.listarCiudadanos()) {
