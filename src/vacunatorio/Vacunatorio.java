@@ -35,9 +35,14 @@ public class Vacunatorio {
         //ld.guardarLaboratorio(labP1);
         //vd.guardarVacuna(vacP1);
         //cid.guardarCita(citP1);
+        System.out.println("Traemos los Ciudadanos antes de la modificacion");
+        for (Ciudadano ciudadano : cd.listarCiudadanos()) {
+            System.out.println(ciudadano.toString());
+        }
+        
         cd.modificarCiudadano(new Ciudadano(34155039, "Federico Acenjo", "fedeacen@lkjlkj.com", 1144422255, "casa"));
         
-        System.out.println("Traemos los Ciudadanos");
+        System.out.println("Traemos los Ciudadanos despues de la modificacion");
         for (Ciudadano ciudadano : cd.listarCiudadanos()) {
             System.out.println(ciudadano.toString());
         }
