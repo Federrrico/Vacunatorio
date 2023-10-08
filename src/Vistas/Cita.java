@@ -46,6 +46,7 @@ public class Cita extends javax.swing.JInternalFrame {
         jSpinField2 = new com.toedter.components.JSpinField();
         jLabel6 = new javax.swing.JLabel();
 
+        setClosable(true);
         setPreferredSize(new java.awt.Dimension(848, 528));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
