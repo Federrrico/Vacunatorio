@@ -239,7 +239,7 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
         jtTelefono.setEditable(true);
         jtPatologia.setEditable(true);
         jtAmbitolab.setEditable(true);
-
+        jbEditar.setText("guardar");
 
     }//GEN-LAST:event_jbEditarActionPerformed
 
