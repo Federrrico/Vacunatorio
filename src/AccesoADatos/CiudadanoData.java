@@ -40,6 +40,7 @@ public class CiudadanoData {
             ps.setString(6, ciudadano.getAmbito_laboral());
             ps.executeUpdate();
             ps.close();
+            JOptionPane.showMessageDialog(null, "Ciudadano agregado exitosamente");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Ciudadano existente");
         }

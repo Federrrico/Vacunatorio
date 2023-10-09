@@ -216,7 +216,7 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
                 c1.setPatologia(jtPatologia.getText());
                 c1.setAmbito_laboral(jtAmbitolab.getText());
                 cd.guardarCiudadano(c1);
-                JOptionPane.showMessageDialog(this, "Ciudadano agregado exitosamente");
+               
             } else {
                 JOptionPane.showMessageDialog(this, "Tenes que completar todos los campos");
             }
