@@ -15,21 +15,21 @@ public class Ciudadano {
     private int dni;
     private String nombre_completo;
     private String correo_electronico;
-    private int telefono;
+    private Long telefono;
     private String patologia = null;
     private String ambito_laboral;
 
     public Ciudadano() {
     }
 
-    public Ciudadano(String nombre_completo, String correo_electronico, int telefono, String ambito_laboral) {
+    public Ciudadano(String nombre_completo, String correo_electronico, Long telefono, String ambito_laboral) {
         this.nombre_completo = nombre_completo;
         this.correo_electronico = correo_electronico;
         this.telefono = telefono;
         this.ambito_laboral = ambito_laboral;
     }
 
-    public Ciudadano(int dni, String nombre_completo, String correo_electronico, int telefono, String ambito_laboral) {
+    public Ciudadano(int dni, String nombre_completo, String correo_electronico, Long telefono, String ambito_laboral) {
         this.dni = dni;
         this.nombre_completo = nombre_completo;
         this.correo_electronico = correo_electronico;
@@ -61,11 +61,11 @@ public class Ciudadano {
         this.correo_electronico = correo_electronico;
     }
 
-    public int getTelefono() {
+    public Long getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(Long telefono) {
         this.telefono = telefono;
     }
 

@@ -35,7 +35,7 @@ public class CiudadanoData {
             ps.setInt(1, ciudadano.getDni());
             ps.setString(2, ciudadano.getNombre_completo());
             ps.setString(3, ciudadano.getCorreo_electronico());
-            ps.setInt(4, ciudadano.getTelefono());
+            ps.setLong(4, ciudadano.getTelefono());
             ps.setString(5, ciudadano.getPatologia());
             ps.setString(6, ciudadano.getAmbito_laboral());
             ps.executeUpdate();
@@ -58,7 +58,7 @@ public class CiudadanoData {
                 ciudadano.setDni(dni);
                 ciudadano.setNombre_completo(rs.getString(2));
                 ciudadano.setCorreo_electronico(rs.getString(3));
-                ciudadano.setTelefono(rs.getInt(4));
+                ciudadano.setTelefono(rs.getLong(4));
                 ciudadano.setPatologia(rs.getString(5));
                 ciudadano.setAmbito_laboral(rs.getString(6));
             } else {
@@ -83,7 +83,7 @@ public class CiudadanoData {
                 ciudadano.setDni(rs.getInt("dni"));
                 ciudadano.setNombre_completo(rs.getString("nombre_completo"));
                 ciudadano.setCorreo_electronico(rs.getString("correo_electronico"));
-                ciudadano.setTelefono(rs.getInt("telefono"));
+                ciudadano.setTelefono(rs.getLong("telefono"));
                 ciudadano.setPatologia(rs.getString("patologia"));
                 ciudadano.setAmbito_laboral(rs.getString("ambito_laboral"));
                 ciudadanos.add(ciudadano);
@@ -105,7 +105,7 @@ public class CiudadanoData {
            
             ps.setString(1, ciudadano.getNombre_completo());
             ps.setString(2, ciudadano.getCorreo_electronico());
-            ps.setInt(3, ciudadano.getTelefono());
+            ps.setLong(3, ciudadano.getTelefono());
             ps.setString(4, ciudadano.getPatologia());
             ps.setString(5, ciudadano.getAmbito_laboral());
             ps.setInt(6, ciudadano.getDni());

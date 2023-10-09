@@ -5,6 +5,11 @@
  */
 package Vistas;
 
+import AccesoADatos.CiudadanoData;
+import AccesoADatos.Conexion;
+import Entidades.Ciudadano;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Editor
@@ -29,13 +34,13 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
 
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        jtDni = new javax.swing.JTextField();
+        jtNombre = new javax.swing.JTextField();
+        jtCorreo = new javax.swing.JTextField();
+        jtTelefono = new javax.swing.JTextField();
+        jtPatologia = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        jtAmbitolab = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -63,12 +68,27 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
 
         jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/iconoBuscar.png"))); // NOI18N
         jbBuscar.setText("Buscar");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
 
         jbAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/iconoGuardar.png"))); // NOI18N
         jbAgregar.setText("Agregar");
+        jbAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAgregarActionPerformed(evt);
+            }
+        });
 
         jbEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/iconoEditar.png"))); // NOI18N
         jbEditar.setText("Editar");
+        jbEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEditarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -85,12 +105,12 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField3)
-                    .addComponent(jTextField4)
-                    .addComponent(jTextField5)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtDni)
+                    .addComponent(jtNombre)
+                    .addComponent(jtCorreo)
+                    .addComponent(jtTelefono)
+                    .addComponent(jtPatologia)
+                    .addComponent(jtAmbitolab, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(jbBuscar)
                 .addGap(31, 31, 31))
@@ -117,27 +137,27 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                    .addComponent(jtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                    .addComponent(jtCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                    .addComponent(jtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                    .addComponent(jtPatologia, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                    .addComponent(jtAmbitolab, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -149,6 +169,80 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        CiudadanoData cd = new CiudadanoData();
+        Ciudadano c1 = new Ciudadano();
+
+        try {
+            int dni = Integer.parseInt(jtDni.getText());
+            c1 = cd.buscarCiudadano(dni);
+            jtNombre.setText(c1.getNombre_completo());
+            jtCorreo.setText(c1.getCorreo_electronico());
+            jtTelefono.setText(c1.getTelefono() + "");
+            jtPatologia.setText(c1.getPatologia());
+            jtAmbitolab.setText(c1.getAmbito_laboral());
+            jtNombre.setEditable(false);
+            jtCorreo.setEditable(false);
+            jtTelefono.setEditable(false);
+            jtPatologia.setEditable(false);
+            jtAmbitolab.setEditable(false);
+
+        } catch (NullPointerException | NumberFormatException nf) {
+            jtDni.setText("");
+            JOptionPane.showMessageDialog(null, "Error al buscar, verifique los datos ingresados");
+        }
+
+    }//GEN-LAST:event_jbBuscarActionPerformed
+    private void limpiarCampos() {
+        jtDni.setText("");
+        jtNombre.setText("");
+        jtCorreo.setText("");
+        jtTelefono.setText("");
+        jtPatologia.setText("");
+        jtAmbitolab.setText("");
+    }
+    private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
+        Conexion.getConexion();
+        CiudadanoData cd = new CiudadanoData();
+        Ciudadano c1 = new Ciudadano();
+        try {
+            if (!(jtDni.getText().isEmpty() && jtNombre.getText().isEmpty()
+                    && jtCorreo.getText().isEmpty() && jtTelefono.getText().isEmpty()
+                    && jtAmbitolab.getText().isEmpty())) {
+                c1.setDni(Integer.parseInt(jtDni.getText()));
+                c1.setNombre_completo(jtNombre.getText());
+                c1.setCorreo_electronico(jtCorreo.getText());
+                c1.setTelefono(Long.parseLong(jtTelefono.getText()));
+                c1.setPatologia(jtPatologia.getText());
+                c1.setAmbito_laboral(jtAmbitolab.getText());
+                cd.guardarCiudadano(c1);
+                JOptionPane.showMessageDialog(this, "Ciudadano agregado exitosamente");
+            } else {
+                JOptionPane.showMessageDialog(this, "Tenes que completar todos los campos");
+            }
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "La fecha no ha sido Ingresada!!");
+        } catch (NumberFormatException ex) {
+            if (jtDni.getText().length() > 8) {
+                JOptionPane.showMessageDialog(this, "Excediste los digitos permitidos");
+            } else {
+                JOptionPane.showMessageDialog(this, "Solo tenes que ingresar numeros" + ex.getMessage());
+            }
+        }
+        limpiarCampos();
+    }//GEN-LAST:event_jbAgregarActionPerformed
+
+    private void jbEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditarActionPerformed
+        jtDni.setEditable(false);
+        jtNombre.setEditable(true);
+        jtCorreo.setEditable(true);
+        jtTelefono.setEditable(true);
+        jtPatologia.setEditable(true);
+        jtAmbitolab.setEditable(true);
+
+
+    }//GEN-LAST:event_jbEditarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -158,14 +252,14 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JButton jbAgregar;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEditar;
+    private javax.swing.JTextField jtAmbitolab;
+    private javax.swing.JTextField jtCorreo;
+    private javax.swing.JTextField jtDni;
+    private javax.swing.JTextField jtNombre;
+    private javax.swing.JTextField jtPatologia;
+    private javax.swing.JTextField jtTelefono;
     // End of variables declaration//GEN-END:variables
 }
