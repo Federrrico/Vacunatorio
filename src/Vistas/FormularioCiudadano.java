@@ -55,6 +55,12 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Ambito laboral:");
 
+        jtPatologia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtPatologiaKeyTyped(evt);
+            }
+        });
+
         jLabel1.setText("Dni:");
 
         jLabel2.setText("Nombre Completo:");
@@ -84,6 +90,13 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
 
         jbEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/iconoEditar.png"))); // NOI18N
         jbEditar.setText("Editar");
+        jbEditar.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                jbEditarInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+        });
         jbEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbEditarActionPerformed(evt);
@@ -221,7 +234,7 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Tenes que completar todos los campos");
             }
         } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(this, "La fecha no ha sido Ingresada!!");
+            JOptionPane.showMessageDialog(this, "Revisar los datos ingresados!!");
         } catch (NumberFormatException ex) {
             if (jtDni.getText().length() > 8) {
                 JOptionPane.showMessageDialog(this, "Excediste los digitos permitidos");
@@ -233,15 +246,43 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbAgregarActionPerformed
 
     private void jbEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditarActionPerformed
-        jtDni.setEditable(false);
-        jtNombre.setEditable(true);
-        jtCorreo.setEditable(true);
-        jtTelefono.setEditable(true);
-        jtPatologia.setEditable(true);
-        jtAmbitolab.setEditable(true);
-        jbEditar.setText("guardar");
-
+        
+         jtDni.setEditable(false);
+                jtNombre.setEditable(true);
+                 jtCorreo.setEditable(true);
+                 jtTelefono.setEditable(true);
+                jtPatologia.setEditable(true);
+                jtAmbitolab.setEditable(true);
+         jbEditar.setText("Guardar");
+         
     }//GEN-LAST:event_jbEditarActionPerformed
+
+    private void jtPatologiaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtPatologiaKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtPatologiaKeyTyped
+
+    private void jbEditarInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jbEditarInputMethodTextChanged
+        try {
+       
+         CiudadanoData cd = new CiudadanoData();
+         Ciudadano c1 = new Ciudadano();
+          
+               
+                c1.setDni(Integer.parseInt(jtDni.getText()));
+                c1.setNombre_completo(jtNombre.getText());
+                c1.setCorreo_electronico(jtCorreo.getText());
+                c1.setTelefono(Long.parseLong(jtTelefono.getText()));
+                c1.setPatologia(jtPatologia.getText());
+                c1.setAmbito_laboral(jtAmbitolab.getText());
+               cd.modificarCiudadano(c1);
+  
+        
+            }catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "Revisar los datos ingresados!!");
+        } catch (NumberFormatException ex) {
+           JOptionPane.showMessageDialog(this, "Solo tenes que ingresar numeros" + ex.getMessage());
+        }
+    }//GEN-LAST:event_jbEditarInputMethodTextChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
