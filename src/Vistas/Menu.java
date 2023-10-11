@@ -36,9 +36,9 @@ public class Menu extends javax.swing.JFrame {
         jCiudadano = new javax.swing.JMenu();
         jFormularioCiudadano = new javax.swing.JMenuItem();
         jLaboratorio = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jFormularioLaboratorio = new javax.swing.JMenuItem();
         jVacuna = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jFormularioVacuna = new javax.swing.JMenuItem();
         jCita = new javax.swing.JMenu();
         jtCita = new javax.swing.JMenuItem();
 
@@ -76,15 +76,25 @@ public class Menu extends javax.swing.JFrame {
 
         jLaboratorio.setText("Laboratorio");
 
-        jMenuItem2.setText("jMenuItem2");
-        jLaboratorio.add(jMenuItem2);
+        jFormularioLaboratorio.setText("Formulario Laboratorio");
+        jFormularioLaboratorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormularioLaboratorioActionPerformed(evt);
+            }
+        });
+        jLaboratorio.add(jFormularioLaboratorio);
 
         jMenuBar1.add(jLaboratorio);
 
         jVacuna.setText("Vacuna");
 
-        jMenuItem3.setText("jMenuItem3");
-        jVacuna.add(jMenuItem3);
+        jFormularioVacuna.setText("Formulario Vacuna");
+        jFormularioVacuna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormularioVacunaActionPerformed(evt);
+            }
+        });
+        jVacuna.add(jFormularioVacuna);
 
         jMenuBar1.add(jVacuna);
 
@@ -133,11 +143,33 @@ public class Menu extends javax.swing.JFrame {
             escritorio.remove(iframe);
         }
         escritorio.repaint();
-        Cita fc = new Cita();
-        fc.setVisible(true);
-        escritorio.add(fc);
-        escritorio.moveToFront(fc);
+        Cita cita = new Cita();
+        cita.setVisible(true);
+        escritorio.add(cita);
+        escritorio.moveToFront(cita);
     }//GEN-LAST:event_jtCitaActionPerformed
+
+    private void jFormularioLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormularioLaboratorioActionPerformed
+        for (JInternalFrame iframe : escritorio.getAllFrames()) {
+            escritorio.remove(iframe);
+        }
+        escritorio.repaint();
+        Laboratorio lab = new Laboratorio();
+        lab.setVisible(true);
+        escritorio.add(lab);
+        escritorio.moveToFront(lab);
+    }//GEN-LAST:event_jFormularioLaboratorioActionPerformed
+
+    private void jFormularioVacunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormularioVacunaActionPerformed
+        for (JInternalFrame iframe : escritorio.getAllFrames()) {
+            escritorio.remove(iframe);
+        }
+        escritorio.repaint();
+        Vacuna vac = new Vacuna();
+        vac.setVisible(true);
+        escritorio.add(vac);
+        escritorio.moveToFront(vac);
+    }//GEN-LAST:event_jFormularioVacunaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -179,11 +211,11 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jCita;
     private javax.swing.JMenu jCiudadano;
     private javax.swing.JMenuItem jFormularioCiudadano;
+    private javax.swing.JMenuItem jFormularioLaboratorio;
+    private javax.swing.JMenuItem jFormularioVacuna;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jLaboratorio;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenu jVacuna;
     private javax.swing.JMenuItem jtCita;
     // End of variables declaration//GEN-END:variables
