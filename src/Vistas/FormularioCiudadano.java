@@ -21,6 +21,13 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
      */
     public FormularioCiudadano() {
         initComponents();
+        jtNombre.setEditable(false);
+        jtCorreo.setEditable(false);
+        jtTelefono.setEditable(false);
+        jtPatologia.setEditable(false);
+        jtAmbitolab.setEditable(false);
+        jbEditar.setEnabled(false);
+
     }
 
     /**
@@ -87,24 +94,17 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
 
         jbEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/iconoEditar.png"))); // NOI18N
         jbEditar.setText("Editar");
-        jbEditar.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                jbEditarInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
-        });
-        jbEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbEditarActionPerformed(evt);
+        jbEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jbEditarMouseReleased(evt);
             }
         });
 
         jbAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/iconoGuardar.png"))); // NOI18N
-        jbAgregar.setText("Agregar");
-        jbAgregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbAgregarActionPerformed(evt);
+        jbAgregar.setText("Nuevo");
+        jbAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jbAgregarMouseReleased(evt);
             }
         });
 
@@ -181,8 +181,7 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
                                     .addComponent(jtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jbBuscar))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -215,72 +214,8 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
-        Conexion.getConexion();
-        CiudadanoData cd = new CiudadanoData();
-        Ciudadano c1 = new Ciudadano();
-        try {
-            if (!(jtDni.getText().isEmpty() && jtNombre.getText().isEmpty()
-                && jtCorreo.getText().isEmpty() && jtTelefono.getText().isEmpty()
-                && jtAmbitolab.getText().isEmpty())) {
-            c1.setDni(Integer.parseInt(jtDni.getText()));
-            c1.setNombre_completo(jtNombre.getText());
-            c1.setCorreo_electronico(jtCorreo.getText());
-            c1.setTelefono(Long.parseLong(jtTelefono.getText()));
-            c1.setPatologia(jtPatologia.getText());
-            c1.setAmbito_laboral(jtAmbitolab.getText());
-            cd.guardarCiudadano(c1);
-
-        } else {
-            JOptionPane.showMessageDialog(this, "Tenes que completar todos los campos");
-        }
-        } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(this, "Revisar los datos ingresados!!");
-        } catch (NumberFormatException ex) {
-            if (jtDni.getText().length() > 8) {
-                JOptionPane.showMessageDialog(this, "Excediste los digitos permitidos");
-            } else {
-                JOptionPane.showMessageDialog(this, "Solo tenes que ingresar numeros" + ex.getMessage());
-            }
-        }
-        limpiarCampos();
-    }//GEN-LAST:event_jbAgregarActionPerformed
-
-    private void jbEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditarActionPerformed
-
-        jtDni.setEditable(false);
-        jtNombre.setEditable(true);
-        jtCorreo.setEditable(true);
-        jtTelefono.setEditable(true);
-        jtPatologia.setEditable(true);
-        jtAmbitolab.setEditable(true);
-        jbEditar.setText("Guardar");
-
-    }//GEN-LAST:event_jbEditarActionPerformed
-
-    private void jbEditarInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jbEditarInputMethodTextChanged
-        try {
-
-            CiudadanoData cd = new CiudadanoData();
-            Ciudadano c1 = new Ciudadano();
-
-            c1.setDni(Integer.parseInt(jtDni.getText()));
-            c1.setNombre_completo(jtNombre.getText());
-            c1.setCorreo_electronico(jtCorreo.getText());
-            c1.setTelefono(Long.parseLong(jtTelefono.getText()));
-            c1.setPatologia(jtPatologia.getText());
-            c1.setAmbito_laboral(jtAmbitolab.getText());
-            cd.modificarCiudadano(c1);
-
-        }catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(this, "Revisar los datos ingresados!!");
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Solo tenes que ingresar numeros" + ex.getMessage());
-        }
-    }//GEN-LAST:event_jbEditarInputMethodTextChanged
-
     private void jtPatologiaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtPatologiaKeyTyped
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jtPatologiaKeyTyped
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
@@ -300,12 +235,107 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
             jtTelefono.setEditable(false);
             jtPatologia.setEditable(false);
             jtAmbitolab.setEditable(false);
+            jbEditar.setEnabled(true);
 
         } catch (NullPointerException | NumberFormatException nf) {
             jtDni.setText("");
             JOptionPane.showMessageDialog(null, "Error al buscar, verifique los datos ingresados");
         }
     }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jbEditarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbEditarMouseReleased
+        try {
+
+            CiudadanoData cd = new CiudadanoData();
+            Ciudadano c1 = new Ciudadano();
+
+            c1.setDni(Integer.parseInt(jtDni.getText()));
+            c1.setNombre_completo(jtNombre.getText());
+            c1.setCorreo_electronico(jtCorreo.getText());
+            c1.setTelefono(Long.parseLong(jtTelefono.getText()));
+            c1.setPatologia(jtPatologia.getText());
+            c1.setAmbito_laboral(jtAmbitolab.getText());
+            if (jbEditar.getText().equals("Modificar")) {
+                cd.modificarCiudadano(c1);
+                jbEditar.setText("Editar");
+                limpiarCampos();
+                jtDni.setEditable(true);
+                jtNombre.setEditable(false);
+                jtCorreo.setEditable(false);
+                jtTelefono.setEditable(false);
+                jtPatologia.setEditable(false);
+                jtAmbitolab.setEditable(false);
+            } else {
+                jtDni.setEditable(false);
+                jtNombre.setEditable(true);
+                jtCorreo.setEditable(true);
+                jtTelefono.setEditable(true);
+                jtPatologia.setEditable(true);
+                jtAmbitolab.setEditable(true);
+                jbEditar.setText("Modificar");
+            }
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "Revisar los datos ingresados!!");
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Solo tenes que ingresar numeros" + ex.getMessage());
+        }
+    }//GEN-LAST:event_jbEditarMouseReleased
+
+    private void jbAgregarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbAgregarMouseReleased
+        jtDni.setEditable(true);
+        jtNombre.setEditable(true);
+        jtCorreo.setEditable(true);
+        jtTelefono.setEditable(true);
+        jtPatologia.setEditable(true);
+        jtAmbitolab.setEditable(true);
+        jbBuscar.setEnabled(false);
+        CiudadanoData cd = new CiudadanoData();
+        Ciudadano c1 = new Ciudadano();
+        System.out.println(jbAgregar.getText());
+        if (jbAgregar.getText().equals("Guardar")) {
+            jbAgregar.setText("Nuevo");
+            jtDni.setEditable(true);
+            jtNombre.setEditable(false);
+            jtCorreo.setEditable(false);
+            jtTelefono.setEditable(false);
+            jtPatologia.setEditable(false);
+            jtAmbitolab.setEditable(false);
+            try {
+                if (!(jtDni.getText().isEmpty() && jtNombre.getText().isEmpty()
+                        && jtCorreo.getText().isEmpty() && jtTelefono.getText().isEmpty()
+                        && jtAmbitolab.getText().isEmpty())) {
+                    c1.setDni(Integer.parseInt(jtDni.getText()));
+                    c1.setNombre_completo(jtNombre.getText());
+                    c1.setCorreo_electronico(jtCorreo.getText());
+                    c1.setTelefono(Long.parseLong(jtTelefono.getText()));
+                    c1.setPatologia(jtPatologia.getText());
+                    c1.setAmbito_laboral(jtAmbitolab.getText());
+                    cd.guardarCiudadano(c1);
+                    jbAgregar.setText("Nuevo");
+                    jbBuscar.setEnabled(true);
+                    jtDni.setEditable(true);
+                    jtNombre.setEditable(false);
+                    jtCorreo.setEditable(false);
+                    jtTelefono.setEditable(false);
+                    jtPatologia.setEditable(false);
+                    jtAmbitolab.setEditable(false);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Tenes que completar todos los campos");
+                }
+            } catch (NullPointerException e) {
+                JOptionPane.showMessageDialog(this, "Revisar los datos ingresados!!");
+            } catch (NumberFormatException ex) {
+                if (jtDni.getText().length() > 8) {
+                    JOptionPane.showMessageDialog(this, "Excediste los digitos permitidos");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Solo tenes que ingresar numeros" + ex.getMessage());
+                }
+            }
+            limpiarCampos();
+        } else {
+            jbAgregar.setText("Guardar");
+        }
+    }//GEN-LAST:event_jbAgregarMouseReleased
     private void limpiarCampos() {
         jtDni.setText("");
         jtNombre.setText("");

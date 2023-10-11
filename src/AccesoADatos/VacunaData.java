@@ -31,7 +31,7 @@ public class VacunaData {
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, vacuna.getNro_serie());
-            ps.setInt(2, vacuna.getLaboratorio().getCuit());
+            ps.setLong(2, vacuna.getLaboratorio().getCuit());
             ps.setDouble(3, vacuna.getDosis());
             ps.setString(4, vacuna.getNombre_vacuna());
             ps.setString(5, vacuna.getAntigeno());
@@ -57,7 +57,7 @@ public class VacunaData {
             if(rs.next()){
                 vacuna=new Vacuna();
                 vacuna.setNro_serie(nro_serie);
-                vacuna.setLaboratorio(labD.buscarLaboratorio(rs.getInt(2)));
+                vacuna.setLaboratorio(labD.buscarLaboratorio(rs.getLong(2)));
                 vacuna.setDosis(rs.getDouble(3));
                 vacuna.setNombre_vacuna(rs.getString(4));
                 vacuna.setAntigeno(rs.getString(5));
@@ -83,7 +83,7 @@ public class VacunaData {
             while (rs.next()) {
                 Vacuna vacuna = new Vacuna();
                 vacuna.setNro_serie(rs.getInt("nro_serie"));
-                vacuna.setLaboratorio(labD.buscarLaboratorio(rs.getInt("cuit")));
+                vacuna.setLaboratorio(labD.buscarLaboratorio(rs.getLong("cuit")));
                 vacuna.setDosis(rs.getDouble("dosis"));
                 vacuna.setNombre_vacuna(rs.getString("nombre_vacuna"));
                 vacuna.setAntigeno(rs.getString("antigeno"));
@@ -106,7 +106,7 @@ public class VacunaData {
         try {
             ps = con.prepareStatement(sql);
 
-            ps.setInt(1, vacuna.getLaboratorio().getCuit());
+            ps.setLong(1, vacuna.getLaboratorio().getCuit());
             ps.setDouble(2, vacuna.getDosis());
             ps.setString(3, vacuna.getNombre_vacuna());
             ps.setString(4, vacuna.getAntigeno());

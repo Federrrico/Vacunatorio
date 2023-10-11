@@ -154,7 +154,7 @@ public class Menu extends javax.swing.JFrame {
             escritorio.remove(iframe);
         }
         escritorio.repaint();
-        Laboratorio lab = new Laboratorio();
+        LaboratorioV lab = new LaboratorioV();
         lab.setVisible(true);
         escritorio.add(lab);
         escritorio.moveToFront(lab);

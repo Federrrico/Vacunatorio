@@ -10,7 +10,7 @@ package Entidades;
  * @author federico.acenjo
  */
 public class Laboratorio {
-    private int cuit;
+    private Long cuit;
     private String nombre;
     private String pais_origen;
     private String direccion_fiscal;
@@ -24,18 +24,18 @@ public class Laboratorio {
         this.direccion_fiscal = direccion_fiscal;
     }
 
-    public Laboratorio(int cuit, String nombre, String pais_origen, String direccion_fiscal) {
+    public Laboratorio(Long cuit, String nombre, String pais_origen, String direccion_fiscal) {
         this.cuit = cuit;
         this.nombre = nombre;
         this.pais_origen = pais_origen;
         this.direccion_fiscal = direccion_fiscal;
     }
 
-    public int getCuit() {
+    public Long getCuit() {
         return cuit;
     }
 
-    public void setCuit(int cuit) {
+    public void setCuit(Long cuit) {
         this.cuit = cuit;
     }
 

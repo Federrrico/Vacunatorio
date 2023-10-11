@@ -33,24 +33,30 @@ public class LaboratorioData {
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, laboratorio.getCuit());
+            ps.setLong(1, laboratorio.getCuit());
             ps.setString(2, laboratorio.getNombre());
             ps.setString(3, laboratorio.getPais_origen());
             ps.setString(4, laboratorio.getDireccion_fiscal());
-            ps.executeUpdate();
+            int exito  = ps.executeUpdate();
+            if (exito==1) {
+               JOptionPane.showMessageDialog(null, "Laboratorio Agregado"); 
+            }
+        
             ps.close();
+            
+          
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Laboratorio existente " + ex);
         }
     }
     
-    public Laboratorio buscarLaboratorio(int cuit) {
+    public Laboratorio buscarLaboratorio(Long cuit) {
         Laboratorio laboratorio = null;
         String sql = "SELECT * FROM laboratorio WHERE cuit = ?";
         try {
             PreparedStatement ps;
             ps = con.prepareStatement(sql);
-            ps.setInt(1,cuit );
+            ps.setLong(1,cuit );
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 laboratorio=new Laboratorio();
@@ -77,7 +83,7 @@ public class LaboratorioData {
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 Laboratorio laboratorio = new Laboratorio();
-                laboratorio.setCuit(rs.getInt("cuit"));
+                laboratorio.setCuit(rs.getLong("cuit"));
                 laboratorio.setNombre(rs.getString("nombre"));
                 laboratorio.setPais_origen(rs.getString("pais_origen"));
                 laboratorio.setDireccion_fiscal(rs.getString("direccion_fiscal"));
@@ -98,7 +104,7 @@ public class LaboratorioData {
         try {
             ps = con.prepareStatement(sql);
            
-            ps.setInt(1, laboratorio.getCuit());
+            ps.setLong(1, laboratorio.getCuit());
             ps.setString(2, laboratorio.getNombre());
             ps.setString(3, laboratorio.getPais_origen());
             ps.setString(4, laboratorio.getDireccion_fiscal());
