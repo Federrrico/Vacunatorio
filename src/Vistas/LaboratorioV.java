@@ -8,6 +8,7 @@ package Vistas;
 import AccesoADatos.LaboratorioData;
 import Entidades.Laboratorio;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,7 +16,21 @@ import javax.swing.table.DefaultTableModel;
  * @author Editor
  */
 public class LaboratorioV extends javax.swing.JInternalFrame {
-   private DefaultTableModel modelo = new DefaultTableModel();
+
+    private int edit = -1;
+
+    private DefaultTableModel modelo = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int rowIndex, int columnIndex) {
+            if (rowIndex == edit) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+    };
+
     /**
      * Creates new form Laboratorio
      */
@@ -26,11 +41,25 @@ public class LaboratorioV extends javax.swing.JInternalFrame {
         modelo.addColumn("Pais");
         modelo.addColumn("Domicilio");
         jTable1.setModel(modelo);
-       
+
+        llenarTabla();
     }
-    private void borrarFilas(){
+
+    public void llenarTabla() {
+        LaboratorioData lD = new LaboratorioData();
+
+        try {
+            for (Laboratorio lab : lD.listarLaboratorios()) {
+                modelo.addRow(new Object[]{lab.getCuit(), lab.getNombre(),
+                    lab.getPais_origen(), lab.getDireccion_fiscal()});
+            }
+        } catch (NullPointerException ex) {
+        }
+    }
+
+    private void borrarFilas() {
         int f = modelo.getRowCount() - 1;
-        for (;f >= 0; f--) {
+        for (; f >= 0; f--) {
             modelo.removeRow(f);
         }
     }
@@ -46,8 +75,6 @@ public class LaboratorioV extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jcLaboratorio = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
         jAgregar = new javax.swing.JButton();
         jEditar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -64,24 +91,6 @@ public class LaboratorioV extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("LABORATORIO");
 
-        jcLaboratorio.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jcLaboratorio.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jcLaboratorioItemStateChanged(evt);
-            }
-        });
-        jcLaboratorio.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
-            }
-            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
-            }
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
-                jcLaboratorioPopupMenuWillBecomeVisible(evt);
-            }
-        });
-
-        jLabel2.setText("Laboratorio:");
-
         jAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/iconoGuardar.png"))); // NOI18N
         jAgregar.setText("Agregar");
         jAgregar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -94,6 +103,13 @@ public class LaboratorioV extends javax.swing.JInternalFrame {
         jEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/iconoEditar.png"))); // NOI18N
         jEditar.setText("Editar");
         jEditar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jEditar.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                jEditarInputMethodTextChanged(evt);
+            }
+        });
         jEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jEditarActionPerformed(evt);
@@ -110,7 +126,15 @@ public class LaboratorioV extends javax.swing.JInternalFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -129,28 +153,16 @@ public class LaboratorioV extends javax.swing.JInternalFrame {
                         .addComponent(jEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(46, 46, 46)
-                                .addComponent(jcLaboratorio, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(62, 504, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jcLaboratorio, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(70, 70, 70)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -167,50 +179,51 @@ public class LaboratorioV extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAgregarActionPerformed
-     LaboratorioAgregar la= new LaboratorioAgregar();
-     la.setVisible(true);
+        LaboratorioAgregar la = new LaboratorioAgregar();
+        la.setVisible(true);
     }//GEN-LAST:event_jAgregarActionPerformed
 
-    private void jcLaboratorioPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jcLaboratorioPopupMenuWillBecomeVisible
-         LaboratorioData lD= new LaboratorioData();
-        jcLaboratorio.removeAllItems();
-        jcLaboratorio.addItem(null);
-        try {
-            for (Laboratorio lab : lD.listarLaboratorios()) {
-                jcLaboratorio.addItem(lab);
-            }
-        } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(this, "No hay laboratorios cargados en la base de datos");
-        }
-    }//GEN-LAST:event_jcLaboratorioPopupMenuWillBecomeVisible
-
     private void jEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEditarActionPerformed
-        // TODO add your handling code here:
+
+        try {
+            if (jEditar.getText().equals("Guardar")) {
+                LaboratorioData ld = new LaboratorioData();
+                Laboratorio lab = new Laboratorio();
+
+                lab.setCuit(Long.parseLong(modelo.getValueAt(jTable1.getSelectedRow(), 0).toString()));
+                lab.setNombre(modelo.getValueAt(jTable1.getSelectedRow(), 1).toString());
+                lab.setPais_origen(modelo.getValueAt(jTable1.getSelectedRow(), 2).toString());
+                lab.setDireccion_fiscal(modelo.getValueAt(jTable1.getSelectedRow(), 3).toString());
+                ld.modificarLaboratorio(lab);
+
+                jEditar.setText("Editar");
+                edit = -1;
+                modelo.isCellEditable(jTable1.getSelectedRow(), jTable1.getSelectedColumn());
+            } else {
+                edit = jTable1.getSelectedRow();
+                modelo.isCellEditable(jTable1.getSelectedRow(), jTable1.getSelectedColumn());
+                jEditar.setText("Guardar");
+            }
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "Revisar los datos ingresados!!");
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Solo tenes que ingresar numeros" + ex.getMessage());
+        }
+
     }//GEN-LAST:event_jEditarActionPerformed
 
-    private void jcLaboratorioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcLaboratorioItemStateChanged
-      borrarFilas();
-          LaboratorioData lD= new LaboratorioData();
-            Laboratorio lab1 = (Laboratorio) jcLaboratorio.getSelectedItem();
-            
-            try {
-                for (Laboratorio lab : lD.listarLaboratorios()) {
-                    modelo.addRow(new Object[]{lab.getCuit(), lab.getNombre(),
-                        lab.getPais_origen(), lab.getDireccion_fiscal()});
-                }
-            } catch (NullPointerException ex) {}
-    }//GEN-LAST:event_jcLaboratorioItemStateChanged
+    private void jEditarInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jEditarInputMethodTextChanged
+
+    }//GEN-LAST:event_jEditarInputMethodTextChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jAgregar;
     private javax.swing.JButton jEditar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JComboBox<Laboratorio> jcLaboratorio;
     // End of variables declaration//GEN-END:variables
 }

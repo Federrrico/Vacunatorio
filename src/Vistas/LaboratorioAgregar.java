@@ -22,11 +22,12 @@ public class LaboratorioAgregar extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
     }
-      private void limpiarCampos() {
+
+    private void limpiarCampos() {
         jTCuit.setText("");
         jTNombre.setText("");
         jTDomicilio.setText("");
-        jTPais.setText(""); 
+        jTPais.setText("");
     }
 
     /**
@@ -52,8 +53,7 @@ public class LaboratorioAgregar extends javax.swing.JFrame {
         jVolver = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(858, 528));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
@@ -78,7 +78,7 @@ public class LaboratorioAgregar extends javax.swing.JFrame {
         jTDomicilio.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jBNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/microscope.png"))); // NOI18N
-        jBNuevo.setText("Nuevo");
+        jBNuevo.setText("Guardar");
         jBNuevo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jBNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,29 +167,31 @@ public class LaboratorioAgregar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoActionPerformed
-       Laboratorio la= new Laboratorio();
-       LaboratorioData lD= new LaboratorioData();
-        if (!(jTCuit.getText().isEmpty()&& jTDomicilio.getText().isEmpty()
-                && jTNombre.getText().isEmpty()&&jTPais.getText().isEmpty())) {
-           try{
-               la.setCuit(Long.parseLong(jTCuit.getText()));
-               la.setNombre(jTNombre.getText());
-               la.setDireccion_fiscal(jTDomicilio.getText());
-               la.setPais_origen(jTPais.getText());
-               lD.guardarLaboratorio(la);
-              limpiarCampos();
-           } catch(NullPointerException ex){
-           JOptionPane.showMessageDialog(this, "Verifique los datos ingresados");
-           }  
-        }else{
+        Menu mn = new Menu();
+        Laboratorio la = new Laboratorio();
+        LaboratorioData lD = new LaboratorioData();
+        if (!(jTCuit.getText().isEmpty() && jTDomicilio.getText().isEmpty()
+                && jTNombre.getText().isEmpty() && jTPais.getText().isEmpty())) {
+            try {
+                la.setCuit(Long.parseLong(jTCuit.getText()));
+                la.setNombre(jTNombre.getText());
+                la.setDireccion_fiscal(jTDomicilio.getText());
+                la.setPais_origen(jTPais.getText());
+                lD.guardarLaboratorio(la);
+                limpiarCampos();
+                mn.actualizarLab();
+            } catch (NullPointerException ex) {
+                JOptionPane.showMessageDialog(this, "Verifique los datos ingresados");
+            }
+        } else {
             JOptionPane.showMessageDialog(this, "Verifique que los campos no esten vacios");
         }
-       
+        
     }//GEN-LAST:event_jBNuevoActionPerformed
 
     private void jVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVolverActionPerformed
-        LaboratorioV lv= new LaboratorioV();
-        lv.setVisible(true);
+//        LaboratorioV lv= new LaboratorioV();
+//        lv.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jVolverActionPerformed
 

@@ -100,14 +100,14 @@ public class LaboratorioData {
 
         String sql = "UPDATE laboratorio SET nombre = ?, pais_origen = ?, direccion_fiscal = ? WHERE cuit = ?";
         PreparedStatement ps = null;
-
+        System.out.println(laboratorio.toString());
         try {
             ps = con.prepareStatement(sql);
            
-            ps.setLong(1, laboratorio.getCuit());
-            ps.setString(2, laboratorio.getNombre());
-            ps.setString(3, laboratorio.getPais_origen());
-            ps.setString(4, laboratorio.getDireccion_fiscal());
+            ps.setLong(4, laboratorio.getCuit());
+            ps.setString(1, laboratorio.getNombre());
+            ps.setString(2, laboratorio.getPais_origen());
+            ps.setString(3, laboratorio.getDireccion_fiscal());
             int exito = ps.executeUpdate();
 
             if (exito == 1) {
