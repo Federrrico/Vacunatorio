@@ -16,6 +16,7 @@ public class CentrodeVacunacion extends javax.swing.JFrame {
      */
     public CentrodeVacunacion() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
