@@ -34,10 +34,7 @@ public class LaboratorioV extends javax.swing.JInternalFrame {
             modelo.removeRow(f);
         }
     }
-public void cargarTabla(){
 
-
-}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -52,7 +49,7 @@ public void cargarTabla(){
         jcLaboratorio = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jAgregar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jEditar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
@@ -82,11 +79,6 @@ public void cargarTabla(){
                 jcLaboratorioPopupMenuWillBecomeVisible(evt);
             }
         });
-        jcLaboratorio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcLaboratorioActionPerformed(evt);
-            }
-        });
 
         jLabel2.setText("Laboratorio:");
 
@@ -99,12 +91,12 @@ public void cargarTabla(){
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/iconoEditar.png"))); // NOI18N
-        jButton2.setText("Editar");
-        jButton2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/iconoEditar.png"))); // NOI18N
+        jEditar.setText("Editar");
+        jEditar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jEditarActionPerformed(evt);
             }
         });
 
@@ -134,7 +126,7 @@ public void cargarTabla(){
                         .addGap(62, 62, 62)
                         .addComponent(jAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,7 +153,7 @@ public void cargarTabla(){
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(70, 70, 70)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(157, Short.MAX_VALUE))
         );
@@ -173,11 +165,6 @@ public void cargarTabla(){
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jcLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcLaboratorioActionPerformed
-    
-       
-    }//GEN-LAST:event_jcLaboratorioActionPerformed
 
     private void jAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAgregarActionPerformed
      LaboratorioAgregar la= new LaboratorioAgregar();
@@ -197,9 +184,9 @@ public void cargarTabla(){
         }
     }//GEN-LAST:event_jcLaboratorioPopupMenuWillBecomeVisible
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEditarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jEditarActionPerformed
 
     private void jcLaboratorioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcLaboratorioItemStateChanged
       borrarFilas();
@@ -217,7 +204,7 @@ public void cargarTabla(){
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jAgregar;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jEditar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
