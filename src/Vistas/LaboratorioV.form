@@ -50,7 +50,7 @@
                       </Group>
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-                          <Component id="jButton1" min="-2" pref="138" max="-2" attributes="0"/>
+                          <Component id="jAgregar" min="-2" pref="138" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                           <Component id="jButton2" min="-2" pref="138" max="-2" attributes="0"/>
                       </Group>
@@ -91,7 +91,7 @@
                   <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButton2" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                      <Component id="jButton1" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="jAgregar" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="157" max="32767" attributes="0"/>
               </Group>
@@ -135,7 +135,7 @@
             <Property name="text" type="java.lang.String" value="Laboratorio:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="jAgregar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Recursos/iconoGuardar.png"/>
@@ -148,7 +148,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jAgregarActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton2">
