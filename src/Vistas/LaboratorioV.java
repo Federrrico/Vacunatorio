@@ -7,9 +7,11 @@ package Vistas;
 
 import AccesoADatos.LaboratorioData;
 import Entidades.Laboratorio;
+import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import sun.swing.SwingUtilities2;
 
 /**
  *
@@ -30,6 +32,8 @@ public class LaboratorioV extends javax.swing.JInternalFrame {
         }
 
     };
+    
+   
 
     /**
      * Creates new form Laboratorio
@@ -41,10 +45,9 @@ public class LaboratorioV extends javax.swing.JInternalFrame {
         modelo.addColumn("Pais");
         modelo.addColumn("Domicilio");
         jTable1.setModel(modelo);
-
         llenarTabla();
     }
-
+    
     public void llenarTabla() {
         LaboratorioData lD = new LaboratorioData();
 
@@ -54,13 +57,6 @@ public class LaboratorioV extends javax.swing.JInternalFrame {
                     lab.getPais_origen(), lab.getDireccion_fiscal()});
             }
         } catch (NullPointerException ex) {
-        }
-    }
-
-    private void borrarFilas() {
-        int f = modelo.getRowCount() - 1;
-        for (; f >= 0; f--) {
-            modelo.removeRow(f);
         }
     }
 
@@ -184,7 +180,7 @@ public class LaboratorioV extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jAgregarActionPerformed
 
     private void jEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEditarActionPerformed
-
+        
         try {
             if (jEditar.getText().equals("Guardar")) {
                 LaboratorioData ld = new LaboratorioData();

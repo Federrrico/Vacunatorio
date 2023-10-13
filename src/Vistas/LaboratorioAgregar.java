@@ -7,6 +7,7 @@ package Vistas;
 
 import AccesoADatos.LaboratorioData;
 import Entidades.Laboratorio;
+import java.awt.Component;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,7 +15,7 @@ import javax.swing.JOptionPane;
  * @author Felipe
  */
 public class LaboratorioAgregar extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form LaboratorioAgregar
      */
@@ -24,11 +25,15 @@ public class LaboratorioAgregar extends javax.swing.JFrame {
     }
 
     private void limpiarCampos() {
+        LaboratorioV lv = new LaboratorioV();
         jTCuit.setText("");
         jTNombre.setText("");
         jTDomicilio.setText("");
         jTPais.setText("");
+        
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,6 +59,7 @@ public class LaboratorioAgregar extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(858, 528));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
@@ -167,7 +173,7 @@ public class LaboratorioAgregar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoActionPerformed
-        Menu mn = new Menu();
+        
         Laboratorio la = new Laboratorio();
         LaboratorioData lD = new LaboratorioData();
         if (!(jTCuit.getText().isEmpty() && jTDomicilio.getText().isEmpty()
@@ -179,7 +185,7 @@ public class LaboratorioAgregar extends javax.swing.JFrame {
                 la.setPais_origen(jTPais.getText());
                 lD.guardarLaboratorio(la);
                 limpiarCampos();
-                mn.actualizarLab();
+                
             } catch (NullPointerException ex) {
                 JOptionPane.showMessageDialog(this, "Verifique los datos ingresados");
             }
