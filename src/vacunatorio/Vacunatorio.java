@@ -26,10 +26,11 @@ public class Vacunatorio {
         LaboratorioData ld = new LaboratorioData();
         VacunaData vd = new VacunaData();
         CitaData cid = new CitaData();
-        Ciudadano fede = new Ciudadano(34155039, "Federico Acenjo", "federico@asdasd.com", 1155522255L, "casa");
+        CentroVacunacion cv = new CentroVacunacion(1, "Prueba", "PruebaLoc", "PruebaProv", "PruebaDir", true);
+        Ciudadano fede = new Ciudadano(34155039, "Federico Acenjo", "federico@asdasd.com", 1155522255L, "casa", "Pilar", "Buenos Aires");
         Laboratorio labP1 = new Laboratorio(32555666L, "Umbrella", "EEUU", "Calle falsa 123, Pueblo Fantasma");
         Vacuna vacP1 = new Vacuna(222555888, labP1, "UZ1", 0.3, "Z01", LocalDate.of(2024, 12, 10), true);
-        Cita citP1 = new Cita (fede, LocalDateTime.of(LocalDate.of(2023, 12, 10), LocalTime.of(15, 00)), "Springfield", LocalDateTime.of(LocalDate.of(2023, 12, 10), LocalTime.of(15, 15)), vacP1, 1);
+        Cita citP1 = new Cita (fede, LocalDateTime.of(LocalDate.of(2023, 12, 10), LocalTime.of(15, 00)), cv.getIdCV(), LocalDateTime.of(LocalDate.of(2023, 12, 10), LocalTime.of(15, 15)), vacP1, 1);
         
         cd.guardarCiudadano(fede);
         ld.guardarLaboratorio(labP1);
@@ -41,7 +42,7 @@ public class Vacunatorio {
             System.out.println(ciudadano.toString());
         }
         
-        cd.modificarCiudadano(new Ciudadano(34155039, "Federico Acenjo", "fedeacen@lkjlkj.com", 1144422255L, "casa"));
+        cd.modificarCiudadano(new Ciudadano(34155039, "Federico Acenjo", "fedeacen@lkjlkj.com", 1144422255L, "casa", "Pilar", "Buenos Aires"));
         
         System.out.println("Traemos los Ciudadanos despues de la modificacion");
         for (Ciudadano ciudadano : cd.listarCiudadanos()) {

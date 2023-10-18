@@ -7,11 +7,10 @@ package Vistas;
 
 import AccesoADatos.LaboratorioData;
 import Entidades.Laboratorio;
-import java.awt.Component;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import sun.swing.SwingUtilities2;
+
+
 
 /**
  *
@@ -175,7 +174,8 @@ public class LaboratorioV extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAgregarActionPerformed
-        LaboratorioAgregar la = new LaboratorioAgregar();
+        LaboratorioAgregarInternal la = new LaboratorioAgregarInternal();
+        Menu.escritorio.add(la);
         la.setVisible(true);
     }//GEN-LAST:event_jAgregarActionPerformed
 

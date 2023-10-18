@@ -28,7 +28,7 @@ public class CiudadanoData {
 
     public void guardarCiudadano(Ciudadano ciudadano) {
 
-        String sql = "INSERT INTO ciudadano (dni, nombre_completo, correo_electronico, telefono, patologia, ambito_laboral) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO ciudadano (dni, nombre_completo, correo_electronico, telefono, patologia, ambito_laboral, localidad, provincia) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -38,6 +38,8 @@ public class CiudadanoData {
             ps.setLong(4, ciudadano.getTelefono());
             ps.setString(5, ciudadano.getPatologia());
             ps.setString(6, ciudadano.getAmbito_laboral());
+            ps.setString(7, ciudadano.getLocalidad());
+            ps.setString(8, ciudadano.getProvincia());
             ps.executeUpdate();
             ps.close();
             JOptionPane.showMessageDialog(null, "Ciudadano agregado exitosamente");
@@ -62,6 +64,8 @@ public class CiudadanoData {
                 ciudadano.setTelefono(rs.getLong(4));
                 ciudadano.setPatologia(rs.getString(5));
                 ciudadano.setAmbito_laboral(rs.getString(6));
+                ciudadano.setLocalidad(rs.getString(7));
+                ciudadano.setProvincia(rs.getString(8));
             } else {
                 JOptionPane.showMessageDialog(null, "No existe el ciudadano");
             }
@@ -87,6 +91,8 @@ public class CiudadanoData {
                 ciudadano.setTelefono(rs.getLong("telefono"));
                 ciudadano.setPatologia(rs.getString("patologia"));
                 ciudadano.setAmbito_laboral(rs.getString("ambito_laboral"));
+                ciudadano.setLocalidad(rs.getString("localidad"));
+                ciudadano.setProvincia(rs.getString("provincia"));
                 ciudadanos.add(ciudadano);
             } 
             ps.close();
@@ -98,7 +104,7 @@ public class CiudadanoData {
     
     public void modificarCiudadano(Ciudadano ciudadano) {
 
-        String sql = "UPDATE ciudadano SET nombre_completo = ?, correo_electronico = ?, telefono = ? ,patologia = ?, ambito_laboral = ? WHERE dni = ?";
+        String sql = "UPDATE ciudadano SET nombre_completo = ?, correo_electronico = ?, telefono = ? ,patologia = ?, ambito_laboral = ?, localidad = ?, provincia = ? WHERE dni = ?";
         PreparedStatement ps = null;
 
         try {
@@ -109,7 +115,9 @@ public class CiudadanoData {
             ps.setLong(3, ciudadano.getTelefono());
             ps.setString(4, ciudadano.getPatologia());
             ps.setString(5, ciudadano.getAmbito_laboral());
-            ps.setInt(6, ciudadano.getDni());
+            ps.setString(6, ciudadano.getLocalidad());
+            ps.setString(7, ciudadano.getProvincia());
+            ps.setInt(8, ciudadano.getDni());
             int exito = ps.executeUpdate();
 
             if (exito == 1) {

@@ -18,25 +18,48 @@ public class Ciudadano {
     private Long telefono;
     private String patologia = null;
     private String ambito_laboral;
+    private String provincia;
+    private String localidad;
 
     public Ciudadano() {
     }
 
-    public Ciudadano(String nombre_completo, String correo_electronico, Long telefono, String ambito_laboral) {
+    public Ciudadano(String nombre_completo, String correo_electronico, Long telefono, String ambito_laboral, String provincia, String localidad) {
         this.nombre_completo = nombre_completo;
         this.correo_electronico = correo_electronico;
         this.telefono = telefono;
         this.ambito_laboral = ambito_laboral;
+        this.provincia = provincia;
+        this.localidad = localidad;
     }
 
-    public Ciudadano(int dni, String nombre_completo, String correo_electronico, Long telefono, String ambito_laboral) {
+    public String getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
+    }
+
+    public String getLocalidad() {
+        return localidad;
+    }
+
+    public void setLocalidad(String localidad) {
+        this.localidad = localidad;
+    }
+
+    public Ciudadano(int dni, String nombre_completo, String correo_electronico, Long telefono, String ambito_laboral, String provincia, String localidad) {
         this.dni = dni;
         this.nombre_completo = nombre_completo;
         this.correo_electronico = correo_electronico;
         this.telefono = telefono;
         this.ambito_laboral = ambito_laboral;
+        this.provincia = provincia;
+        this.localidad = localidad;
     }
-
+    
+    
     public int getDni() {
         return dni;
     }
@@ -87,6 +110,8 @@ public class Ciudadano {
 
     @Override
     public String toString() {
-        return "Ciudadano{" + "dni=" + dni + ", nombre_completo=" + nombre_completo + ", correo_electronico=" + correo_electronico + ", telefono=" + telefono + ", patologia=" + patologia + ", ambito_laboral=" + ambito_laboral + '}';
-    }    
+        return "Ciudadano{" + "dni=" + dni + ", nombre_completo=" + nombre_completo + ", correo_electronico=" + correo_electronico + ", telefono=" + telefono + ", patologia=" + patologia + ", ambito_laboral=" + ambito_laboral + ", provincia=" + provincia + ", localidad=" + localidad + '}';
+    }
+
+      
 }
