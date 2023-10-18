@@ -109,10 +109,10 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
             }
         });
         jbEditar.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 jbEditarInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
 
@@ -138,11 +138,18 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Ambito laboral:");
 
-        jCBProvincia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCBProvincia.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+                jCBProvinciaPopupMenuWillBecomeVisible(evt);
+            }
+        });
 
         jLabel10.setText("Localidad:");
 
-        jCBLocalidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jCBLocalidad.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
@@ -271,7 +278,8 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
             jtTelefono.setText(c1.getTelefono() + "");
             jtPatologia.setText(c1.getPatologia());
             jtAmbitolab.setText(c1.getAmbito_laboral());
-            
+            jCBProvincia.addItem(c1.getProvincia());
+            jCBLocalidad.addItem(c1.getLocalidad());
             jtNombre.setEditable(false);
             jtCorreo.setEditable(false);
             jtTelefono.setEditable(false);
@@ -335,6 +343,8 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
         jtTelefono.setEditable(true);
         jtPatologia.setEditable(true);
         jtAmbitolab.setEditable(true);
+        jCBLocalidad.setEnabled(true);
+        jCBProvincia.setEnabled(true);
         jbBuscar.setEnabled(false);
         CiudadanoData cd = new CiudadanoData();
         Ciudadano c1 = new Ciudadano();
@@ -356,6 +366,8 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
                     c1.setTelefono(Long.parseLong(jtTelefono.getText()));
                     c1.setPatologia(jtPatologia.getText());
                     c1.setAmbito_laboral(jtAmbitolab.getText());
+                    c1.setProvincia(jCBProvincia.getSelectedItem().toString());
+                    c1.setLocalidad(jCBLocalidad.getSelectedItem().toString());
                     cd.guardarCiudadano(c1);
                     jbAgregar.setText("Nuevo");
                     jbBuscar.setEnabled(true);
@@ -385,8 +397,28 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbAgregarMouseReleased
 
     private void jCBLocalidadPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jCBLocalidadPopupMenuWillBecomeVisible
-        
+      String provincia = jCBProvincia.getSelectedItem().toString();
+      //jCBProvincia.removeAllItems();
+     
+      switch (provincia){
+          case "Cordoba":
+              jCBLocalidad.addItem("Carloz Paz");
+              jCBLocalidad.addItem("Capilla del Monte");
+              break;
+          case "Entre Rios":
+              jCBLocalidad.addItem("Concordia");
+              jCBLocalidad.addItem("Paraná");
+              break;
+          case "Buenos Aires":
+              jCBLocalidad.addItem("Pergamino");
+              jCBLocalidad.addItem("Pilar");
+              break;
+      }
     }//GEN-LAST:event_jCBLocalidadPopupMenuWillBecomeVisible
+
+    private void jCBProvinciaPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jCBProvinciaPopupMenuWillBecomeVisible
+         jCBLocalidad.removeAllItems();
+    }//GEN-LAST:event_jCBProvinciaPopupMenuWillBecomeVisible
     
   
     
