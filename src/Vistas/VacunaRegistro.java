@@ -101,7 +101,7 @@ public class VacunaRegistro extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jCentros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vacuna.png"))); // NOI18N
-        jCentros.setText("Centros de Vacunación");
+        jCentros.setText("VacunAr");
         jCentros.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jCentros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -182,7 +182,7 @@ public class VacunaRegistro extends javax.swing.JInternalFrame {
         borrarFilas();
         CitaData cd = new CitaData();
         Ciudadano c1 = (Ciudadano) jcVacuna.getSelectedItem();
-
+try{
         for (Entidades.Cita cita : cd.listarCitas()) {
             String estadoString;
             if (cita.getCiudadano().getDni() == c1.getDni()) {
@@ -204,7 +204,9 @@ public class VacunaRegistro extends javax.swing.JInternalFrame {
                     cita.getVacuna().getDosis(), estadoString});
             }
         }
-        borrarFilas();
+        
+}catch(NullPointerException ex)
+{}
     }//GEN-LAST:event_jcVacunaItemStateChanged
 
 

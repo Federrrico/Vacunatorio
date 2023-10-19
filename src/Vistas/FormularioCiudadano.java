@@ -380,7 +380,8 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
             try {
                 if (!(jtDni.getText().isEmpty() && jtNombre.getText().isEmpty()
                         && jtCorreo.getText().isEmpty() && jtTelefono.getText().isEmpty()
-                        && jtAmbitolab.getText().isEmpty())) {
+                        && jtAmbitolab.getText().isEmpty()&&jCBLocalidad.getSelectedItem()== null&&jCBProvincia.getSelectedItem()==null
+                       )&&!(jCorreoInvalido.isVisible())) {
                     c1.setDni(Integer.parseInt(jtDni.getText()));
                     c1.setNombre_completo(jtNombre.getText());
                     c1.setCorreo_electronico(jtCorreo.getText());
@@ -420,7 +421,7 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
 
     private void jCBLocalidadPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jCBLocalidadPopupMenuWillBecomeVisible
       String provincia = jCBProvincia.getSelectedItem().toString();
-     
+     jCBLocalidad.removeAllItems();
       switch (provincia){
           case "Cordoba":
               jCBLocalidad.addItem("Carloz Paz");
@@ -447,7 +448,7 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
         if (!(numeros)) {
             evt.consume();
         }
-        if ((jtDni.getText().length() >= 11)) {
+        if ((jtDni.getText().length() >= 8)) {
             evt.consume();
         }
     }//GEN-LAST:event_jtDniKeyTyped
@@ -476,7 +477,7 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
         if (!(numeros)) {
             evt.consume();
         }
-        if ((jtDni.getText().length() >= 11)) {
+        if ((jtTelefono.getText().length() >= 15)) {
             evt.consume();
         }
     }//GEN-LAST:event_jtTelefonoKeyTyped

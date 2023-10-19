@@ -25,6 +25,15 @@ public class Cita {
     public Cita() {
     }
 
+    public Cita(Ciudadano ciudadano, LocalDateTime fecha_cita, int centro_vacunacion, Vacuna vacuna, int codigo_refuerzo, int estado) {
+        this.ciudadano = ciudadano;
+        this.fecha_cita = fecha_cita;
+        this.centro_vacunacion = centro_vacunacion;
+        this.vacuna = vacuna;
+        this.codigo_refuerzo = codigo_refuerzo;
+        this.estado = estado;
+    }
+
     public Cita(Ciudadano ciudadano, LocalDateTime fecha_cita, int centro_vacunacion, LocalDateTime fecha_colocacion, Vacuna vacuna, int codigo_refuerzo, int estado) {
         this.ciudadano = ciudadano;
         this.fecha_cita = fecha_cita;
@@ -112,7 +121,7 @@ public class Cita {
 
     @Override
     public String toString() {
-        return "Cita{" + "id_cita=" + id_cita + ", ciudadano=" + ciudadano.getDni() + ", fecha_cita=" + fecha_cita + ", centro_vacunacion=" + centro_vacunacion + ", fecha_colocacion=" + fecha_colocacion + ", vacuna=" + vacuna.getNombre_vacuna() + ", codigo_refuerzo=" + codigo_refuerzo + '}';
+        return "Cita{" + "id_cita=" + id_cita + ", ciudadano=" + ciudadano.getDni() + ", fecha_cita=" + fecha_cita + ", centro_vacunacion=" + centro_vacunacion + ", fecha_colocacion=" + fecha_colocacion + ", vacuna=" + vacuna.getNombre_vacuna() + ", codigo_refuerzo=" + codigo_refuerzo + " Estado "+ estado+'}';
     }
 
 
