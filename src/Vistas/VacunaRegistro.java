@@ -183,7 +183,7 @@ public class VacunaRegistro extends javax.swing.JInternalFrame {
         CitaData cd = new CitaData();
         Ciudadano c1 = (Ciudadano) jcVacuna.getSelectedItem();
 
-        for (Cita cita : cd.listarCitas()) {
+        for (Entidades.Cita cita : cd.listarCitas()) {
             String estadoString;
             if (cita.getCiudadano().getDni() == c1.getDni()) {
                 switch (cita.getEstado()) {

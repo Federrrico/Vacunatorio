@@ -26,6 +26,7 @@ public class Vacunatorio {
         LaboratorioData ld = new LaboratorioData();
         VacunaData vd = new VacunaData();
         CitaData cid = new CitaData();
+        CentroVacunacionData cvd = new CentroVacunacionData();
         CentroVacunacion cv = new CentroVacunacion(1, "Prueba", "PruebaLoc", "PruebaProv", "PruebaDir", true);
         Ciudadano fede = new Ciudadano(34155039, "Federico Acenjo", "federico@asdasd.com", 1155522255L, "casa", "Pilar", "Buenos Aires");
         Laboratorio labP1 = new Laboratorio(32555666L, "Umbrella", "EEUU", "Calle falsa 123, Pueblo Fantasma");
@@ -33,6 +34,7 @@ public class Vacunatorio {
         Cita citP1 = new Cita (fede, LocalDateTime.of(LocalDate.of(2023, 12, 10), LocalTime.of(15, 00)), cv.getIdCV(), LocalDateTime.of(LocalDate.of(2023, 12, 10), LocalTime.of(15, 15)), vacP1, 1, 1);
         
         cd.guardarCiudadano(fede);
+        cvd.guardarCentroVacunacion(cv);
         ld.guardarLaboratorio(labP1);
         vd.guardarVacuna(vacP1);
         cid.guardarCita(citP1);

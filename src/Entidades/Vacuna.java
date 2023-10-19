@@ -101,7 +101,7 @@ public class Vacuna {
 
     @Override
     public String toString() {
-        return "Vacuna{" + "nro_serie=" + nro_serie + ", laboratorio=" + laboratorio.getCuit() + ", nombre_vacuna=" + nombre_vacuna + ", dosis=" + dosis + ", antigeno=" + antigeno + ", fecha_vencimiento=" + fecha_vencimiento + ", aplicada=" + aplicada + '}';
+        return "Vacuna{" + "nro_serie=" + nro_serie + ", laboratorio=" + laboratorio.getCuit().toString() + ", nombre_vacuna=" + nombre_vacuna + ", dosis=" + dosis + ", antigeno=" + antigeno + ", fecha_vencimiento=" + fecha_vencimiento + ", aplicada=" + aplicada + '}';
     }
 
  
