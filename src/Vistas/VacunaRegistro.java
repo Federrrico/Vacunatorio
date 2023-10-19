@@ -16,30 +16,30 @@ import javax.swing.table.DefaultTableModel;
  * @author Editor
  */
 public class VacunaRegistro extends javax.swing.JInternalFrame {
+
     private DefaultTableModel modelo = new DefaultTableModel();
-    
+
     /**
      * Creates new form Vacuna
      */
     public VacunaRegistro() {
         initComponents();
-            modelo.addColumn("Vacuna");
-            modelo.addColumn("Dosis");
-            modelo.addColumn("Estado");
-            modelo.addColumn("Fecha y hora");
-            
-            jTable1.setModel(modelo);
+        modelo.addColumn("Vacuna");
+        modelo.addColumn("Dosis");
+        modelo.addColumn("Estado");
+        //modelo.addColumn("Fecha y hora");
+
+        jTable1.setModel(modelo);
 
     }
-    
-     private void borrarFilas(){
+
+    private void borrarFilas() {
         int f = modelo.getRowCount() - 1;
-        for (;f >= 0; f--) {
+        for (; f >= 0; f--) {
             modelo.removeRow(f);
         }
     }
-     
-     
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -158,7 +158,7 @@ public class VacunaRegistro extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCentrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCentrosActionPerformed
-        CentrodeVacunacion cv= new CentrodeVacunacion();
+        CentrodeVacunacion cv = new CentrodeVacunacion();
         cv.setVisible(true);
     }//GEN-LAST:event_jCentrosActionPerformed
 
@@ -166,32 +166,45 @@ public class VacunaRegistro extends javax.swing.JInternalFrame {
         CiudadanoData cd = new CiudadanoData();
         jcVacuna.removeAllItems();
         jcVacuna.addItem(null);
-        
+
         try {
-            for (Ciudadano c1: cd.listarCiudadanos() ) {
+            for (Ciudadano c1 : cd.listarCiudadanos()) {
                 jcVacuna.addItem(c1);
             }
-        
-        
-        }catch (NullPointerException ex ){
+
+        } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(this, "No existen ciudadanos en la BD");
-        
+
         }
     }//GEN-LAST:event_jcVacunaPopupMenuWillBecomeVisible
 
     private void jcVacunaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcVacunaItemStateChanged
-       borrarFilas();
+        borrarFilas();
         CitaData cd = new CitaData();
         Ciudadano c1 = (Ciudadano) jcVacuna.getSelectedItem();
-        
+
         for (Cita cita : cd.listarCitas()) {
-            if (cita.getCiudadano().getDni() == c1.getDni()){
-            modelo.addRow(new Object[]{cita.getVacuna(),
-            cita.getVacuna().getDosis()});
-            
+            String estadoString;
+            if (cita.getCiudadano().getDni() == c1.getDni()) {
+                switch (cita.getEstado()) {
+                    case 0:
+                        estadoString = "En proceso";
+                        break;
+                    case 1:
+                        estadoString = cita.getFecha_colocacion().toString();
+                        break;
+                    case 2:
+                        estadoString = "Cancelada";
+                        break;
+                    default:
+                        estadoString = "Reprogramada";
+                        break;
+                }
+                modelo.addRow(new Object[]{cita.getVacuna().getNombre_vacuna(),
+                    cita.getVacuna().getDosis(), estadoString});
             }
-           
         }
+        borrarFilas();
     }//GEN-LAST:event_jcVacunaItemStateChanged
 
 
