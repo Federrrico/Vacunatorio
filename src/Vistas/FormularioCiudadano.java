@@ -9,6 +9,8 @@ import AccesoADatos.CentroVacunacionData;
 import AccesoADatos.CiudadanoData;
 import Entidades.CentroVacunacion;
 import Entidades.Ciudadano;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 /**
@@ -30,9 +32,11 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
         jbEditar.setEnabled(false);
         jCBLocalidad.setEnabled(false);
         jCBProvincia.setEnabled(false);
+        jCBProvincia.addItem(null);
         jCBProvincia.addItem("Entre Rios");
         jCBProvincia.addItem("Cordoba");
         jCBProvincia.addItem("Buenos Aires");
+        jCorreoInvalido.setVisible(false);
     }
 
     /**
@@ -65,6 +69,7 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
         jCBProvincia = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
         jCBLocalidad = new javax.swing.JComboBox<>();
+        jCorreoInvalido = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -85,14 +90,39 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
         });
 
         jtAmbitolab.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jtAmbitolab.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtAmbitolabKeyTyped(evt);
+            }
+        });
 
         jtDni.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jtDni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtDniKeyTyped(evt);
+            }
+        });
 
         jtNombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtNombreKeyTyped(evt);
+            }
+        });
 
         jtCorreo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jtCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtCorreoKeyReleased(evt);
+            }
+        });
 
         jtTelefono.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtTelefonoKeyTyped(evt);
+            }
+        });
 
         jtPatologia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jtPatologia.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -106,13 +136,6 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
         jbEditar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jbEditarMouseReleased(evt);
-            }
-        });
-        jbEditar.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                jbEditarInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
 
@@ -138,6 +161,7 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Ambito laboral:");
 
+        jCBProvincia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jCBProvincia.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
@@ -150,6 +174,7 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
 
         jLabel10.setText("Localidad:");
 
+        jCBLocalidad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jCBLocalidad.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
@@ -159,6 +184,10 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
                 jCBLocalidadPopupMenuWillBecomeVisible(evt);
             }
         });
+
+        jCorreoInvalido.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jCorreoInvalido.setForeground(new java.awt.Color(255, 0, 0));
+        jCorreoInvalido.setText("Correo Invalido(*)");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -171,24 +200,22 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 4, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addGap(23, 23, 23))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel10))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jtPatologia, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jCorreoInvalido))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -200,11 +227,11 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
                         .addComponent(jCBProvincia, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(30, 30, 30))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(62, 62, 62)
+                .addGap(60, 60, 60)
                 .addComponent(jbAgregar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbEditar)
-                .addGap(55, 55, 55))
+                .addGap(62, 62, 62))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,51 +247,45 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtPatologia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtAmbitolab, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCorreoInvalido))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtPatologia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtAmbitolab, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCBProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCBLocalidad, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAgregar)
                     .addComponent(jbEditar))
-                .addContainerGap(268, Short.MAX_VALUE))
+                .addContainerGap(296, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 440, 747));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 0, 440, 747));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vacunas-1920-5.jpg"))); // NOI18N
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jbEditarInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jbEditarInputMethodTextChanged
-    }//GEN-LAST:event_jbEditarInputMethodTextChanged
-
-    private void jtPatologiaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtPatologiaKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtPatologiaKeyTyped
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         CiudadanoData cd = new CiudadanoData();
@@ -369,6 +390,7 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
                     c1.setProvincia(jCBProvincia.getSelectedItem().toString());
                     c1.setLocalidad(jCBLocalidad.getSelectedItem().toString());
                     cd.guardarCiudadano(c1);
+                    limpiarCampos();
                     jbAgregar.setText("Nuevo");
                     jbBuscar.setEnabled(true);
                     jtDni.setEditable(true);
@@ -393,12 +415,11 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
         } else {
             jbAgregar.setText("Guardar");
         }
-        limpiarCampos();
+        
     }//GEN-LAST:event_jbAgregarMouseReleased
 
     private void jCBLocalidadPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jCBLocalidadPopupMenuWillBecomeVisible
       String provincia = jCBProvincia.getSelectedItem().toString();
-      //jCBProvincia.removeAllItems();
      
       switch (provincia){
           case "Cordoba":
@@ -419,7 +440,74 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
     private void jCBProvinciaPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jCBProvinciaPopupMenuWillBecomeVisible
          jCBLocalidad.removeAllItems();
     }//GEN-LAST:event_jCBProvinciaPopupMenuWillBecomeVisible
+
+    private void jtDniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtDniKeyTyped
+        int tecla = evt.getKeyChar();
+        boolean numeros = tecla >= 48 && tecla <= 57;
+        if (!(numeros)) {
+            evt.consume();
+        }
+        if ((jtDni.getText().length() >= 11)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtDniKeyTyped
+
+    private void jtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNombreKeyTyped
+        int tecla = evt.getKeyChar();
+        boolean may = tecla >= 65 && tecla <= 90;
+        boolean min = tecla >= 97 && tecla <= 122;
+        boolean esp = tecla == 32;
+        if (!(may || min || esp)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtNombreKeyTyped
+
+    private void jtCorreoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtCorreoKeyReleased
+         if (verificarCorreo(jtCorreo.getText())) {
+            jCorreoInvalido.setVisible(false);
+        } else {
+            jCorreoInvalido.setVisible(true);
+        }
+    }//GEN-LAST:event_jtCorreoKeyReleased
+
+    private void jtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtTelefonoKeyTyped
+        int tecla = evt.getKeyChar();
+        boolean numeros = tecla >= 48 && tecla <= 57;
+        if (!(numeros)) {
+            evt.consume();
+        }
+        if ((jtDni.getText().length() >= 11)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtTelefonoKeyTyped
+
+    private void jtPatologiaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtPatologiaKeyTyped
+        int tecla = evt.getKeyChar();
+        boolean may = tecla >= 65 && tecla <= 90;
+        boolean min = tecla >= 97 && tecla <= 122;
+        boolean esp = tecla == 32;
+        if (!(may || min || esp)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtPatologiaKeyTyped
+
+    private void jtAmbitolabKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtAmbitolabKeyTyped
+        int tecla = evt.getKeyChar();
+        boolean may = tecla >= 65 && tecla <= 90;
+        boolean min = tecla >= 97 && tecla <= 122;
+        boolean esp = tecla == 32;
+        if (!(may || min || esp)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtAmbitolabKeyTyped
     
+     public boolean verificarCorreo (String correo){
+    // se compara con la expresion regular
+        Pattern patron = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                                    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        Matcher mat= patron.matcher(correo);
+        return mat.find();
+    }
   
     
     private void limpiarCampos() {
@@ -429,11 +517,14 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
         jtTelefono.setText("");
         jtPatologia.setText("");
         jtAmbitolab.setText("");
+        jCBProvincia.setSelectedItem(null);
+        jCBLocalidad.setSelectedItem(null);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jCBLocalidad;
     private javax.swing.JComboBox<String> jCBProvincia;
+    private javax.swing.JLabel jCorreoInvalido;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
