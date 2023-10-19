@@ -21,33 +21,35 @@ import javax.swing.JOptionPane;
  * @author federico.acenjo
  */
 public class CitaData {
+
     private VacunaData vacunaD;
     private CiudadanoData ciudadanoD;
-    
+
     private Connection con = null;
-    
+
     public CitaData() {
         con = Conexion.getConexion();
         ciudadanoD = new CiudadanoData();
         vacunaD = new VacunaData();
     }
-    
-     public void guardarCita(Cita cita) {
 
-        String sql = "INSERT INTO cita (ciudadano, fecha_cita, centro_vacunacion, fecha_colocacion, vacuna, codigo_refuerzo) VALUES (?, ?, ?, ?, ?, ?)";
+    public void guardarCita(Cita cita) {
+
+        String sql = "INSERT INTO cita (ciudadano, fecha_cita, centro_vacunacion, fecha_colocacion, vacuna, codigo_refuerzo, estado) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            
+
             ps.setInt(1, cita.getCiudadano().getDni());
             ps.setTimestamp(2, Timestamp.valueOf(cita.getFecha_cita()));
             ps.setInt(3, cita.getCentro_vacunacion());
             ps.setTimestamp(4, Timestamp.valueOf(cita.getFecha_colocacion()));
             ps.setInt(5, cita.getVacuna().getNro_serie());
             ps.setInt(6, cita.getCodigo_refuerzo());
+            ps.setInt(7, 1);
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()){
+            if (rs.next()) {
                 cita.setId_cita(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Cita registrada con exito. Cita nro: " + cita.getId_cita());
             }
@@ -56,17 +58,17 @@ public class CitaData {
             JOptionPane.showMessageDialog(null, "Cita existente");
         }
     }
-    
+
     public Cita buscarCita(int id) {
         Cita cita = null;
         String sql = "SELECT * FROM cita WHERE id_cita = ?";
         try {
             PreparedStatement ps;
             ps = con.prepareStatement(sql);
-            ps.setInt(1, id );
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            if(rs.next()){
-                cita=new Cita();
+            if (rs.next()) {
+                cita = new Cita();
                 cita.setId_cita(id);
                 cita.setCiudadano(ciudadanoD.buscarCiudadano(rs.getInt(2)));
                 //LocalDateTime.of(LocalDate.of(2023, 12, 10), LocalTime.MIN)
@@ -75,6 +77,7 @@ public class CitaData {
                 cita.setFecha_colocacion(rs.getTimestamp(5).toLocalDateTime());
                 cita.setVacuna(vacunaD.buscarVacuna(rs.getInt(6)));
                 cita.setCodigo_refuerzo(rs.getInt(7));
+                cita.setEstado(rs.getInt(8));
             } else {
                 JOptionPane.showMessageDialog(null, "No existe la cita");
             }
@@ -101,6 +104,7 @@ public class CitaData {
                 cita.setFecha_colocacion(rs.getTimestamp("fecha_colocacion").toLocalDateTime());
                 cita.setVacuna(vacunaD.buscarVacuna(rs.getInt("vacuna")));
                 cita.setCodigo_refuerzo(rs.getInt("codigo_refuerzo"));
+                cita.setEstado(rs.getInt("estado"));
                 citas.add(cita);
             }
             ps.close();
@@ -109,4 +113,33 @@ public class CitaData {
         }
         return citas;
     }
+
+    public void modificarCita(Cita cita) {
+        String sql = "UPDATE cita SET ciudadano = ?, fecha_cita = ?, centro_vacunacion = ?, "
+                + "fecha_colocacion = ?, vacuna = ?, codigo_refuerzo = ?, estado = ? WHERE id_cita = ?";
+        PreparedStatement ps = null;
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, cita.getCiudadano().getDni());
+            ps.setTimestamp(2, Timestamp.valueOf(cita.getFecha_cita()));
+            ps.setInt(3, cita.getCentro_vacunacion());
+            ps.setTimestamp(4, Timestamp.valueOf(cita.getFecha_colocacion()));
+            ps.setInt(5, cita.getVacuna().getNro_serie());
+            ps.setInt(6, cita.getCodigo_refuerzo());
+            ps.setInt(7, cita.getEstado());
+            ps.setInt(8, cita.getId_cita());
+            int exito = ps.executeUpdate();
+
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Cita modificada.");
+            } else {
+                JOptionPane.showMessageDialog(null, "La cita no existe");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cita ");
+        }
+    }
+    
+    
 }

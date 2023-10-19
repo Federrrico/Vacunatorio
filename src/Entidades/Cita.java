@@ -20,20 +20,22 @@ public class Cita {
     private LocalDateTime fecha_colocacion;
     private Vacuna vacuna;
     private int codigo_refuerzo;
+    private int estado;
 
     public Cita() {
     }
 
-    public Cita(Ciudadano ciudadano, LocalDateTime fecha_cita, int centro_vacunacion, LocalDateTime fecha_colocacion, Vacuna vacuna, int codigo_refuerzo) {
+    public Cita(Ciudadano ciudadano, LocalDateTime fecha_cita, int centro_vacunacion, LocalDateTime fecha_colocacion, Vacuna vacuna, int codigo_refuerzo, int estado) {
         this.ciudadano = ciudadano;
         this.fecha_cita = fecha_cita;
         this.centro_vacunacion = centro_vacunacion;
         this.fecha_colocacion = fecha_colocacion;
         this.vacuna = vacuna;
         this.codigo_refuerzo = codigo_refuerzo;
+        this.estado = estado;
     }
 
-    public Cita(int id_cita, Ciudadano ciudadano, LocalDateTime fecha_cita, int centro_vacunacion, LocalDateTime fecha_colocacion, Vacuna vacuna, int codigo_refuerzo) {
+    public Cita(int id_cita, Ciudadano ciudadano, LocalDateTime fecha_cita, int centro_vacunacion, LocalDateTime fecha_colocacion, Vacuna vacuna, int codigo_refuerzo, int estado) {
         this.id_cita = id_cita;
         this.ciudadano = ciudadano;
         this.fecha_cita = fecha_cita;
@@ -41,6 +43,15 @@ public class Cita {
         this.fecha_colocacion = fecha_colocacion;
         this.vacuna = vacuna;
         this.codigo_refuerzo = codigo_refuerzo;
+        this.estado = estado;
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
     }
 
     public int getId_cita() {
