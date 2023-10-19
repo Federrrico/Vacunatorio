@@ -5,19 +5,41 @@
  */
 package Vistas;
 
+import AccesoADatos.CitaData;
+import AccesoADatos.CiudadanoData;
+import Entidades.*;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Editor
  */
-public class Vacuna extends javax.swing.JInternalFrame {
-
+public class VacunaRegistro extends javax.swing.JInternalFrame {
+    private DefaultTableModel modelo = new DefaultTableModel();
+    
     /**
      * Creates new form Vacuna
      */
-    public Vacuna() {
+    public VacunaRegistro() {
         initComponents();
-    }
+            modelo.addColumn("Vacuna");
+            modelo.addColumn("Dosis");
+            modelo.addColumn("Estado");
+            modelo.addColumn("Fecha y hora");
+            
+            jTable1.setModel(modelo);
 
+    }
+    
+     private void borrarFilas(){
+        int f = modelo.getRowCount() - 1;
+        for (;f >= 0; f--) {
+            modelo.removeRow(f);
+        }
+    }
+     
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,6 +71,20 @@ public class Vacuna extends javax.swing.JInternalFrame {
         jLabel2.setText("Ciudadano");
 
         jcVacuna.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jcVacuna.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcVacunaItemStateChanged(evt);
+            }
+        });
+        jcVacuna.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+                jcVacunaPopupMenuWillBecomeVisible(evt);
+            }
+        });
 
         jTable1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -94,7 +130,7 @@ public class Vacuna extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(126, 126, 126)
                         .addComponent(jCentros, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,7 +145,7 @@ public class Vacuna extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52)
                 .addComponent(jCentros)
-                .addContainerGap(337, Short.MAX_VALUE))
+                .addContainerGap(338, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 0, 440, 747));
@@ -126,6 +162,38 @@ public class Vacuna extends javax.swing.JInternalFrame {
         cv.setVisible(true);
     }//GEN-LAST:event_jCentrosActionPerformed
 
+    private void jcVacunaPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jcVacunaPopupMenuWillBecomeVisible
+        CiudadanoData cd = new CiudadanoData();
+        jcVacuna.removeAllItems();
+        jcVacuna.addItem(null);
+        
+        try {
+            for (Ciudadano c1: cd.listarCiudadanos() ) {
+                jcVacuna.addItem(c1);
+            }
+        
+        
+        }catch (NullPointerException ex ){
+            JOptionPane.showMessageDialog(this, "No existen ciudadanos en la BD");
+        
+        }
+    }//GEN-LAST:event_jcVacunaPopupMenuWillBecomeVisible
+
+    private void jcVacunaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcVacunaItemStateChanged
+       borrarFilas();
+        CitaData cd = new CitaData();
+        Ciudadano c1 = (Ciudadano) jcVacuna.getSelectedItem();
+        
+        for (Cita cita : cd.listarCitas()) {
+            if (cita.getCiudadano().getDni() == c1.getDni()){
+            modelo.addRow(new Object[]{cita.getVacuna(),
+            cita.getVacuna().getDosis()});
+            
+            }
+           
+        }
+    }//GEN-LAST:event_jcVacunaItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jCentros;
@@ -135,6 +203,6 @@ public class Vacuna extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JComboBox<String> jcVacuna;
+    private javax.swing.JComboBox<Ciudadano> jcVacuna;
     // End of variables declaration//GEN-END:variables
 }

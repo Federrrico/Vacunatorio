@@ -153,7 +153,7 @@ public class Menu extends javax.swing.JFrame {
             escritorio.remove(iframe);
         }
         escritorio.repaint();
-        Cita cita = new Cita();
+        CitaRegistro cita = new CitaRegistro();
         cita.setVisible(true);
         escritorio.add(cita);
         escritorio.moveToFront(cita);
@@ -175,7 +175,7 @@ public class Menu extends javax.swing.JFrame {
             escritorio.remove(iframe);
         }
         escritorio.repaint();
-        Vacuna vac = new Vacuna();
+        VacunaRegistro vac = new VacunaRegistro();
         vac.setVisible(true);
         escritorio.add(vac);
         escritorio.moveToFront(vac);
