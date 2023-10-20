@@ -32,7 +32,8 @@ public class CitaData {
         ciudadanoD = new CiudadanoData();
         vacunaD = new VacunaData();
     }
-
+    
+    
     public void guardarCita(Cita cita) {
 
         String sql = "INSERT INTO cita (ciudadano, fecha_cita, centro_vacunacion, vacuna, codigo_refuerzo, estado) VALUES (?, ?, ?, ?, ?, ?)";
@@ -77,7 +78,9 @@ public class CitaData {
                 //LocalDateTime.of(LocalDate.of(2023, 12, 10), LocalTime.MIN)
                 cita.setFecha_cita(rs.getTimestamp(3).toLocalDateTime());
                 cita.setCentro_vacunacion(rs.getInt(4));
-                cita.setFecha_colocacion(rs.getTimestamp(5).toLocalDateTime());
+                if (rs.getTimestamp(5) != null){
+                    cita.setFecha_colocacion(rs.getTimestamp(5).toLocalDateTime());
+                }
                 cita.setVacuna(vacunaD.buscarVacuna(rs.getInt(6)));
                 cita.setCodigo_refuerzo(rs.getInt(7));
                 cita.setEstado(rs.getInt(8));

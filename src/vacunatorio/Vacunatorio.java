@@ -36,14 +36,13 @@ public class Vacunatorio {
         Cita citP2 = new Cita (fefe, LocalDateTime.of(LocalDate.of(2023, 12, 10), LocalTime.of(15, 00)),cv.getIdCV(),vacP1, 1, 0);
         
 //        cd.guardarCiudadano(fede);
-        //cd.guardarCiudadano(fefe);
+        cd.guardarCiudadano(fefe);
 //        cvd.guardarCentroVacunacion(cv);
 //        ld.guardarLaboratorio(labP1);
 //        vd.guardarVacuna(vacP1);
-        cid.guardarCita(citP1);
-        
+//        cid.guardarCita(citP1);
         cid.guardarCita(citP2);
-        cid.modificarCita(citP1);
+        
         System.out.println("Traemos los Ciudadanos antes de la modificacion");
         for (Ciudadano ciudadano : cd.listarCiudadanos()) {
             System.out.println(ciudadano.toString());
