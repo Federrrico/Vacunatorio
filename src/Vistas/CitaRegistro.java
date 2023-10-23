@@ -5,6 +5,11 @@
  */
 package Vistas;
 
+import AccesoADatos.CentroVacunacionData;
+import AccesoADatos.CiudadanoData;
+import Entidades.CentroVacunacion;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Editor
@@ -37,13 +42,13 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTFCodRefuerzo = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jBCentroVac = new javax.swing.JButton();
         jSpinField1 = new com.toedter.components.JSpinField();
         jSpinField2 = new com.toedter.components.JSpinField();
+        jCBCentroVacunacion = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -69,15 +74,13 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("Centro de Vacunación:");
 
-        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setText("Código de refuerzo:");
 
-        jTextField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        jTFCodRefuerzo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTFCodRefuerzo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                jTFCodRefuerzoActionPerformed(evt);
             }
         });
 
@@ -86,13 +89,13 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
         jButton1.setText("Generar Cita");
         jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/hospital.png"))); // NOI18N
-        jButton2.setText(" Centros de Vacunación");
-        jButton2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jBCentroVac.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jBCentroVac.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/hospital.png"))); // NOI18N
+        jBCentroVac.setText(" Centros de Vacunación");
+        jBCentroVac.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jBCentroVac.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jBCentroVacActionPerformed(evt);
             }
         });
 
@@ -104,12 +107,23 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
         jSpinField2.setMaximum(45);
         jSpinField2.setMinimum(0);
 
+        jCBCentroVacunacion.setMaximumSize(new java.awt.Dimension(33, 26));
+        jCBCentroVacunacion.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+                jCBCentroVacunacionPopupMenuWillBecomeVisible(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,10 +133,10 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTFCodRefuerzo, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jtdni)
-                            .addComponent(jTextField1))
+                            .addComponent(jCBCentroVacunacion, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jSpinField1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -131,7 +145,7 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35)
-                        .addComponent(jButton2)
+                        .addComponent(jBCentroVac)
                         .addGap(32, 32, 32))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -150,21 +164,21 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jSpinField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSpinField2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCBCentroVacunacion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTFCodRefuerzo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(60, 60, 60)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(jBCentroVac)
                     .addComponent(jButton1))
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, 430, 498));
@@ -176,21 +190,37 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       CentrodeVacunacion cv = new CentrodeVacunacion();
-       cv.setVisible(true);
-      
-       
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jBCentroVacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCentroVacActionPerformed
+       CentrosDeVacunacion cv = new CentrosDeVacunacion();
+       Menu.escritorio.add(cv);
+       cv.setVisible(true);   
+    }//GEN-LAST:event_jBCentroVacActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void jTFCodRefuerzoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFCodRefuerzoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_jTFCodRefuerzoActionPerformed
+
+    private void jCBCentroVacunacionPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jCBCentroVacunacionPopupMenuWillBecomeVisible
+        CentroVacunacionData cvd = new CentroVacunacionData();
+        jCBCentroVacunacion.removeAllItems();
+        jCBCentroVacunacion.addItem(null);
+        CiudadanoData cd = new CiudadanoData();
+        
+        try {
+            for (CentroVacunacion cv : cvd.listarCentroVacunacionsPorLocalidad(cd.buscarCiudadano(Integer.parseInt(jtdni.getText())).getLocalidad())) {
+                jCBCentroVacunacion.addItem(cv);
+            }
+
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(this, "No existen centros de vacunacion en la localidad " + cd.buscarCiudadano(Integer.parseInt(jtdni.getText())).getLocalidad());
+        } catch (NumberFormatException ex) {}
+    }//GEN-LAST:event_jCBCentroVacunacionPopupMenuWillBecomeVisible
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBCentroVac;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<CentroVacunacion> jCBCentroVacunacion;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private com.toedter.calendar.JDateChooser jDateChooser3;
@@ -204,8 +234,7 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private com.toedter.components.JSpinField jSpinField1;
     private com.toedter.components.JSpinField jSpinField2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTFCodRefuerzo;
     private javax.swing.JTextField jtdni;
     // End of variables declaration//GEN-END:variables
 }

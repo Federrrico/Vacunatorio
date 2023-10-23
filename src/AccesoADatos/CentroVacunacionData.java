@@ -28,7 +28,7 @@ public class CentroVacunacionData {
     
     public void guardarCentroVacunacion(CentroVacunacion centroVacunacion) {
 
-        String sql = "INSERT INTO centroVacunacion (nombre, localidad, provincia, direccion, estado) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO centrovacunacion (nombre, localidad, provincia, direccion, estado) VALUES (?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -51,7 +51,7 @@ public class CentroVacunacionData {
     
     public CentroVacunacion buscarCentroVacunacion(int id) {
         CentroVacunacion centroVacunacion = null;
-        String sql = "SELECT * FROM centroVacunacion WHERE id = ? AND estado = 1";
+        String sql = "SELECT * FROM centrovacunacion WHERE idCV = ? AND estado = 1";
         try {
             PreparedStatement ps;
             ps = con.prepareStatement(sql);
@@ -79,12 +79,12 @@ public class CentroVacunacionData {
         List<CentroVacunacion> centroVacunacions = new ArrayList<>();
         
         try {
-            String sql = "SELECT * FROM centroVacunacion WHERE estado = 1";
+            String sql = "SELECT * FROM centrovacunacion WHERE estado = 1";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 CentroVacunacion centroVacunacion = new CentroVacunacion();
-                centroVacunacion.setIdCV(rs.getInt("id"));
+                centroVacunacion.setIdCV(rs.getInt("idCV"));
                 centroVacunacion.setNombre(rs.getString("nombre"));
                 centroVacunacion.setLocalidad(rs.getString("localidad"));
                 centroVacunacion.setProvincia(rs.getString("provincia"));
@@ -99,17 +99,17 @@ public class CentroVacunacionData {
         return centroVacunacions;
     }
     
-    public List<CentroVacunacion> listarCentroVacunacionsPorProvincia(String provincia) {
+    public List<CentroVacunacion> listarCentroVacunacionsPorLocalidad(String localidad) {
         List<CentroVacunacion> centroVacunacions = new ArrayList<>();
         
         try {
-            String sql = "SELECT localidad FROM centroVacunacion WHERE estado = 1 AND provincia = ?";
+            String sql = "SELECT * FROM centrovacunacion WHERE estado = 1 AND localidad = ?";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, provincia);
+            ps.setString(1, localidad);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 CentroVacunacion centroVacunacion = new CentroVacunacion();
-                centroVacunacion.setIdCV(rs.getInt("id"));
+                centroVacunacion.setIdCV(rs.getInt("idCV"));
                 centroVacunacion.setNombre(rs.getString("nombre"));
                 centroVacunacion.setLocalidad(rs.getString("localidad"));
                 centroVacunacion.setProvincia(rs.getString("provincia"));
@@ -119,14 +119,14 @@ public class CentroVacunacionData {
             } 
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla CentroVacunacion");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla CentroVacunacion 2");
         }
         return centroVacunacions;
     }
     
     public void modificarCentroVacunacion(CentroVacunacion centroVacunacion) {
 
-        String sql = "UPDATE centroVacunacion SET nombre = ?, localidad = ?, provincia = ?, direccion = ? WHERE id = ?";
+        String sql = "UPDATE centrovacunacion SET nombre = ?, localidad = ?, provincia = ?, direccion = ? WHERE idCV = ?";
         PreparedStatement ps = null;
         System.out.println(centroVacunacion.toString());
         try {
@@ -150,7 +150,7 @@ public class CentroVacunacionData {
     }
     
     public void eliminarCentroVacunacion(int id){
-        String sql = "UPDATE centroVacunacion SET estado = 0 WHERE id = ?;";
+        String sql = "UPDATE centrovacunacion SET estado = 0 WHERE idCV = ?;";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);

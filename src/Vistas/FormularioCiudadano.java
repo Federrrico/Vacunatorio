@@ -9,6 +9,7 @@ import AccesoADatos.CentroVacunacionData;
 import AccesoADatos.CiudadanoData;
 import Entidades.CentroVacunacion;
 import Entidades.Ciudadano;
+import java.awt.Color;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -316,8 +317,10 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
             jtTelefono.setText(c1.getTelefono() + "");
             jtPatologia.setText(c1.getPatologia());
             jtAmbitolab.setText(c1.getAmbito_laboral());
-            jCBProvincia.addItem(c1.getProvincia());
+            //jCBProvincia.addItem(c1.getProvincia());
+            jCBProvincia.setSelectedItem(c1.getProvincia());
             jCBLocalidad.addItem(c1.getLocalidad());
+            jCBLocalidad.setSelectedItem(c1.getLocalidad());
             jtNombre.setEditable(false);
             jtCorreo.setEditable(false);
             jtTelefono.setEditable(false);
@@ -397,8 +400,7 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
             try {
                 if (!(jtDni.getText().isEmpty() && jtNombre.getText().isEmpty()
                         && jtCorreo.getText().isEmpty() && jtTelefono.getText().isEmpty()
-                        && jtAmbitolab.getText().isEmpty()&&jCBLocalidad.getSelectedItem()== null&&jCBProvincia.getSelectedItem()==null
-                       )&&!(jCorreoInvalido.isVisible())) {
+                        && jtAmbitolab.getText().isEmpty() && jCBLocalidad.getSelectedItem() == null && jCBProvincia.getSelectedItem() == null) && !(jCorreoInvalido.isVisible())) {
                     c1.setDni(Integer.parseInt(jtDni.getText()));
                     c1.setNombre_completo(jtNombre.getText());
                     c1.setCorreo_electronico(jtCorreo.getText());
@@ -433,30 +435,30 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
         } else {
             jbAgregar.setText("Guardar");
         }
-        
+
     }//GEN-LAST:event_jbAgregarMouseReleased
 
     private void jCBLocalidadPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jCBLocalidadPopupMenuWillBecomeVisible
-      String provincia = jCBProvincia.getSelectedItem().toString();
-     jCBLocalidad.removeAllItems();
-      switch (provincia){
-          case "Cordoba":
-              jCBLocalidad.addItem("Carloz Paz");
-              jCBLocalidad.addItem("Capilla del Monte");
-              break;
-          case "Entre Rios":
-              jCBLocalidad.addItem("Concordia");
-              jCBLocalidad.addItem("Paraná");
-              break;
-          case "Buenos Aires":
-              jCBLocalidad.addItem("Pergamino");
-              jCBLocalidad.addItem("Pilar");
-              break;
-      }
+        String provincia = jCBProvincia.getSelectedItem().toString();
+        jCBLocalidad.removeAllItems();
+        switch (provincia) {
+            case "Cordoba":
+                jCBLocalidad.addItem("Carloz Paz");
+                jCBLocalidad.addItem("Capilla del Monte");
+                break;
+            case "Entre Rios":
+                jCBLocalidad.addItem("Concordia");
+                jCBLocalidad.addItem("Paraná");
+                break;
+            case "Buenos Aires":
+                jCBLocalidad.addItem("Pergamino");
+                jCBLocalidad.addItem("Pilar");
+                break;
+        }
     }//GEN-LAST:event_jCBLocalidadPopupMenuWillBecomeVisible
 
     private void jCBProvinciaPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jCBProvinciaPopupMenuWillBecomeVisible
-         jCBLocalidad.removeAllItems();
+        jCBLocalidad.removeAllItems();
     }//GEN-LAST:event_jCBProvinciaPopupMenuWillBecomeVisible
 
     private void jtDniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtDniKeyTyped
@@ -481,7 +483,7 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtNombreKeyTyped
 
     private void jtCorreoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtCorreoKeyReleased
-         if (verificarCorreo(jtCorreo.getText())) {
+        if (verificarCorreo(jtCorreo.getText())) {
             jCorreoInvalido.setVisible(false);
         } else {
             jCorreoInvalido.setVisible(true);
@@ -518,16 +520,15 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
             evt.consume();
         }
     }//GEN-LAST:event_jtAmbitolabKeyTyped
-    
-     public boolean verificarCorreo (String correo){
-    // se compara con la expresion regular
+
+    public boolean verificarCorreo(String correo) {
+        // se compara con la expresion regular
         Pattern patron = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                                    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-        Matcher mat= patron.matcher(correo);
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        Matcher mat = patron.matcher(correo);
         return mat.find();
     }
-  
-    
+
     private void limpiarCampos() {
         jtDni.setText("");
         jtNombre.setText("");

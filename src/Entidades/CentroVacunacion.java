@@ -87,7 +87,7 @@ public class CentroVacunacion {
 
     @Override
     public String toString() {
-        return "CentroVacunacion{" + "idCV=" + idCV + ", nombre=" + nombre + ", localidad=" + localidad + ", provincia=" + provincia + ", direccion=" + direccion + ", estado=" + estado + '}';
+        return nombre + ", " + direccion;
     }
 
     
