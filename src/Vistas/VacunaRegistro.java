@@ -270,10 +270,6 @@ public class VacunaRegistro extends javax.swing.JInternalFrame {
         String fecha = getFecha(jDCFechaColocacion);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy, MM, dd");
         CitaData cd = new CitaData();
-        System.out.println("Fecha: " + getFecha(jDCFechaColocacion));
-        System.out.println("Hora: " + jSFHoraColocacion.getValue());
-        System.out.println("Minutos: " + jSFMinColocacion.getValue());
-        System.out.println("ID Cita: " + Integer.parseInt(modelo.getValueAt(jTable1.getSelectedRow(), 0).toString()));
         Entidades.Cita cita = cd.buscarCita(Integer.parseInt(modelo.getValueAt(jTable1.getSelectedRow(), 0).toString()));
         cita.setFecha_colocacion(LocalDateTime.of(LocalDate.parse(fecha, dtf), LocalTime.of(jSFHoraColocacion.getValue(), jSFMinColocacion.getValue())));
         cita.setEstado(1);

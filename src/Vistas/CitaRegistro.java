@@ -6,8 +6,17 @@
 package Vistas;
 
 import AccesoADatos.CentroVacunacionData;
+import AccesoADatos.CitaData;
 import AccesoADatos.CiudadanoData;
 import Entidades.CentroVacunacion;
+import Entidades.Cita;
+import Entidades.Ciudadano;
+import com.toedter.calendar.JDateChooser;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,6 +30,24 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
      */
     public CitaRegistro() {
         initComponents();
+        llenarcombo();
+    }
+
+    public void llenarcombo() {
+        jCBCodigoRefuerzo.addItem(null);
+        jCBCodigoRefuerzo.addItem(1);
+        jCBCodigoRefuerzo.addItem(2);
+        jCBCodigoRefuerzo.addItem(3);
+
+    }
+    SimpleDateFormat formato = new SimpleDateFormat("yyyy, MM, dd");
+
+    private String getFecha(JDateChooser jd) {
+        if (jd.getDate() != null) {
+            return formato.format(jd.getDate());
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -40,15 +67,15 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jtdni = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDCfechaCal = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTFCodRefuerzo = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jBGenerarCita = new javax.swing.JButton();
         jBCentroVac = new javax.swing.JButton();
-        jSpinField1 = new com.toedter.components.JSpinField();
-        jSpinField2 = new com.toedter.components.JSpinField();
+        jSFhora = new com.toedter.components.JSpinField();
+        jSFMinutos = new com.toedter.components.JSpinField();
         jCBCentroVacunacion = new javax.swing.JComboBox<>();
+        jCBCodigoRefuerzo = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -69,7 +96,7 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Fecha de Cita:");
 
-        jDateChooser1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jDCfechaCal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("Centro de Vacunación:");
@@ -77,17 +104,15 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setText("Código de refuerzo:");
 
-        jTFCodRefuerzo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jTFCodRefuerzo.addActionListener(new java.awt.event.ActionListener() {
+        jBGenerarCita.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jBGenerarCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/turno.png"))); // NOI18N
+        jBGenerarCita.setText("Generar Cita");
+        jBGenerarCita.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jBGenerarCita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFCodRefuerzoActionPerformed(evt);
+                jBGenerarCitaActionPerformed(evt);
             }
         });
-
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/turno.png"))); // NOI18N
-        jButton1.setText("Generar Cita");
-        jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jBCentroVac.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBCentroVac.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/hospital.png"))); // NOI18N
@@ -99,13 +124,13 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
             }
         });
 
-        jSpinField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jSpinField1.setMaximum(17);
-        jSpinField1.setMinimum(8);
+        jSFhora.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jSFhora.setMaximum(17);
+        jSFhora.setMinimum(8);
 
-        jSpinField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jSpinField2.setMaximum(45);
-        jSpinField2.setMinimum(0);
+        jSFMinutos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jSFMinutos.setMaximum(45);
+        jSFMinutos.setMinimum(0);
 
         jCBCentroVacunacion.setMaximumSize(new java.awt.Dimension(33, 26));
         jCBCentroVacunacion.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
@@ -123,7 +148,7 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,17 +158,17 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTFCodRefuerzo, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jDCfechaCal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jtdni)
-                            .addComponent(jCBCentroVacunacion, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jCBCentroVacunacion, 0, 150, Short.MAX_VALUE)
+                            .addComponent(jCBCodigoRefuerzo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addComponent(jSpinField1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jSFhora, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jSpinField2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jSFMinutos, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBGenerarCita, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35)
                         .addComponent(jBCentroVac)
                         .addGap(32, 32, 32))
@@ -162,23 +187,23 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jSpinField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSpinField2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(jSFhora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSFMinutos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jDCfechaCal, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCBCentroVacunacion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTFCodRefuerzo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCBCodigoRefuerzo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(60, 60, 60)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBCentroVac)
-                    .addComponent(jButton1))
-                .addContainerGap(86, Short.MAX_VALUE))
+                    .addComponent(jBGenerarCita))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, 430, 498));
@@ -191,21 +216,17 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCentroVacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCentroVacActionPerformed
-       CentrosDeVacunacion cv = new CentrosDeVacunacion();
-       Menu.escritorio.add(cv);
-       cv.setVisible(true);   
+        CentrosDeVacunacion cv = new CentrosDeVacunacion();
+        Menu.escritorio.add(cv);
+        cv.setVisible(true);
     }//GEN-LAST:event_jBCentroVacActionPerformed
-
-    private void jTFCodRefuerzoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFCodRefuerzoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFCodRefuerzoActionPerformed
 
     private void jCBCentroVacunacionPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jCBCentroVacunacionPopupMenuWillBecomeVisible
         CentroVacunacionData cvd = new CentroVacunacionData();
         jCBCentroVacunacion.removeAllItems();
         jCBCentroVacunacion.addItem(null);
         CiudadanoData cd = new CiudadanoData();
-        
+
         try {
             for (CentroVacunacion cv : cvd.listarCentroVacunacionsPorLocalidad(cd.buscarCiudadano(Integer.parseInt(jtdni.getText())).getLocalidad())) {
                 jCBCentroVacunacion.addItem(cv);
@@ -213,15 +234,42 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
 
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(this, "No existen centros de vacunacion en la localidad " + cd.buscarCiudadano(Integer.parseInt(jtdni.getText())).getLocalidad());
-        } catch (NumberFormatException ex) {}
+        } catch (NumberFormatException ex) {
+        }
     }//GEN-LAST:event_jCBCentroVacunacionPopupMenuWillBecomeVisible
+
+
+    private void jBGenerarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGenerarCitaActionPerformed
+        CitaData cd = new CitaData();
+        Entidades.Cita ct = new Cita();
+        CiudadanoData ciuD = new CiudadanoData();
+        String fecha = getFecha(jDCfechaCal);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy, MM, dd");
+        CentroVacunacionData cvd = new CentroVacunacionData();
+        CentroVacunacion cv = new CentroVacunacion();
+       
+
+        try {
+            ct.setCiudadano(ciuD.buscarCiudadano(Integer.parseInt(jtdni.getText())));
+            ct.setFecha_cita(LocalDateTime.of(LocalDate.parse(fecha, dtf), LocalTime.of(jSFhora.getValue(), jSFMinutos.getValue())));
+            ct.setCentro_vacunacion(((CentroVacunacion)jCBCentroVacunacion.getSelectedItem()).getIdCV());
+            ct.setCodigo_refuerzo((int) jCBCodigoRefuerzo.getSelectedItem());
+            cd.guardarCita(ct);
+
+        } catch (NullPointerException ex) {
+            JOptionPane.showConfirmDialog(this, "Verifica los datos ingresados");
+        }
+
+
+    }//GEN-LAST:event_jBGenerarCitaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCentroVac;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jBGenerarCita;
     private javax.swing.JComboBox<CentroVacunacion> jCBCentroVacunacion;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private javax.swing.JComboBox<Integer> jCBCodigoRefuerzo;
+    private com.toedter.calendar.JDateChooser jDCfechaCal;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private com.toedter.calendar.JDateChooser jDateChooser3;
     private com.toedter.calendar.JDateChooser jDateChooser4;
@@ -232,9 +280,8 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private com.toedter.components.JSpinField jSpinField1;
-    private com.toedter.components.JSpinField jSpinField2;
-    private javax.swing.JTextField jTFCodRefuerzo;
+    private com.toedter.components.JSpinField jSFMinutos;
+    private com.toedter.components.JSpinField jSFhora;
     private javax.swing.JTextField jtdni;
     // End of variables declaration//GEN-END:variables
 }

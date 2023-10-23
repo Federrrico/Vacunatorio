@@ -58,8 +58,8 @@ public class CentroVacunacionData {
             ps.setInt(1,id );
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
-                centroVacunacion=new CentroVacunacion();
-                centroVacunacion.setIdCV(1);
+                centroVacunacion= new CentroVacunacion();
+                centroVacunacion.setIdCV(id);
                 centroVacunacion.setNombre(rs.getString(2));
                 centroVacunacion.setLocalidad(rs.getString(3));
                 centroVacunacion.setProvincia(rs.getString(4));

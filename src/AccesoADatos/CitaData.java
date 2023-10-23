@@ -47,7 +47,7 @@ public class CitaData {
             //ps.setTimestamp(4, Timestamp.valueOf(cita.getFecha_colocacion()));
             ps.setInt(4, cita.getVacuna().getNro_serie());
             ps.setInt(5, cita.getCodigo_refuerzo());
-            ps.setInt(6, cita.getEstado());
+            ps.setInt(6, 0);
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -55,8 +55,6 @@ public class CitaData {
                 JOptionPane.showMessageDialog(null, "Cita registrada con exito. Cita nro: " + cita.getId_cita());
             }
             ps.close();
-        }catch(NullPointerException ex ){
-            JOptionPane.showMessageDialog(null, "SOS VOS EL ERROr");
         
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Cita existente");
