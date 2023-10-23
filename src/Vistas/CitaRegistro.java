@@ -11,6 +11,7 @@ import AccesoADatos.CiudadanoData;
 import Entidades.CentroVacunacion;
 import Entidades.Cita;
 import Entidades.Ciudadano;
+import Entidades.Vacuna;
 import com.toedter.calendar.JDateChooser;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -247,6 +248,7 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy, MM, dd");
         CentroVacunacionData cvd = new CentroVacunacionData();
         CentroVacunacion cv = new CentroVacunacion();
+        Vacuna vac = new Vacuna();
        
 
         try {
@@ -254,10 +256,12 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
             ct.setFecha_cita(LocalDateTime.of(LocalDate.parse(fecha, dtf), LocalTime.of(jSFhora.getValue(), jSFMinutos.getValue())));
             ct.setCentro_vacunacion(((CentroVacunacion)jCBCentroVacunacion.getSelectedItem()).getIdCV());
             ct.setCodigo_refuerzo((int) jCBCodigoRefuerzo.getSelectedItem());
+            //ct.setVacuna(vac);
+            ct.setEstado(0);
             cd.guardarCita(ct);
 
         } catch (NullPointerException ex) {
-            JOptionPane.showConfirmDialog(this, "Verifica los datos ingresados");
+            JOptionPane.showMessageDialog(this, "Verifica los datos ingresados " + ex);
         }
 
 

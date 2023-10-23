@@ -36,7 +36,7 @@ public class CitaData {
     
     public void guardarCita(Cita cita) {
 
-        String sql = "INSERT INTO cita (ciudadano, fecha_cita, centro_vacunacion, vacuna, codigo_refuerzo, estado) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO cita (ciudadano, fecha_cita, centro_vacunacion, codigo_refuerzo, estado) VALUES (?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -45,9 +45,9 @@ public class CitaData {
             ps.setTimestamp(2, Timestamp.valueOf(cita.getFecha_cita()));
             ps.setInt(3, cita.getCentro_vacunacion());
             //ps.setTimestamp(4, Timestamp.valueOf(cita.getFecha_colocacion()));
-            ps.setInt(4, cita.getVacuna().getNro_serie());
-            ps.setInt(5, cita.getCodigo_refuerzo());
-            ps.setInt(6, 0);
+            //ps.setInt(4, cita.getVacuna().getNro_serie());
+            ps.setInt(4, cita.getCodigo_refuerzo());
+            ps.setInt(5, cita.getEstado());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
