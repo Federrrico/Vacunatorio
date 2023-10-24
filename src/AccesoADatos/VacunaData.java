@@ -64,7 +64,7 @@ public class VacunaData {
                 vacuna.setFecha_vencimiento(rs.getTimestamp(6).toLocalDateTime().toLocalDate());
                 vacuna.setAplicada(rs.getBoolean(7));
             } else {
-                JOptionPane.showMessageDialog(null, "No existe el vacuna");
+                JOptionPane.showMessageDialog(null, "No existe la vacuna");
             }
             ps.close();
         } catch (SQLException ex) {

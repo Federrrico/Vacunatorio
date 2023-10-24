@@ -192,7 +192,7 @@ public class CentrosDeVacunacion extends javax.swing.JInternalFrame {
 
         try {
             if (!(jTNombre.getText().isEmpty() && jTLocalidad.getText().isEmpty()
-                    && jTProvincia.getText().isEmpty() && jTDireccion.getText().isEmpty()&& jRBEstado.isSelected())) {
+                    && jTProvincia.getText().isEmpty() && jTDireccion.getText().isEmpty())&& jRBEstado.isSelected()) {
                 cv.setNombre(jTNombre.getText());
                 cv.setLocalidad(jTLocalidad.getText());
                 cv.setProvincia(jTProvincia.getText());

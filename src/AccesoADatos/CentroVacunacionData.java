@@ -39,7 +39,7 @@ public class CentroVacunacionData {
             ps.setBoolean(5, true);
             int exito  = ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
-            if (exito==1) {
+            if (rs.next()) {
                centroVacunacion.setIdCV(rs.getInt(1));
                JOptionPane.showMessageDialog(null, "CentroVacunacion Agregado"); 
             }

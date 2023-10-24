@@ -110,7 +110,11 @@ public class CitaData {
                 if (rs.getTimestamp("fecha_colocacion") != null) {
                     cita.setFecha_colocacion(rs.getTimestamp("fecha_colocacion").toLocalDateTime());
                 }
-                cita.setVacuna(vacunaD.buscarVacuna(rs.getInt("vacuna")));
+                System.out.println(rs.getInt("vacuna"));
+                if (rs.getInt("vacuna")!=0) {
+                    cita.setVacuna(vacunaD.buscarVacuna(rs.getInt("vacuna")));
+                }
+               
                 cita.setCodigo_refuerzo(rs.getInt("codigo_refuerzo"));
                 cita.setEstado(rs.getInt("estado"));
                 citas.add(cita);
@@ -133,7 +137,12 @@ public class CitaData {
             ps.setTimestamp(2, Timestamp.valueOf(cita.getFecha_cita()));
             ps.setInt(3, cita.getCentro_vacunacion());
             ps.setTimestamp(4, Timestamp.valueOf(cita.getFecha_colocacion()));
-            ps.setInt(5, cita.getVacuna().getNro_serie());
+            if (cita.getVacuna()!=null) {
+                ps.setInt(5, cita.getVacuna().getNro_serie());
+            }else{
+              ps.setNull(5, 0);
+            }
+           
             ps.setInt(6, cita.getCodigo_refuerzo());
             ps.setInt(7, cita.getEstado());
             ps.setInt(8, cita.getId_cita());

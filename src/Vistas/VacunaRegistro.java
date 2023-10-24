@@ -23,15 +23,15 @@ import javax.swing.table.DefaultTableModel;
  */
 public class VacunaRegistro extends javax.swing.JInternalFrame {
 
-    private DefaultTableModel modelo = new DefaultTableModel(){
+    private DefaultTableModel modelo = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int row, int column) {
             return false; //To change body of generated methods, choose Tools | Templates.
         }
-        
+
     };
     private Cita citaV;
-    
+
     /**
      * Creates new form Vacuna
      */
@@ -46,8 +46,8 @@ public class VacunaRegistro extends javax.swing.JInternalFrame {
 
         jTable1.setModel(modelo);
         citaV = new Cita();
-      jCentros.setEnabled(false);
-       
+        jCentros.setEnabled(false);
+
     }
 
     private void borrarFilas() {
@@ -56,9 +56,9 @@ public class VacunaRegistro extends javax.swing.JInternalFrame {
             modelo.removeRow(f);
         }
     }
-    
+
     SimpleDateFormat formato = new SimpleDateFormat("yyyy, MM, dd");
-    
+
     private String getFecha(JDateChooser jd) {
         if (jd.getDate() != null) {
             return formato.format(jd.getDate());
@@ -66,8 +66,8 @@ public class VacunaRegistro extends javax.swing.JInternalFrame {
             return null;
         }
     }
-    
-    private void llenarTabla(){
+
+    private void llenarTabla() {
         borrarFilas();
         CitaData cd = new CitaData();
         Ciudadano c1 = (Ciudadano) jcVacuna.getSelectedItem();
@@ -92,9 +92,20 @@ public class VacunaRegistro extends javax.swing.JInternalFrame {
                             estadoString = "Reprogramada";
                             break;
                     }
-                    modelo.addRow(new Object[]{cita.getId_cita(), cita.getVacuna().getNombre_vacuna(),
-                        cita.getVacuna().getDosis(), estadoString, fechaCol});
-                  
+                    if (cita.getVacuna() != null) {
+                        modelo.addRow(new Object[]{cita.getId_cita(),
+                            cita.getVacuna().getNombre_vacuna(),
+                            cita.getVacuna().getDosis(),
+                            estadoString,
+                            fechaCol});
+                    } else {
+                        modelo.addRow(new Object[]{cita.getId_cita(),
+                            "No Colocada",
+                            "No Colocada",
+                            estadoString,
+                            fechaCol});
+                    }
+
                 }
             }
         } catch (NullPointerException ex) {
@@ -267,6 +278,7 @@ public class VacunaRegistro extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCentrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCentrosActionPerformed
+
         String fecha = getFecha(jDCFechaColocacion);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy, MM, dd");
         CitaData cd = new CitaData();
@@ -286,7 +298,7 @@ public class VacunaRegistro extends javax.swing.JInternalFrame {
             for (Ciudadano c1 : cd.listarCiudadanos()) {
                 jcVacuna.addItem(c1);
             }
-
+            llenarTabla();
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(this, "No existen ciudadanos en la BD");
 
@@ -298,7 +310,7 @@ public class VacunaRegistro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jcVacunaItemStateChanged
 
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
-       
+
         jCentros.setEnabled(true);
     }//GEN-LAST:event_jTable1MousePressed
 
