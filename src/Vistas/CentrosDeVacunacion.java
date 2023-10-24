@@ -23,11 +23,11 @@ public class CentrosDeVacunacion extends javax.swing.JInternalFrame {
     }
 
     private void limpiarCampos() {
-        LaboratorioV lv = new LaboratorioV();
         jTNombre.setText("");
         jTLocalidad.setText("");
         jTProvincia.setText("");
         jTDireccion.setText("");
+        jRBEstado.setSelected(false);
         
     }
     /**
@@ -192,12 +192,12 @@ public class CentrosDeVacunacion extends javax.swing.JInternalFrame {
 
         try {
             if (!(jTNombre.getText().isEmpty() && jTLocalidad.getText().isEmpty()
-                    && jTProvincia.getText().isEmpty() && jTDireccion.getText().isEmpty())) {
+                    && jTProvincia.getText().isEmpty() && jTDireccion.getText().isEmpty()&& jRBEstado.isSelected())) {
                 cv.setNombre(jTNombre.getText());
                 cv.setLocalidad(jTLocalidad.getText());
                 cv.setProvincia(jTProvincia.getText());
                 cv.setDireccion(jTDireccion.getText());
-                cv.setEstado(isIcon);
+                cv.setEstado(true);
                 cvd.guardarCentroVacunacion(cv);
                 limpiarCampos();
             } else {
