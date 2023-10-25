@@ -55,6 +55,8 @@ public class Menu extends javax.swing.JFrame {
         jListadoCitas = new javax.swing.JMenuItem();
         jCentroDeVacunacion = new javax.swing.JMenu();
         jFormularioCentroVacunacion = new javax.swing.JMenuItem();
+        jListadoDiario = new javax.swing.JMenuItem();
+        jListadoVacunasAplicadas = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -149,6 +151,22 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jCentroDeVacunacion.add(jFormularioCentroVacunacion);
+
+        jListadoDiario.setText("Listado Diario");
+        jListadoDiario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jListadoDiarioActionPerformed(evt);
+            }
+        });
+        jCentroDeVacunacion.add(jListadoDiario);
+
+        jListadoVacunasAplicadas.setText("Listado de Vacunas Aplicadas por Centro");
+        jListadoVacunasAplicadas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jListadoVacunasAplicadasActionPerformed(evt);
+            }
+        });
+        jCentroDeVacunacion.add(jListadoVacunasAplicadas);
 
         jMenuBar1.add(jCentroDeVacunacion);
 
@@ -246,6 +264,28 @@ public class Menu extends javax.swing.JFrame {
         escritorio.moveToFront(lc);
     }//GEN-LAST:event_jListadoCitasActionPerformed
 
+    private void jListadoDiarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jListadoDiarioActionPerformed
+        for (JInternalFrame iframe : escritorio.getAllFrames()) {
+            escritorio.remove(iframe);
+        }
+        escritorio.repaint();
+        ListadoDeCitas lc = new ListadoDeCitas();
+        lc.setVisible(true);
+        escritorio.add(lc);
+        escritorio.moveToFront(lc);
+    }//GEN-LAST:event_jListadoDiarioActionPerformed
+
+    private void jListadoVacunasAplicadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jListadoVacunasAplicadasActionPerformed
+        for (JInternalFrame iframe : escritorio.getAllFrames()) {
+            escritorio.remove(iframe);
+        }
+        escritorio.repaint();
+        ListadoVacunasAplicadas lc = new ListadoVacunasAplicadas();
+        lc.setVisible(true);
+        escritorio.add(lc);
+        escritorio.moveToFront(lc);
+    }//GEN-LAST:event_jListadoVacunasAplicadasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -294,6 +334,8 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jLaboratorio;
     private javax.swing.JMenuItem jListadoCitas;
+    private javax.swing.JMenuItem jListadoDiario;
+    private javax.swing.JMenuItem jListadoVacunasAplicadas;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jVacuna;
     private javax.swing.JMenuItem jtCita;
