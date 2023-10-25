@@ -49,6 +49,7 @@ public class Menu extends javax.swing.JFrame {
         jFormularioLaboratorio = new javax.swing.JMenuItem();
         jVacuna = new javax.swing.JMenu();
         jFormularioVacuna = new javax.swing.JMenuItem();
+        jCargaVacuna = new javax.swing.JMenuItem();
         jCita = new javax.swing.JMenu();
         jtCita = new javax.swing.JMenuItem();
 
@@ -105,6 +106,14 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jVacuna.add(jFormularioVacuna);
+
+        jCargaVacuna.setText("Carga de Vacuna");
+        jCargaVacuna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCargaVacunaActionPerformed(evt);
+            }
+        });
+        jVacuna.add(jCargaVacuna);
 
         jMenuBar1.add(jVacuna);
 
@@ -181,6 +190,17 @@ public class Menu extends javax.swing.JFrame {
         escritorio.moveToFront(vac);
     }//GEN-LAST:event_jFormularioVacunaActionPerformed
 
+    private void jCargaVacunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCargaVacunaActionPerformed
+        for (JInternalFrame iframe : escritorio.getAllFrames()) {
+            escritorio.remove(iframe);
+        }
+        escritorio.repaint();
+        CargaVacuna vac = new CargaVacuna();
+        vac.setVisible(true);
+        escritorio.add(vac);
+        escritorio.moveToFront(vac);
+    }//GEN-LAST:event_jCargaVacunaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -218,6 +238,7 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JDesktopPane escritorio;
+    private javax.swing.JMenuItem jCargaVacuna;
     private javax.swing.JMenu jCita;
     private javax.swing.JMenu jCiudadano;
     private javax.swing.JMenuItem jFormularioCiudadano;

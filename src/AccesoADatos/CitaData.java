@@ -79,7 +79,9 @@ public class CitaData {
                 if (rs.getTimestamp(5) != null){
                     cita.setFecha_colocacion(rs.getTimestamp(5).toLocalDateTime());
                 }
-                cita.setVacuna(vacunaD.buscarVacuna(rs.getInt(6)));
+                if (rs.getInt(6) != 0){
+                    cita.setVacuna(vacunaD.buscarVacuna(rs.getInt(6)));
+                }
                 cita.setCodigo_refuerzo(rs.getInt(7));
                 cita.setEstado(rs.getInt(8));
             } else {
@@ -136,7 +138,11 @@ public class CitaData {
             ps.setInt(1, cita.getCiudadano().getDni());
             ps.setTimestamp(2, Timestamp.valueOf(cita.getFecha_cita()));
             ps.setInt(3, cita.getCentro_vacunacion());
-            ps.setTimestamp(4, Timestamp.valueOf(cita.getFecha_colocacion()));
+            if (cita.getFecha_colocacion() != null){
+                ps.setTimestamp(4, Timestamp.valueOf(cita.getFecha_colocacion()));
+            } else {
+                ps.setNull(4, 0);
+            }
             if (cita.getVacuna()!=null) {
                 ps.setInt(5, cita.getVacuna().getNro_serie());
             }else{
@@ -150,6 +156,26 @@ public class CitaData {
 
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Cita modificada.");
+            } else {
+                JOptionPane.showMessageDialog(null, "La cita no existe");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cita ");
+        }
+    }
+    
+    public void eliminarCita(int cita) {
+        String sql = "UPDATE cita SET estado = 2 WHERE id_cita = ?";
+        PreparedStatement ps = null;
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, cita);
+
+            int exito = ps.executeUpdate();
+
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Cita Cancelada.");
             } else {
                 JOptionPane.showMessageDialog(null, "La cita no existe");
             }

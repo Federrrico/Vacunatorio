@@ -37,7 +37,11 @@ public class VacunaData {
             ps.setString(5, vacuna.getAntigeno());
             ps.setTimestamp(6, Timestamp.valueOf(vacuna.getFecha_vencimiento().atStartOfDay()));
             ps.setBoolean(7, vacuna.getAplicada());
-            ps.executeUpdate();
+            
+            int exito = ps.executeUpdate();
+            if (exito == 1){
+                JOptionPane.showMessageDialog(null, "La vacuna ha sido cargada");
+            }
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Vacuna existente");
