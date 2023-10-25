@@ -52,6 +52,7 @@ public class Menu extends javax.swing.JFrame {
         jCargaVacuna = new javax.swing.JMenuItem();
         jCita = new javax.swing.JMenu();
         jtCita = new javax.swing.JMenuItem();
+        jListadoCitas = new javax.swing.JMenuItem();
         jCentroDeVacunacion = new javax.swing.JMenu();
         jFormularioCentroVacunacion = new javax.swing.JMenuItem();
 
@@ -128,6 +129,14 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jCita.add(jtCita);
+
+        jListadoCitas.setText("Listado de Citas");
+        jListadoCitas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jListadoCitasActionPerformed(evt);
+            }
+        });
+        jCita.add(jListadoCitas);
 
         jMenuBar1.add(jCita);
 
@@ -226,6 +235,17 @@ public class Menu extends javax.swing.JFrame {
         escritorio.moveToFront(cvac);
     }//GEN-LAST:event_jFormularioCentroVacunacionActionPerformed
 
+    private void jListadoCitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jListadoCitasActionPerformed
+        for (JInternalFrame iframe : escritorio.getAllFrames()) {
+            escritorio.remove(iframe);
+        }
+        escritorio.repaint();
+        ListadoDeCitas lc = new ListadoDeCitas();
+        lc.setVisible(true);
+        escritorio.add(lc);
+        escritorio.moveToFront(lc);
+    }//GEN-LAST:event_jListadoCitasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -273,6 +293,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jFormularioVacuna;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jLaboratorio;
+    private javax.swing.JMenuItem jListadoCitas;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jVacuna;
     private javax.swing.JMenuItem jtCita;
