@@ -5,17 +5,22 @@
  */
 package Vistas;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Editor
  */
 public class ListadoDiario extends javax.swing.JInternalFrame {
-
+private DefaultTableModel modelo= new DefaultTableModel();
     /**
      * Creates new form ListadoDiario
      */
     public ListadoDiario() {
         initComponents();
+        modelo.addColumn("Centro de Vacunación");
+        modelo.addColumn("Dosis aplicadas");
+        jTCentroDosis.setModel(modelo);
     }
 
     /**
@@ -33,8 +38,9 @@ public class ListadoDiario extends javax.swing.JInternalFrame {
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTCentroDosis = new javax.swing.JTable();
 
+        setClosable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vacunacion-covid-194.png.jpg"))); // NOI18N
@@ -50,8 +56,8 @@ public class ListadoDiario extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Seleccione Fecha:");
 
-        jTable1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTCentroDosis.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTCentroDosis.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -62,7 +68,7 @@ public class ListadoDiario extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTCentroDosis);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -110,6 +116,6 @@ public class ListadoDiario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTCentroDosis;
     // End of variables declaration//GEN-END:variables
 }

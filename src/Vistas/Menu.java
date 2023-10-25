@@ -269,7 +269,7 @@ public class Menu extends javax.swing.JFrame {
             escritorio.remove(iframe);
         }
         escritorio.repaint();
-        ListadoDeCitas lc = new ListadoDeCitas();
+        ListadoDiario lc = new ListadoDiario();
         lc.setVisible(true);
         escritorio.add(lc);
         escritorio.moveToFront(lc);

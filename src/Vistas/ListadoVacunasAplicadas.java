@@ -5,17 +5,23 @@
  */
 package Vistas;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Editor
  */
 public class ListadoVacunasAplicadas extends javax.swing.JInternalFrame {
-
+private DefaultTableModel modelo= new DefaultTableModel();
     /**
      * Creates new form ListadoVacunasAplicadas
      */
     public ListadoVacunasAplicadas() {
         initComponents();
+        modelo.addColumn("Vacuna");
+        modelo.addColumn("Nro de serie");
+        modelo.addColumn("DNI ciudadano");
+        jTVacunasAplicadas.setModel(modelo);
     }
 
     /**
@@ -33,7 +39,7 @@ public class ListadoVacunasAplicadas extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTVacunasAplicadas = new javax.swing.JTable();
 
         setClosable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -51,8 +57,8 @@ public class ListadoVacunasAplicadas extends javax.swing.JInternalFrame {
 
         jComboBox1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jTable1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTVacunasAplicadas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTVacunasAplicadas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -63,7 +69,7 @@ public class ListadoVacunasAplicadas extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTVacunasAplicadas);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -111,6 +117,6 @@ public class ListadoVacunasAplicadas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTVacunasAplicadas;
     // End of variables declaration//GEN-END:variables
 }
