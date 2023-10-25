@@ -41,6 +41,7 @@ public class CargaVacuna extends javax.swing.JInternalFrame {
     }
 
     private void cargarComboBox() {
+        jCBLab.addItem(null);
         LaboratorioData labD = new LaboratorioData();
         for (Laboratorio lab : labD.listarLaboratorios()) {
             jCBLab.addItem(lab);
