@@ -5,6 +5,7 @@
  */
 package AccesoADatos;
 
+import Entidades.CentroVacunacion;
 import Entidades.Cita;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -112,7 +113,7 @@ public class CitaData {
                 if (rs.getTimestamp("fecha_colocacion") != null) {
                     cita.setFecha_colocacion(rs.getTimestamp("fecha_colocacion").toLocalDateTime());
                 }
-                System.out.println(rs.getInt("vacuna"));
+                //System.out.println(rs.getInt("vacuna"));
                 if (rs.getInt("vacuna")!=0) {
                     cita.setVacuna(vacunaD.buscarVacuna(rs.getInt("vacuna")));
                 }
@@ -182,6 +183,41 @@ public class CitaData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cita ");
         }
+    }
+    
+    public List<Cita> listarCitasCentroVac(CentroVacunacion cv) {
+        List<Cita> citas = new ArrayList<>();
+
+        try {
+            String sql = "SELECT * FROM cita WHERE centro_vacunacion = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, cv.getIdCV());
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                
+                Cita cita = new Cita();
+                cita.setId_cita(rs.getInt("id_cita"));
+                cita.setCiudadano(ciudadanoD.buscarCiudadano(rs.getInt("ciudadano")));
+                cita.setFecha_cita(rs.getTimestamp("fecha_cita").toLocalDateTime());
+                cita.setCentro_vacunacion(rs.getInt("centro_vacunacion"));
+                if (rs.getTimestamp("fecha_colocacion") != null) {
+                    cita.setFecha_colocacion(rs.getTimestamp("fecha_colocacion").toLocalDateTime());
+                }
+                //System.out.println(rs.getInt("vacuna"));
+                if (rs.getInt("vacuna")!=0) {
+                    cita.setVacuna(vacunaD.buscarVacuna(rs.getInt("vacuna")));
+                }
+               
+                cita.setCodigo_refuerzo(rs.getInt("codigo_refuerzo"));
+                cita.setEstado(rs.getInt("estado"));
+                citas.add(cita);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Cita");
+        }
+        return citas;
     }
 
 }

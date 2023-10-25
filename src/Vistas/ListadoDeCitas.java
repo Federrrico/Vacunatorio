@@ -5,6 +5,14 @@
  */
 package Vistas;
 
+import AccesoADatos.CentroVacunacionData;
+import AccesoADatos.CitaData;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Editor
@@ -14,8 +22,22 @@ public class ListadoDeCitas extends javax.swing.JInternalFrame {
     /**
      * Creates new form ListadoDeCitas
      */
+    private DefaultTableModel modelo = new DefaultTableModel();
+
     public ListadoDeCitas() {
         initComponents();
+        modelo.addColumn("ID");
+        modelo.addColumn("CIUDADANO");
+        modelo.addColumn("FECHA");
+        modelo.addColumn("CENTRO VACUNACION");
+        jTable1.setModel(modelo);
+    }
+    
+    private void borrarFilas(){
+        int f = modelo.getRowCount() - 1;
+        for (;f >= 0; f--) {
+            modelo.removeRow(f);
+        }
     }
 
     /**
@@ -30,9 +52,9 @@ public class ListadoDeCitas extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jMonthChooser1 = new com.toedter.calendar.JMonthChooser();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        jRBCumplidas = new javax.swing.JRadioButton();
+        jRBCanceladas = new javax.swing.JRadioButton();
+        jRBVencidas = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
@@ -46,18 +68,38 @@ public class ListadoDeCitas extends javax.swing.JInternalFrame {
         jLabel1.setText("LISTADO DE CITAS");
 
         jMonthChooser1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jMonthChooser1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jMonthChooser1PropertyChange(evt);
+            }
+        });
 
-        jRadioButton1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jRadioButton1.setText("Cumplidas");
-        jRadioButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jRBCumplidas.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jRBCumplidas.setText("Cumplidas");
+        jRBCumplidas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jRBCumplidas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBCumplidasActionPerformed(evt);
+            }
+        });
 
-        jRadioButton2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jRadioButton2.setText("Canceladas");
-        jRadioButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jRBCanceladas.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jRBCanceladas.setText("Canceladas");
+        jRBCanceladas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jRBCanceladas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBCanceladasActionPerformed(evt);
+            }
+        });
 
-        jRadioButton3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jRadioButton3.setText("Vencidas");
-        jRadioButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jRBVencidas.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jRBVencidas.setText("Vencidas");
+        jRBVencidas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jRBVencidas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBVencidasActionPerformed(evt);
+            }
+        });
 
         jTable1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -81,11 +123,11 @@ public class ListadoDeCitas extends javax.swing.JInternalFrame {
                 .addContainerGap(33, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jRadioButton1)
+                        .addComponent(jRBCumplidas)
                         .addGap(101, 101, 101)
-                        .addComponent(jRadioButton2)
+                        .addComponent(jRBCanceladas)
                         .addGap(91, 91, 91)
-                        .addComponent(jRadioButton3)
+                        .addComponent(jRBVencidas)
                         .addGap(54, 54, 54))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -106,9 +148,9 @@ public class ListadoDeCitas extends javax.swing.JInternalFrame {
                 .addComponent(jMonthChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton3))
+                    .addComponent(jRBCanceladas)
+                    .addComponent(jRBCumplidas)
+                    .addComponent(jRBVencidas))
                 .addGap(43, 43, 43)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(278, Short.MAX_VALUE))
@@ -122,15 +164,149 @@ public class ListadoDeCitas extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jMonthChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jMonthChooser1PropertyChange
+        
+        if (jRBCumplidas.isSelected()) {
+            jRBCanceladas.setSelected(false);
+            jRBVencidas.setSelected(false);
+            CentroVacunacionData cvd = new CentroVacunacionData();
+            CitaData cd = new CitaData();
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM");
+            try {
+                borrarFilas();
+                for (Entidades.Cita cita : cd.listarCitas()) {
+                    String fechaString = cita.getFecha_cita().format(dtf);
+                    int fechaCita = Integer.parseInt(fechaString);
+                    if (cita.getEstado() == 1 && fechaCita - 1 == jMonthChooser1.getMonth()) {
+                        modelo.addRow(new Object[]{cita.getId_cita(), cita.getCiudadano().getDni(), cita.getFecha_cita(), cvd.buscarCentroVacunacion(cita.getCentro_vacunacion()).getNombre()});
+                    }
+
+                }
+            } catch (NullPointerException ex) {
+                JOptionPane.showMessageDialog(this, "Seleccione una opcion para obtener las citas deseadas");
+            }
+        } else if (jRBCanceladas.isSelected()) {
+            jRBCumplidas.setSelected(false);
+            jRBVencidas.setSelected(false);
+            CentroVacunacionData cvd = new CentroVacunacionData();
+            CitaData cd = new CitaData();
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM");
+            try {
+                borrarFilas();
+                for (Entidades.Cita cita : cd.listarCitas()) {
+                    String fechaString = cita.getFecha_cita().format(dtf);
+                    int fechaCita = Integer.parseInt(fechaString);
+                    if (cita.getEstado() == 2 && fechaCita - 1 == jMonthChooser1.getMonth()) {
+                        modelo.addRow(new Object[]{cita.getId_cita(), cita.getCiudadano().getDni(), cita.getFecha_cita(), cvd.buscarCentroVacunacion(cita.getCentro_vacunacion()).getNombre()});
+                    }
+
+                }
+            } catch (NullPointerException ex) {
+                JOptionPane.showMessageDialog(this, "Seleccione una opcion para obtener las citas deseadas");
+            }
+        } else if (jRBVencidas.isSelected()) {
+            jRBCanceladas.setSelected(false);
+            jRBCumplidas.setSelected(false);
+            CentroVacunacionData cvd = new CentroVacunacionData();
+            CitaData cd = new CitaData();
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM");
+            try {
+                borrarFilas();
+                for (Entidades.Cita cita : cd.listarCitas()) {
+                    LocalDateTime fechaCita = cita.getFecha_cita();
+                    LocalDateTime fechaActual = LocalDateTime.now();
+                    String fechaString = cita.getFecha_cita().format(dtf);
+                    int fechaCita2 = Integer.parseInt(fechaString);
+                    if (ChronoUnit.DAYS.between(fechaCita, fechaActual) > 15 && cita.getEstado() != 1 && cita.getEstado() != 2 && fechaCita2 - 1 == jMonthChooser1.getMonth()) {
+                        modelo.addRow(new Object[]{cita.getId_cita(), cita.getCiudadano().getDni(), cita.getFecha_cita(), cvd.buscarCentroVacunacion(cita.getCentro_vacunacion()).getNombre()});
+                    }
+
+                }
+            } catch (NullPointerException ex) {
+                JOptionPane.showMessageDialog(this, "Seleccione una opcion para obtener las citas deseadas");
+            }
+        } else {
+            borrarFilas();
+        }
+    }//GEN-LAST:event_jMonthChooser1PropertyChange
+
+    private void jRBCumplidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBCumplidasActionPerformed
+        jRBCanceladas.setSelected(false);
+        jRBVencidas.setSelected(false);
+        
+        CentroVacunacionData cvd = new CentroVacunacionData();
+        CitaData cd = new CitaData();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM");
+        try {
+            borrarFilas();
+            for (Entidades.Cita cita : cd.listarCitas()) {
+                String fechaString = cita.getFecha_cita().format(dtf);
+                int fechaCita = Integer.parseInt(fechaString);
+                if (cita.getEstado() == 1 && fechaCita - 1 == jMonthChooser1.getMonth()) {
+                    modelo.addRow(new Object[]{cita.getId_cita(), cita.getCiudadano().getDni(), cita.getFecha_cita(), cvd.buscarCentroVacunacion(cita.getCentro_vacunacion()).getNombre()});
+                }
+
+            }
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(this, "Seleccione una opcion para obtener las citas deseadas");
+        }
+    }//GEN-LAST:event_jRBCumplidasActionPerformed
+
+    private void jRBCanceladasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBCanceladasActionPerformed
+        jRBCumplidas.setSelected(false);
+        jRBVencidas.setSelected(false);
+
+        CentroVacunacionData cvd = new CentroVacunacionData();
+        CitaData cd = new CitaData();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM");
+        try {
+            borrarFilas();
+            for (Entidades.Cita cita : cd.listarCitas()) {
+                String fechaString = cita.getFecha_cita().format(dtf);
+                int fechaCita = Integer.parseInt(fechaString);
+                if (cita.getEstado() == 2 && fechaCita - 1 == jMonthChooser1.getMonth()) {
+                    modelo.addRow(new Object[]{cita.getId_cita(), cita.getCiudadano().getDni(), cita.getFecha_cita(), cvd.buscarCentroVacunacion(cita.getCentro_vacunacion()).getNombre()});
+                }
+
+            }
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(this, "Seleccione una opcion para obtener las citas deseadas");
+        }
+    }//GEN-LAST:event_jRBCanceladasActionPerformed
+
+    private void jRBVencidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBVencidasActionPerformed
+        jRBCanceladas.setSelected(false);
+        jRBCumplidas.setSelected(false);
+        
+        CentroVacunacionData cvd = new CentroVacunacionData();
+        CitaData cd = new CitaData();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM");
+        try {
+            borrarFilas();
+            for (Entidades.Cita cita : cd.listarCitas()) {
+                LocalDateTime fechaCita = cita.getFecha_cita();
+                LocalDateTime fechaActual = LocalDateTime.now();
+                String fechaString = cita.getFecha_cita().format(dtf);
+                int fechaCita2 = Integer.parseInt(fechaString);
+                if (ChronoUnit.DAYS.between(fechaCita, fechaActual) > 15 && cita.getEstado() != 1 && cita.getEstado() == 0 && fechaCita2 - 1 == jMonthChooser1.getMonth()) {
+                    modelo.addRow(new Object[]{cita.getId_cita(), cita.getCiudadano().getDni(), cita.getFecha_cita(), cvd.buscarCentroVacunacion(cita.getCentro_vacunacion()).getNombre()});
+                }
+
+            }
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(this, "Seleccione una opcion para obtener las citas deseadas");
+        }
+    }//GEN-LAST:event_jRBVencidasActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private com.toedter.calendar.JMonthChooser jMonthChooser1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRBCanceladas;
+    private javax.swing.JRadioButton jRBCumplidas;
+    private javax.swing.JRadioButton jRBVencidas;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

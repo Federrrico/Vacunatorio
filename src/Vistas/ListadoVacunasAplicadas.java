@@ -5,6 +5,11 @@
  */
 package Vistas;
 
+import AccesoADatos.CentroVacunacionData;
+import AccesoADatos.CitaData;
+import Entidades.CentroVacunacion;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -12,7 +17,9 @@ import javax.swing.table.DefaultTableModel;
  * @author Editor
  */
 public class ListadoVacunasAplicadas extends javax.swing.JInternalFrame {
-private DefaultTableModel modelo= new DefaultTableModel();
+
+    private DefaultTableModel modelo = new DefaultTableModel();
+
     /**
      * Creates new form ListadoVacunasAplicadas
      */
@@ -22,6 +29,13 @@ private DefaultTableModel modelo= new DefaultTableModel();
         modelo.addColumn("Nro de serie");
         modelo.addColumn("DNI ciudadano");
         jTVacunasAplicadas.setModel(modelo);
+    }
+
+    private void borrarFilas() {
+        int f = modelo.getRowCount() - 1;
+        for (; f >= 0; f--) {
+            modelo.removeRow(f);
+        }
     }
 
     /**
@@ -37,7 +51,7 @@ private DefaultTableModel modelo= new DefaultTableModel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jCBCentroVac = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTVacunasAplicadas = new javax.swing.JTable();
 
@@ -55,7 +69,21 @@ private DefaultTableModel modelo= new DefaultTableModel();
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Centro de Vacunación:");
 
-        jComboBox1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jCBCentroVac.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jCBCentroVac.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCBCentroVacItemStateChanged(evt);
+            }
+        });
+        jCBCentroVac.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+                jCBCentroVacPopupMenuWillBecomeVisible(evt);
+            }
+        });
 
         jTVacunasAplicadas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jTVacunasAplicadas.setModel(new javax.swing.table.DefaultTableModel(
@@ -87,7 +115,7 @@ private DefaultTableModel modelo= new DefaultTableModel();
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jCBCentroVac, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(65, 65, 65))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -98,7 +126,7 @@ private DefaultTableModel modelo= new DefaultTableModel();
                 .addGap(45, 45, 45)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCBCentroVac, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(49, 49, 49)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(178, Short.MAX_VALUE))
@@ -109,9 +137,33 @@ private DefaultTableModel modelo= new DefaultTableModel();
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jCBCentroVacPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jCBCentroVacPopupMenuWillBecomeVisible
+        CentroVacunacionData cvd = new CentroVacunacionData();
+        jCBCentroVac.removeAllItems();
+        jCBCentroVac.addItem(null);
+        for (CentroVacunacion cv : cvd.listarCentroVacunacions()) {
+            jCBCentroVac.addItem(cv);
+        }
+    }//GEN-LAST:event_jCBCentroVacPopupMenuWillBecomeVisible
+
+    private void jCBCentroVacItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCBCentroVacItemStateChanged
+        
+        CentroVacunacionData cvd = new CentroVacunacionData();
+        CitaData cd = new CitaData();
+        try {
+            borrarFilas();
+            for (Entidades.Cita cita : cd.listarCitasCentroVac((CentroVacunacion) jCBCentroVac.getSelectedItem())) {
+
+                modelo.addRow(new Object[]{cita.getVacuna().getNombre_vacuna(), cita.getVacuna().getNro_serie(), cita.getCiudadano().getDni()});
+            }
+        } catch (NullPointerException ex) {
+            
+        }
+    }//GEN-LAST:event_jCBCentroVacItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<CentroVacunacion> jCBCentroVac;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

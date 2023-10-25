@@ -116,12 +116,34 @@ public class VacunaData {
             ps.setString(4, vacuna.getAntigeno());
             ps.setTimestamp(5, Timestamp.valueOf(vacuna.getFecha_vencimiento().atStartOfDay()));
             ps.setBoolean(6, vacuna.getAplicada());
+            ps.setInt(7, vacuna.getNro_serie());
             int exito = ps.executeUpdate();
 
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Modificado Exitosamente.");
             } else {
                 JOptionPane.showMessageDialog(null, "El vacuna no existe");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Vacuna " + ex.getMessage());
+        }
+    }
+    
+    public void colocarVacuna(Vacuna vac) {
+
+        String sql = "UPDATE vacuna SET aplicada = 1 WHERE nro_serie = ?";
+        PreparedStatement ps = null;
+
+        try {
+            ps = con.prepareStatement(sql);
+
+            ps.setInt(1, vac.getNro_serie());
+            int exito = ps.executeUpdate();
+
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Aplicada Exitosamente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "La vacuna no existe");
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Vacuna " + ex.getMessage());
