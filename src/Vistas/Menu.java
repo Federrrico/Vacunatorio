@@ -52,6 +52,8 @@ public class Menu extends javax.swing.JFrame {
         jCargaVacuna = new javax.swing.JMenuItem();
         jCita = new javax.swing.JMenu();
         jtCita = new javax.swing.JMenuItem();
+        jCentroDeVacunacion = new javax.swing.JMenu();
+        jFormularioCentroVacunacion = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -129,6 +131,18 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jCita);
 
+        jCentroDeVacunacion.setText("Centro de Vacunacion");
+
+        jFormularioCentroVacunacion.setText("Formulario Centro Vacunacion");
+        jFormularioCentroVacunacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormularioCentroVacunacionActionPerformed(evt);
+            }
+        });
+        jCentroDeVacunacion.add(jFormularioCentroVacunacion);
+
+        jMenuBar1.add(jCentroDeVacunacion);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -201,6 +215,17 @@ public class Menu extends javax.swing.JFrame {
         escritorio.moveToFront(vac);
     }//GEN-LAST:event_jCargaVacunaActionPerformed
 
+    private void jFormularioCentroVacunacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormularioCentroVacunacionActionPerformed
+        for (JInternalFrame iframe : escritorio.getAllFrames()) {
+            escritorio.remove(iframe);
+        }
+        escritorio.repaint();
+        CentrosDeVacunacion cvac = new CentrosDeVacunacion();
+        cvac.setVisible(true);
+        escritorio.add(cvac);
+        escritorio.moveToFront(cvac);
+    }//GEN-LAST:event_jFormularioCentroVacunacionActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -239,8 +264,10 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenuItem jCargaVacuna;
+    private javax.swing.JMenu jCentroDeVacunacion;
     private javax.swing.JMenu jCita;
     private javax.swing.JMenu jCiudadano;
+    private javax.swing.JMenuItem jFormularioCentroVacunacion;
     private javax.swing.JMenuItem jFormularioCiudadano;
     private javax.swing.JMenuItem jFormularioLaboratorio;
     private javax.swing.JMenuItem jFormularioVacuna;

@@ -28,7 +28,6 @@ public class AgregarLaboratorio extends javax.swing.JInternalFrame {
     }
 
     private void limpiarCampos() {
-        LaboratorioV lv = new LaboratorioV();
         jTCuit.setText("");
         jTNombre.setText("");
         jTPais.setText("");

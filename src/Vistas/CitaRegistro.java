@@ -72,7 +72,6 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jBGenerarCita = new javax.swing.JButton();
-        jBCentroVac = new javax.swing.JButton();
         jSFhora = new com.toedter.components.JSpinField();
         jSFMinutos = new com.toedter.components.JSpinField();
         jCBCentroVacunacion = new javax.swing.JComboBox<>();
@@ -115,16 +114,6 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
             }
         });
 
-        jBCentroVac.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jBCentroVac.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/hospital.png"))); // NOI18N
-        jBCentroVac.setText(" Centros de Vacunación");
-        jBCentroVac.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jBCentroVac.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBCentroVacActionPerformed(evt);
-            }
-        });
-
         jSFhora.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jSFhora.setMaximum(17);
         jSFhora.setMinimum(8);
@@ -133,6 +122,7 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
         jSFMinutos.setMaximum(45);
         jSFMinutos.setMinimum(0);
 
+        jCBCentroVacunacion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jCBCentroVacunacion.setMaximumSize(new java.awt.Dimension(33, 26));
         jCBCentroVacunacion.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
@@ -144,6 +134,8 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
             }
         });
 
+        jCBCodigoRefuerzo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -151,6 +143,9 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(139, 139, 139))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -161,21 +156,14 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jDCfechaCal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jtdni)
-                            .addComponent(jCBCentroVacunacion, 0, 150, Short.MAX_VALUE)
-                            .addComponent(jCBCodigoRefuerzo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jCBCentroVacunacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCBCodigoRefuerzo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jBGenerarCita, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jSFhora, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jSFMinutos, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jBGenerarCita, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
-                        .addComponent(jBCentroVac)
-                        .addGap(32, 32, 32))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(139, 139, 139))))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,11 +188,9 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCBCodigoRefuerzo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(60, 60, 60)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBCentroVac)
-                    .addComponent(jBGenerarCita))
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addGap(49, 49, 49)
+                .addComponent(jBGenerarCita)
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, 430, 498));
@@ -215,12 +201,6 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jBCentroVacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCentroVacActionPerformed
-        CentrosDeVacunacion cv = new CentrosDeVacunacion();
-        Menu.escritorio.add(cv);
-        cv.setVisible(true);
-    }//GEN-LAST:event_jBCentroVacActionPerformed
 
     private void jCBCentroVacunacionPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jCBCentroVacunacionPopupMenuWillBecomeVisible
         CentroVacunacionData cvd = new CentroVacunacionData();
@@ -269,7 +249,6 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBCentroVac;
     private javax.swing.JButton jBGenerarCita;
     private javax.swing.JComboBox<CentroVacunacion> jCBCentroVacunacion;
     private javax.swing.JComboBox<Integer> jCBCodigoRefuerzo;

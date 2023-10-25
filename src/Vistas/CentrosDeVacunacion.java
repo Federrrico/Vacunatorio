@@ -7,6 +7,8 @@ package Vistas;
 
 import AccesoADatos.CentroVacunacionData;
 import Entidades.CentroVacunacion;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +22,7 @@ public class CentrosDeVacunacion extends javax.swing.JInternalFrame {
      */
     public CentrosDeVacunacion() {
         initComponents();
+        jDireccionInvalida.setVisible(false);
     }
 
     private void limpiarCampos() {
@@ -53,9 +56,10 @@ public class CentrosDeVacunacion extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jRBEstado = new javax.swing.JRadioButton();
         jBGuardar = new javax.swing.JButton();
-        jBVolver = new javax.swing.JButton();
         jBBuscar = new javax.swing.JButton();
+        jDireccionInvalida = new javax.swing.JLabel();
 
+        setClosable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vacunacion-covid-194.png.jpg"))); // NOI18N
@@ -79,14 +83,36 @@ public class CentrosDeVacunacion extends javax.swing.JInternalFrame {
         jLabel6.setText("Dirección:");
 
         jTNombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTNombreKeyTyped(evt);
+            }
+        });
 
         jTLocalidad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTLocalidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTLocalidadKeyTyped(evt);
+            }
+        });
 
         jTProvincia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTProvincia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTProvinciaKeyTyped(evt);
+            }
+        });
 
         jTDireccion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTDireccion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTDireccionKeyReleased(evt);
+            }
+        });
 
         jLabel7.setText("Estado:");
+
+        jRBEstado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jBGuardar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/iconoGuardar.png"))); // NOI18N
@@ -98,29 +124,22 @@ public class CentrosDeVacunacion extends javax.swing.JInternalFrame {
             }
         });
 
-        jBVolver.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jBVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/volver.png"))); // NOI18N
-        jBVolver.setText("Volver");
-        jBVolver.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
         jBBuscar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jBBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/iconoBuscar.png"))); // NOI18N
         jBBuscar.setText("Buscar");
         jBBuscar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jBBuscar.setPreferredSize(new java.awt.Dimension(77, 41));
 
+        jDireccionInvalida.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jDireccionInvalida.setForeground(new java.awt.Color(255, 0, 0));
+        jDireccionInvalida.setText("Dirección Inválida(*)");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(88, 88, 88)
-                .addComponent(jBGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
-                .addComponent(jBVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(86, 86, 86))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(42, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -136,16 +155,29 @@ public class CentrosDeVacunacion extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel6)
                                     .addGap(2, 2, 2)))
                             .addComponent(jLabel7))
-                        .addGap(28, 28, 28)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jRBEstado)
-                            .addComponent(jTNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                            .addComponent(jTLocalidad)
-                            .addComponent(jTProvincia)
-                            .addComponent(jTDireccion))
-                        .addGap(47, 47, 47)
-                        .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(39, 39, 39)
+                                .addComponent(jTNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jRBEstado)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jTLocalidad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTProvincia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTDireccion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(36, 36, 36)
+                                .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addComponent(jDireccionInvalida)))
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jBGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(158, 158, 158))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,21 +196,23 @@ public class CentrosDeVacunacion extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jDireccionInvalida))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jRBEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBGuardar)
-                    .addComponent(jBVolver))
-                .addGap(52, 52, 52))
+                .addGap(42, 42, 42)
+                .addComponent(jBGuardar)
+                .addGap(59, 59, 59))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, 430, 440));
@@ -212,11 +246,55 @@ public class CentrosDeVacunacion extends javax.swing.JInternalFrame {
                    
     }//GEN-LAST:event_jBGuardarActionPerformed
 
+    private void jTNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNombreKeyTyped
+        int tecla = evt.getKeyChar();
+        boolean may = tecla >= 65 && tecla <= 90;
+        boolean min = tecla >= 97 && tecla <= 122;
+        boolean esp = tecla == 32;
+        if (!(may || min || esp)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTNombreKeyTyped
+
+    private void jTLocalidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTLocalidadKeyTyped
+        int tecla = evt.getKeyChar();
+        boolean may = tecla >= 65 && tecla <= 90;
+        boolean min = tecla >= 97 && tecla <= 122;
+        boolean esp = tecla == 32;
+        if (!(may || min || esp)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTLocalidadKeyTyped
+
+    private void jTProvinciaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTProvinciaKeyTyped
+        int tecla = evt.getKeyChar();
+        boolean may = tecla >= 65 && tecla <= 90;
+        boolean min = tecla >= 97 && tecla <= 122;
+        boolean esp = tecla == 32;
+        if (!(may || min || esp)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTProvinciaKeyTyped
+
+    private void jTDireccionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTDireccionKeyReleased
+        if (verificarDireccion(jTDireccion.getText())) {
+            jDireccionInvalida.setVisible(false);
+        } else {
+            jDireccionInvalida.setVisible(true);
+        }
+    }//GEN-LAST:event_jTDireccionKeyReleased
+
+    public boolean verificarDireccion (String direccion){
+    // se compara con la expresion regular
+        Pattern patron = Pattern.compile("^([a-zA-Z]+|[a-zA-Z]+\\s[a-zA-Z]+)+\\s+\\d");
+        Matcher mat= patron.matcher(direccion);
+        return mat.find();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBBuscar;
     private javax.swing.JButton jBGuardar;
-    private javax.swing.JButton jBVolver;
+    private javax.swing.JLabel jDireccionInvalida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
