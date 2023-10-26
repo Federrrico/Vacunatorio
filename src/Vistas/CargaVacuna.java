@@ -12,7 +12,6 @@ import Entidades.Vacuna;
 import com.toedter.calendar.JDateChooser;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -89,11 +88,6 @@ public class CargaVacuna extends javax.swing.JInternalFrame {
         jCBLab.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jTFSerie.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jTFSerie.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFSerieActionPerformed(evt);
-            }
-        });
         jTFSerie.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTFSerieKeyTyped(evt);
@@ -239,10 +233,6 @@ public class CargaVacuna extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTFSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFSerieActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFSerieActionPerformed
-
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
         VacunaData vacD = new VacunaData();
         Vacuna vac = new Vacuna();
@@ -269,8 +259,6 @@ public class CargaVacuna extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Debe rellenar todos los campos");
         }
-
-
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jTFSerieKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFSerieKeyTyped

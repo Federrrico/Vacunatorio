@@ -337,8 +337,10 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbEditarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbEditarMouseReleased
+        jCBProvincia.setEnabled(true);
+        jCBLocalidad.setEnabled(true);
+        
         try {
-
             CiudadanoData cd = new CiudadanoData();
             Ciudadano c1 = new Ciudadano();
 
@@ -348,9 +350,10 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
             c1.setTelefono(Long.parseLong(jtTelefono.getText()));
             c1.setPatologia(jtPatologia.getText());
             c1.setAmbito_laboral(jtAmbitolab.getText());
-            System.out.println(jbEditar.getText() + " 1");
+            c1.setProvincia(jCBProvincia.getSelectedItem().toString());
+            c1.setLocalidad(jCBLocalidad.getSelectedItem().toString());
+            
             if (jbEditar.getText().equals("Modificar")) {
-                System.out.println(jbEditar.getText() + " 2");
                 cd.modificarCiudadano(c1);
                 jbEditar.setText("Editar");
                 limpiarCampos();
@@ -360,14 +363,18 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
                 jtTelefono.setEditable(false);
                 jtPatologia.setEditable(false);
                 jtAmbitolab.setEditable(false);
+                jCBLocalidad.setEnabled(false);
+                jCBProvincia.setEnabled(false);
+                jbEditar.setEnabled(false);
             } else {
-                System.out.println(jbEditar.getText() + " 3");
                 jtDni.setEditable(false);
                 jtNombre.setEditable(true);
                 jtCorreo.setEditable(true);
                 jtTelefono.setEditable(true);
                 jtPatologia.setEditable(true);
                 jtAmbitolab.setEditable(true);
+                jCBProvincia.setEnabled(true);
+                jCBLocalidad.setEnabled(true);
                 jbEditar.setText("Modificar");
             }
         } catch (NullPointerException e) {
@@ -375,6 +382,7 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Solo tenes que ingresar numeros" + ex.getMessage());
         }
+        
     }//GEN-LAST:event_jbEditarMouseReleased
 
     private void jbAgregarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbAgregarMouseReleased
@@ -397,6 +405,8 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
             jtTelefono.setEditable(false);
             jtPatologia.setEditable(false);
             jtAmbitolab.setEditable(false);
+            jCBLocalidad.setEnabled(false);
+            jCBProvincia.setEnabled(false);
             try {
                 if (!(jtDni.getText().isEmpty() && jtNombre.getText().isEmpty()
                         && jtCorreo.getText().isEmpty() && jtTelefono.getText().isEmpty()
@@ -419,6 +429,8 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
                     jtTelefono.setEditable(false);
                     jtPatologia.setEditable(false);
                     jtAmbitolab.setEditable(false);
+                    jCBLocalidad.setEnabled(false);
+                    jCBProvincia.setEnabled(false);
                 } else {
                     JOptionPane.showMessageDialog(this, "Tenes que completar todos los campos");
                 }
@@ -431,7 +443,6 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, "Solo tenes que ingresar numeros" + ex.getMessage());
                 }
             }
-
         } else {
             jbAgregar.setText("Guardar");
         }
