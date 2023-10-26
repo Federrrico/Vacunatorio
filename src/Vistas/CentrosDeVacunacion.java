@@ -60,9 +60,7 @@ public class CentrosDeVacunacion extends javax.swing.JInternalFrame {
         jDireccionInvalida = new javax.swing.JLabel();
 
         setClosable(true);
-        setMaximumSize(new java.awt.Dimension(73, 39));
-        setMinimumSize(new java.awt.Dimension(73, 39));
-        setPreferredSize(new java.awt.Dimension(111, 41));
+        setPreferredSize(new java.awt.Dimension(848, 470));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vacunacion-covid-194.png.jpg"))); // NOI18N

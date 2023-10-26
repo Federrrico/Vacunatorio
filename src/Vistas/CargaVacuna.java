@@ -250,7 +250,7 @@ public class CargaVacuna extends javax.swing.JInternalFrame {
             vac.setFecha_vencimiento(LocalDate.parse(getFecha(jDateVencimiento), dtf));
 
             vacD.guardarVacuna(vac);
-            
+            jCBLab.setSelectedItem(null);
             jTFSerie.setText("");
             jTFNombre.setText("");
             jTFDosis.setText("");

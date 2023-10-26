@@ -5,6 +5,7 @@
  */
 package AccesoADatos;
 
+import Entidades.Laboratorio;
 import Entidades.Vacuna;
 import java.sql.Connection;
 import java.sql.*;
@@ -148,5 +149,32 @@ public class VacunaData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Vacuna " + ex.getMessage());
         }
+    }
+    
+    public List<Vacuna> listarVacunasXLaboratorio(Laboratorio lab) {
+        List<Vacuna> vacunas = new ArrayList<>();
+
+        try {
+            String sql = "SELECT * FROM vacuna WHERE laboratorio = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setLong(1, lab.getCuit());
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                Vacuna vacuna = new Vacuna();
+                vacuna.setNro_serie(rs.getInt("nro_serie"));
+                vacuna.setLaboratorio(labD.buscarLaboratorio(rs.getLong("cuit")));
+                vacuna.setDosis(rs.getDouble("dosis"));
+                vacuna.setNombre_vacuna(rs.getString("nombre_vacuna"));
+                vacuna.setAntigeno(rs.getString("antigeno"));
+                vacuna.setFecha_vencimiento(rs.getTimestamp("fecha_vencimiento").toLocalDateTime().toLocalDate());
+                vacuna.setAplicada(rs.getBoolean("aplicada"));
+                vacunas.add(vacuna);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Vacuna");
+        }
+        return vacunas;
     }
 }

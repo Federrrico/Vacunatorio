@@ -47,6 +47,7 @@ public class Menu extends javax.swing.JFrame {
         jFormularioCiudadano = new javax.swing.JMenuItem();
         jLaboratorio = new javax.swing.JMenu();
         jFormularioLaboratorio = new javax.swing.JMenuItem();
+        jConsultas = new javax.swing.JMenuItem();
         jVacuna = new javax.swing.JMenu();
         jFormularioVacuna = new javax.swing.JMenuItem();
         jCargaVacuna = new javax.swing.JMenuItem();
@@ -99,6 +100,14 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jLaboratorio.add(jFormularioLaboratorio);
+
+        jConsultas.setText("Consulta de Vacunas por Laboratorio");
+        jConsultas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jConsultasActionPerformed(evt);
+            }
+        });
+        jLaboratorio.add(jConsultas);
 
         jMenuBar1.add(jLaboratorio);
 
@@ -286,6 +295,17 @@ public class Menu extends javax.swing.JFrame {
         escritorio.moveToFront(lc);
     }//GEN-LAST:event_jListadoVacunasAplicadasActionPerformed
 
+    private void jConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsultasActionPerformed
+        for (JInternalFrame iframe : escritorio.getAllFrames()) {
+            escritorio.remove(iframe);
+        }
+        escritorio.repaint();
+        ConsultasVacunasPorLaboratorio lc = new ConsultasVacunasPorLaboratorio();
+        lc.setVisible(true);
+        escritorio.add(lc);
+        escritorio.moveToFront(lc);
+    }//GEN-LAST:event_jConsultasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -327,6 +347,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jCentroDeVacunacion;
     private javax.swing.JMenu jCita;
     private javax.swing.JMenu jCiudadano;
+    private javax.swing.JMenuItem jConsultas;
     private javax.swing.JMenuItem jFormularioCentroVacunacion;
     private javax.swing.JMenuItem jFormularioCiudadano;
     private javax.swing.JMenuItem jFormularioLaboratorio;
