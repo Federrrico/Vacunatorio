@@ -90,14 +90,34 @@ public class CargaVacuna extends javax.swing.JInternalFrame {
                 jTFSerieActionPerformed(evt);
             }
         });
+        jTFSerie.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFSerieKeyTyped(evt);
+            }
+        });
 
         jDateVencimiento.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jTFNombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTFNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFNombreKeyTyped(evt);
+            }
+        });
 
         jTFDosis.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTFDosis.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFDosisKeyTyped(evt);
+            }
+        });
 
         jTFAntigeno.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTFAntigeno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFAntigenoKeyTyped(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("CARGA DE VACUNAS");
@@ -121,9 +141,12 @@ public class CargaVacuna extends javax.swing.JInternalFrame {
         jLabel7.setText("Fecha de Vencimiento:");
 
         jBGuardar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jBGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vacuna.png"))); // NOI18N
+        jBGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/iconoGuardar.png"))); // NOI18N
         jBGuardar.setText("Guardar");
         jBGuardar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jBGuardar.setMaximumSize(new java.awt.Dimension(73, 39));
+        jBGuardar.setMinimumSize(new java.awt.Dimension(73, 39));
+        jBGuardar.setPreferredSize(new java.awt.Dimension(111, 41));
         jBGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBGuardarActionPerformed(evt);
@@ -156,11 +179,11 @@ public class CargaVacuna extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jBGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(168, 168, 168))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(148, 148, 148))))
+                        .addGap(148, 148, 148))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jBGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(167, 167, 167))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,8 +218,8 @@ public class CargaVacuna extends javax.swing.JInternalFrame {
                     .addComponent(jDateVencimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(54, 54, 54)
-                .addComponent(jBGuardar)
-                .addContainerGap(296, Short.MAX_VALUE))
+                .addComponent(jBGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(294, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(414, 0, 470, 747));
@@ -237,6 +260,41 @@ public class CargaVacuna extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_jBGuardarActionPerformed
+
+    private void jTFSerieKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFSerieKeyTyped
+        int tecla = evt.getKeyChar();
+        boolean numeros = tecla >= 48 && tecla <= 57;
+        if (!(numeros)) {
+            evt.consume();
+        }
+        if ((jTFSerie.getText().length() >= 8)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTFSerieKeyTyped
+
+    private void jTFNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFNombreKeyTyped
+        int tecla = evt.getKeyChar();
+        boolean may = tecla >= 65 && tecla <= 90;
+        boolean min = tecla >= 97 && tecla <= 122;
+        boolean esp = tecla == 32;
+        if (!(may || min || esp)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTFNombreKeyTyped
+
+    private void jTFDosisKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFDosisKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFDosisKeyTyped
+
+    private void jTFAntigenoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFAntigenoKeyTyped
+        int tecla = evt.getKeyChar();
+        boolean may = tecla >= 65 && tecla <= 90;
+        boolean min = tecla >= 97 && tecla <= 122;
+        boolean esp = tecla == 32;
+        if (!(may || min || esp)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTFAntigenoKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
