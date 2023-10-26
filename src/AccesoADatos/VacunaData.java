@@ -155,7 +155,7 @@ public class VacunaData {
         List<Vacuna> vacunas = new ArrayList<>();
 
         try {
-            String sql = "SELECT * FROM vacuna WHERE laboratorio = ?";
+            String sql = "SELECT * FROM vacuna WHERE cuit = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setLong(1, lab.getCuit());
             ResultSet rs = ps.executeQuery();
