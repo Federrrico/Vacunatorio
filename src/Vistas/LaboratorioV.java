@@ -29,7 +29,6 @@ public class LaboratorioV extends javax.swing.JInternalFrame {
                 return false;
             }
         }
-
     };
 
     /**
@@ -200,7 +199,6 @@ public class LaboratorioV extends javax.swing.JInternalFrame {
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Solo tenes que ingresar numeros" + ex.getMessage());
         }
-
     }//GEN-LAST:event_jEditarActionPerformed
 
 

@@ -5,11 +5,8 @@
  */
 package Vistas;
 
-import AccesoADatos.CentroVacunacionData;
 import AccesoADatos.CiudadanoData;
-import Entidades.CentroVacunacion;
 import Entidades.Ciudadano;
-import java.awt.Color;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -339,7 +336,7 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
     private void jbEditarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbEditarMouseReleased
         jCBProvincia.setEnabled(true);
         jCBLocalidad.setEnabled(true);
-        
+
         try {
             CiudadanoData cd = new CiudadanoData();
             Ciudadano c1 = new Ciudadano();
@@ -352,7 +349,7 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
             c1.setAmbito_laboral(jtAmbitolab.getText());
             c1.setProvincia(jCBProvincia.getSelectedItem().toString());
             c1.setLocalidad(jCBLocalidad.getSelectedItem().toString());
-            
+
             if (jbEditar.getText().equals("Modificar")) {
                 cd.modificarCiudadano(c1);
                 jbEditar.setText("Editar");
@@ -382,7 +379,6 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Solo tenes que ingresar numeros" + ex.getMessage());
         }
-        
     }//GEN-LAST:event_jbEditarMouseReleased
 
     private void jbAgregarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbAgregarMouseReleased
@@ -446,7 +442,6 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
         } else {
             jbAgregar.setText("Guardar");
         }
-
     }//GEN-LAST:event_jbAgregarMouseReleased
 
     private void jCBLocalidadPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jCBLocalidadPopupMenuWillBecomeVisible

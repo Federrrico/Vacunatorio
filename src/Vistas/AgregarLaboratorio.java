@@ -229,11 +229,10 @@ public class AgregarLaboratorio extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Solo tenes que ingresar numeros" + ex.getMessage());
             }
         }
-
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jBVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVolverActionPerformed
-         for (JInternalFrame iframe : escritorio.getAllFrames()) {
+        for (JInternalFrame iframe : escritorio.getAllFrames()) {
             escritorio.remove(iframe);
         }
         LaboratorioV lv = new LaboratorioV();
