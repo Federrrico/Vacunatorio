@@ -6,7 +6,6 @@
 package Entidades;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 /**
  *
@@ -101,7 +100,7 @@ public class Vacuna {
 
     @Override
     public String toString() {
-        return "Vacuna{" + "nro_serie=" + nro_serie + ", laboratorio=" + laboratorio.getCuit().toString() + ", nombre_vacuna=" + nombre_vacuna + ", dosis=" + dosis + ", antigeno=" + antigeno + ", fecha_vencimiento=" + fecha_vencimiento + ", aplicada=" + aplicada + '}';
+        return "Nombre: " + nombre_vacuna + ", Dosis: " + dosis + ", Antigeno: " + antigeno;
     }
 
  

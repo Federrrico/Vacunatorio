@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
  * @author federico.acenjo
  */
 public class VacunaData {
+
     private LaboratorioData labD;
     private Connection con = null;
 
@@ -38,9 +39,9 @@ public class VacunaData {
             ps.setString(5, vacuna.getAntigeno());
             ps.setTimestamp(6, Timestamp.valueOf(vacuna.getFecha_vencimiento().atStartOfDay()));
             ps.setBoolean(7, vacuna.getAplicada());
-            
+
             int exito = ps.executeUpdate();
-            if (exito == 1){
+            if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "La vacuna ha sido cargada");
             }
             ps.close();
@@ -50,17 +51,17 @@ public class VacunaData {
             System.out.println("Null pointer ex: " + ex);
         }
     }
-    
+
     public Vacuna buscarVacuna(int nro_serie) {
         Vacuna vacuna = null;
         String sql = "SELECT * FROM vacuna WHERE nro_serie = ?";
         try {
             PreparedStatement ps;
             ps = con.prepareStatement(sql);
-            ps.setInt(1,nro_serie );
+            ps.setInt(1, nro_serie);
             ResultSet rs = ps.executeQuery();
-            if(rs.next()){
-                vacuna=new Vacuna();
+            if (rs.next()) {
+                vacuna = new Vacuna();
                 vacuna.setNro_serie(nro_serie);
                 vacuna.setLaboratorio(labD.buscarLaboratorio(rs.getLong(2)));
                 vacuna.setDosis(rs.getDouble(3));
@@ -83,6 +84,31 @@ public class VacunaData {
 
         try {
             String sql = "SELECT * FROM vacuna";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Vacuna vacuna = new Vacuna();
+                vacuna.setNro_serie(rs.getInt("nro_serie"));
+                vacuna.setLaboratorio(labD.buscarLaboratorio(rs.getLong("cuit")));
+                vacuna.setDosis(rs.getDouble("dosis"));
+                vacuna.setNombre_vacuna(rs.getString("nombre_vacuna"));
+                vacuna.setAntigeno(rs.getString("antigeno"));
+                vacuna.setFecha_vencimiento(rs.getTimestamp("fecha_vencimiento").toLocalDateTime().toLocalDate());
+                vacuna.setAplicada(rs.getBoolean("aplicada"));
+                vacunas.add(vacuna);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Vacuna");
+        }
+        return vacunas;
+    }
+
+    public List<Vacuna> listarVacunasDisponibles() {
+        List<Vacuna> vacunas = new ArrayList<>();
+
+        try {
+            String sql = "SELECT * FROM vacuna WHERE aplicada = 0";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -129,7 +155,7 @@ public class VacunaData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Vacuna " + ex.getMessage());
         }
     }
-    
+
     public void colocarVacuna(Vacuna vac) {
 
         String sql = "UPDATE vacuna SET aplicada = 1 WHERE nro_serie = ?";
@@ -150,7 +176,7 @@ public class VacunaData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Vacuna " + ex.getMessage());
         }
     }
-    
+
     public List<Vacuna> listarVacunasXLaboratorio(Laboratorio lab) {
         List<Vacuna> vacunas = new ArrayList<>();
 
@@ -159,7 +185,7 @@ public class VacunaData {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setLong(1, lab.getCuit());
             ResultSet rs = ps.executeQuery();
-            
+
             while (rs.next()) {
                 Vacuna vacuna = new Vacuna();
                 vacuna.setNro_serie(rs.getInt("nro_serie"));
@@ -176,5 +202,23 @@ public class VacunaData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Vacuna");
         }
         return vacunas;
+    }
+
+    public int cantVacunasDisponibles(int vacuna, Long lab) {
+        int cantidad = 0;
+        try {
+            String sql = "SELECT COUNT(*) FROM vacuna WHERE aplicada = ? AND cuit = ?;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, vacuna);
+            ps.setLong(2, lab);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                cantidad = rs.getInt(1);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Vacuna");
+        }
+        return cantidad;
     }
 }

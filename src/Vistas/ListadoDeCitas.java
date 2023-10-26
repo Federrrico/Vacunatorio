@@ -165,7 +165,8 @@ public class ListadoDeCitas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMonthChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jMonthChooser1PropertyChange
-        
+        DateTimeFormatter dtfT = DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm");
+        DateTimeFormatter dtfTCV = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         if (jRBCumplidas.isSelected()) {
             jRBCanceladas.setSelected(false);
             jRBVencidas.setSelected(false);
@@ -178,7 +179,7 @@ public class ListadoDeCitas extends javax.swing.JInternalFrame {
                     String fechaString = cita.getFecha_cita().format(dtf);
                     int fechaCita = Integer.parseInt(fechaString);
                     if (cita.getEstado() == 1 && fechaCita - 1 == jMonthChooser1.getMonth()) {
-                        modelo.addRow(new Object[]{cita.getId_cita(), cita.getCiudadano().getDni(), cita.getFecha_cita(), cvd.buscarCentroVacunacion(cita.getCentro_vacunacion()).getNombre()});
+                        modelo.addRow(new Object[]{cita.getId_cita(), cita.getCiudadano().getDni(), cita.getFecha_colocacion().format(dtfT), cvd.buscarCentroVacunacion(cita.getCentro_vacunacion()).getNombre()});
                     }
 
                 }
@@ -197,7 +198,7 @@ public class ListadoDeCitas extends javax.swing.JInternalFrame {
                     String fechaString = cita.getFecha_cita().format(dtf);
                     int fechaCita = Integer.parseInt(fechaString);
                     if (cita.getEstado() == 2 && fechaCita - 1 == jMonthChooser1.getMonth()) {
-                        modelo.addRow(new Object[]{cita.getId_cita(), cita.getCiudadano().getDni(), cita.getFecha_cita(), cvd.buscarCentroVacunacion(cita.getCentro_vacunacion()).getNombre()});
+                        modelo.addRow(new Object[]{cita.getId_cita(), cita.getCiudadano().getDni(), cita.getFecha_cita().format(dtfTCV), cvd.buscarCentroVacunacion(cita.getCentro_vacunacion()).getNombre()});
                     }
 
                 }
@@ -218,7 +219,7 @@ public class ListadoDeCitas extends javax.swing.JInternalFrame {
                     String fechaString = cita.getFecha_cita().format(dtf);
                     int fechaCita2 = Integer.parseInt(fechaString);
                     if (ChronoUnit.DAYS.between(fechaCita, fechaActual) > 15 && cita.getEstado() != 1 && cita.getEstado() != 2 && fechaCita2 - 1 == jMonthChooser1.getMonth()) {
-                        modelo.addRow(new Object[]{cita.getId_cita(), cita.getCiudadano().getDni(), cita.getFecha_cita(), cvd.buscarCentroVacunacion(cita.getCentro_vacunacion()).getNombre()});
+                        modelo.addRow(new Object[]{cita.getId_cita(), cita.getCiudadano().getDni(), cita.getFecha_cita().format(dtfTCV), cvd.buscarCentroVacunacion(cita.getCentro_vacunacion()).getNombre()});
                     }
 
                 }
@@ -237,13 +238,14 @@ public class ListadoDeCitas extends javax.swing.JInternalFrame {
         CentroVacunacionData cvd = new CentroVacunacionData();
         CitaData cd = new CitaData();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM");
+        DateTimeFormatter dtfT = DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm");
         try {
             borrarFilas();
             for (Entidades.Cita cita : cd.listarCitas()) {
                 String fechaString = cita.getFecha_cita().format(dtf);
                 int fechaCita = Integer.parseInt(fechaString);
                 if (cita.getEstado() == 1 && fechaCita - 1 == jMonthChooser1.getMonth()) {
-                    modelo.addRow(new Object[]{cita.getId_cita(), cita.getCiudadano().getDni(), cita.getFecha_cita(), cvd.buscarCentroVacunacion(cita.getCentro_vacunacion()).getNombre()});
+                    modelo.addRow(new Object[]{cita.getId_cita(), cita.getCiudadano().getDni(), cita.getFecha_colocacion().format(dtfT), cvd.buscarCentroVacunacion(cita.getCentro_vacunacion()).getNombre()});
                 }
 
             }
@@ -259,13 +261,14 @@ public class ListadoDeCitas extends javax.swing.JInternalFrame {
         CentroVacunacionData cvd = new CentroVacunacionData();
         CitaData cd = new CitaData();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM");
+        DateTimeFormatter dtfT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         try {
             borrarFilas();
             for (Entidades.Cita cita : cd.listarCitas()) {
                 String fechaString = cita.getFecha_cita().format(dtf);
                 int fechaCita = Integer.parseInt(fechaString);
                 if (cita.getEstado() == 2 && fechaCita - 1 == jMonthChooser1.getMonth()) {
-                    modelo.addRow(new Object[]{cita.getId_cita(), cita.getCiudadano().getDni(), cita.getFecha_cita(), cvd.buscarCentroVacunacion(cita.getCentro_vacunacion()).getNombre()});
+                    modelo.addRow(new Object[]{cita.getId_cita(), cita.getCiudadano().getDni(), cita.getFecha_cita().format(dtfT), cvd.buscarCentroVacunacion(cita.getCentro_vacunacion()).getNombre()});
                 }
 
             }
@@ -281,6 +284,7 @@ public class ListadoDeCitas extends javax.swing.JInternalFrame {
         CentroVacunacionData cvd = new CentroVacunacionData();
         CitaData cd = new CitaData();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM");
+        DateTimeFormatter dtfT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         try {
             borrarFilas();
             for (Entidades.Cita cita : cd.listarCitas()) {
@@ -289,7 +293,7 @@ public class ListadoDeCitas extends javax.swing.JInternalFrame {
                 String fechaString = cita.getFecha_cita().format(dtf);
                 int fechaCita2 = Integer.parseInt(fechaString);
                 if (ChronoUnit.DAYS.between(fechaCita, fechaActual) > 15 && cita.getEstado() != 1 && cita.getEstado() == 0 && fechaCita2 - 1 == jMonthChooser1.getMonth()) {
-                    modelo.addRow(new Object[]{cita.getId_cita(), cita.getCiudadano().getDni(), cita.getFecha_cita(), cvd.buscarCentroVacunacion(cita.getCentro_vacunacion()).getNombre()});
+                    modelo.addRow(new Object[]{cita.getId_cita(), cita.getCiudadano().getDni(), cita.getFecha_cita().format(dtfT), cvd.buscarCentroVacunacion(cita.getCentro_vacunacion()).getNombre()});
                 }
 
             }

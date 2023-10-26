@@ -65,7 +65,7 @@ public class Laboratorio {
 
     @Override
     public String toString() {
-        return "Laboratorio{" + "cuit=" + cuit + ", nombre=" + nombre + ", pais_origen=" + pais_origen + ", direccion_fiscal=" + direccion_fiscal + '}';
+        return "Nombre: " + nombre + ", CUIT: " + cuit;
     }
     
     
