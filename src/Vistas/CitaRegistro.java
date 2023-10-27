@@ -11,8 +11,6 @@ import AccesoADatos.CiudadanoData;
 import AccesoADatos.VacunaData;
 import Entidades.CentroVacunacion;
 import Entidades.Cita;
-import Entidades.Ciudadano;
-import Entidades.Vacuna;
 import com.toedter.calendar.JDateChooser;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -257,7 +255,7 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
                 else if (cit.getEstado() == 1 && cit.getCodigo_refuerzo() < 3) {
                     LocalDateTime fechaCita = cit.getFecha_cita();
                     LocalDateTime nuevaFechaCita = fechaCita.plusWeeks(4);
-                    cit.setFecha_cita(nuevaFechaCita);
+                    ct.setFecha_cita(nuevaFechaCita);
                     if (cit.getCodigo_refuerzo() == 1) {
                         ct.setCodigo_refuerzo(2);
                     } else if (cit.getCodigo_refuerzo() == 2) {
