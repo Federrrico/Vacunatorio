@@ -198,6 +198,8 @@ public class LaboratorioV extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Revisar los datos ingresados!!");
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Solo tenes que ingresar numeros" + ex.getMessage());
+        }catch(ArrayIndexOutOfBoundsException ex){
+            JOptionPane.showMessageDialog(this, "Selecione una opcion para Guardar");
         }
     }//GEN-LAST:event_jEditarActionPerformed
 
