@@ -277,6 +277,7 @@ public class CargaVacuna extends javax.swing.JInternalFrame {
         boolean may = tecla >= 65 && tecla <= 90;
         boolean min = tecla >= 97 && tecla <= 122;
         boolean esp = tecla == 32;
+       
         if (!(may || min || esp)) {
             evt.consume();
         }
@@ -287,7 +288,8 @@ public class CargaVacuna extends javax.swing.JInternalFrame {
         boolean may = tecla >= 65 && tecla <= 90;
         boolean min = tecla >= 97 && tecla <= 122;
         boolean esp = tecla == 32;
-        if (!(may || min || esp)) {
+        boolean numeros = tecla >= 48 && tecla <= 57;
+        if (!(may || min || esp||numeros)) {
             evt.consume();
         }
     }//GEN-LAST:event_jTFAntigenoKeyTyped
