@@ -26,7 +26,11 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
         jtCorreo.setEditable(false);
         jtTelefono.setEditable(false);
         jtPatologia.setEditable(false);
-        jtAmbitolab.setEditable(false);
+        jCBAmbito.setEnabled(false);
+        jCBAmbito.addItem(null);
+        jCBAmbito.addItem("Salud");
+        jCBAmbito.addItem("Educación");
+        jCBAmbito.addItem("Otros");
         jbEditar.setEnabled(false);
         jCBLocalidad.setEnabled(false);
         jCBProvincia.setEnabled(false);
@@ -49,7 +53,6 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jbBuscar = new javax.swing.JButton();
-        jtAmbitolab = new javax.swing.JTextField();
         jtDni = new javax.swing.JTextField();
         jtNombre = new javax.swing.JTextField();
         jtCorreo = new javax.swing.JTextField();
@@ -68,6 +71,7 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         jCBLocalidad = new javax.swing.JComboBox<>();
         jCorreoInvalido = new javax.swing.JLabel();
+        jCBAmbito = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -87,13 +91,6 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBuscarActionPerformed(evt);
-            }
-        });
-
-        jtAmbitolab.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jtAmbitolab.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtAmbitolabKeyTyped(evt);
             }
         });
 
@@ -204,6 +201,17 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
         jCorreoInvalido.setForeground(new java.awt.Color(255, 0, 0));
         jCorreoInvalido.setText("Correo Inválido(*)");
 
+        jCBAmbito.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jCBAmbito.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+                jCBAmbitoPopupMenuWillBecomeVisible(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -219,15 +227,10 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
                     .addComponent(jLabel6)
                     .addComponent(jLabel10)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtPatologia, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtAmbitolab, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jCBLocalidad, javax.swing.GroupLayout.Alignment.LEADING, 0, 147, Short.MAX_VALUE)
-                        .addComponent(jCBProvincia, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
@@ -235,7 +238,12 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
-                        .addComponent(jCorreoInvalido)))
+                        .addComponent(jCorreoInvalido))
+                    .addComponent(jtPatologia, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jCBAmbito, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCBLocalidad, javax.swing.GroupLayout.Alignment.LEADING, 0, 147, Short.MAX_VALUE)
+                        .addComponent(jCBProvincia, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(40, 40, 40))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(60, 60, 60)
@@ -276,9 +284,9 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtPatologia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtAmbitolab, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCBAmbito, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -291,7 +299,7 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(287, Short.MAX_VALUE))
+                .addContainerGap(286, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 0, 450, 750));
@@ -313,8 +321,7 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
             jtCorreo.setText(c1.getCorreo_electronico());
             jtTelefono.setText(c1.getTelefono() + "");
             jtPatologia.setText(c1.getPatologia());
-            jtAmbitolab.setText(c1.getAmbito_laboral());
-            //jCBProvincia.addItem(c1.getProvincia());
+            jCBAmbito.setSelectedItem(c1.getAmbito_laboral());
             jCBProvincia.setSelectedItem(c1.getProvincia());
             jCBLocalidad.addItem(c1.getLocalidad());
             jCBLocalidad.setSelectedItem(c1.getLocalidad());
@@ -322,7 +329,7 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
             jtCorreo.setEditable(false);
             jtTelefono.setEditable(false);
             jtPatologia.setEditable(false);
-            jtAmbitolab.setEditable(false);
+            jCBAmbito.setEnabled(false);
             jCBLocalidad.setEnabled(false);
             jCBProvincia.setEnabled(false);
             jbEditar.setEnabled(true);
@@ -346,7 +353,7 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
             c1.setCorreo_electronico(jtCorreo.getText());
             c1.setTelefono(Long.parseLong(jtTelefono.getText()));
             c1.setPatologia(jtPatologia.getText());
-            c1.setAmbito_laboral(jtAmbitolab.getText());
+            c1.setAmbito_laboral(jCBAmbito.getSelectedItem().toString());
             c1.setProvincia(jCBProvincia.getSelectedItem().toString());
             c1.setLocalidad(jCBLocalidad.getSelectedItem().toString());
 
@@ -359,7 +366,7 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
                 jtCorreo.setEditable(false);
                 jtTelefono.setEditable(false);
                 jtPatologia.setEditable(false);
-                jtAmbitolab.setEditable(false);
+                jCBAmbito.setEnabled(false);
                 jCBLocalidad.setEnabled(false);
                 jCBProvincia.setEnabled(false);
                 jbEditar.setEnabled(false);
@@ -369,7 +376,7 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
                 jtCorreo.setEditable(true);
                 jtTelefono.setEditable(true);
                 jtPatologia.setEditable(true);
-                jtAmbitolab.setEditable(true);
+                jCBAmbito.setEnabled(true);
                 jCBProvincia.setEnabled(true);
                 jCBLocalidad.setEnabled(true);
                 jbEditar.setText("Modificar");
@@ -387,7 +394,7 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
         jtCorreo.setEditable(true);
         jtTelefono.setEditable(true);
         jtPatologia.setEditable(true);
-        jtAmbitolab.setEditable(true);
+        jCBAmbito.setEnabled(true);
         jCBLocalidad.setEnabled(true);
         jCBProvincia.setEnabled(true);
         jbBuscar.setEnabled(false);
@@ -400,19 +407,19 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
             jtCorreo.setEditable(false);
             jtTelefono.setEditable(false);
             jtPatologia.setEditable(false);
-            jtAmbitolab.setEditable(false);
+            jCBAmbito.setEnabled(false);
             jCBLocalidad.setEnabled(false);
             jCBProvincia.setEnabled(false);
             try {
                 if (!(jtDni.getText().isEmpty() && jtNombre.getText().isEmpty()
                         && jtCorreo.getText().isEmpty() && jtTelefono.getText().isEmpty()
-                        && jtAmbitolab.getText().isEmpty() && jCBLocalidad.getSelectedItem() == null && jCBProvincia.getSelectedItem() == null) && !(jCorreoInvalido.isVisible())) {
+                        && jCBAmbito.getSelectedItem() == null && jCBLocalidad.getSelectedItem() == null && jCBProvincia.getSelectedItem() == null) && !(jCorreoInvalido.isVisible())) {
                     c1.setDni(Integer.parseInt(jtDni.getText()));
                     c1.setNombre_completo(jtNombre.getText());
                     c1.setCorreo_electronico(jtCorreo.getText());
                     c1.setTelefono(Long.parseLong(jtTelefono.getText()));
                     c1.setPatologia(jtPatologia.getText());
-                    c1.setAmbito_laboral(jtAmbitolab.getText());
+                    c1.setAmbito_laboral(jCBAmbito.getSelectedItem().toString());
                     c1.setProvincia(jCBProvincia.getSelectedItem().toString());
                     c1.setLocalidad(jCBLocalidad.getSelectedItem().toString());
                     cd.guardarCiudadano(c1);
@@ -424,7 +431,7 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
                     jtCorreo.setEditable(false);
                     jtTelefono.setEditable(false);
                     jtPatologia.setEditable(false);
-                    jtAmbitolab.setEditable(false);
+                    jCBAmbito.setEnabled(false);
                     jCBLocalidad.setEnabled(false);
                     jCBProvincia.setEnabled(false);
                 } else {
@@ -517,15 +524,9 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jtPatologiaKeyTyped
 
-    private void jtAmbitolabKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtAmbitolabKeyTyped
-        int tecla = evt.getKeyChar();
-        boolean may = tecla >= 65 && tecla <= 90;
-        boolean min = tecla >= 97 && tecla <= 122;
-        boolean esp = tecla == 32;
-        if (!(may || min || esp)) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_jtAmbitolabKeyTyped
+    private void jCBAmbitoPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jCBAmbitoPopupMenuWillBecomeVisible
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBAmbitoPopupMenuWillBecomeVisible
 
     public boolean verificarCorreo(String correo) {
         // se compara con la expresion regular
@@ -541,12 +542,13 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
         jtCorreo.setText("");
         jtTelefono.setText("");
         jtPatologia.setText("");
-        jtAmbitolab.setText("");
+        jCBAmbito.setSelectedItem(null);
         jCBProvincia.setSelectedItem(null);
         jCBLocalidad.setSelectedItem(null);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> jCBAmbito;
     private javax.swing.JComboBox<String> jCBLocalidad;
     private javax.swing.JComboBox<String> jCBProvincia;
     private javax.swing.JLabel jCorreoInvalido;
@@ -564,7 +566,6 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbAgregar;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEditar;
-    private javax.swing.JTextField jtAmbitolab;
     private javax.swing.JTextField jtCorreo;
     private javax.swing.JTextField jtDni;
     private javax.swing.JTextField jtNombre;
