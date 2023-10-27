@@ -202,15 +202,6 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
         jCorreoInvalido.setText("Correo Inválido(*)");
 
         jCBAmbito.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jCBAmbito.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
-            }
-            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
-            }
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
-                jCBAmbitoPopupMenuWillBecomeVisible(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -523,10 +514,6 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
             evt.consume();
         }
     }//GEN-LAST:event_jtPatologiaKeyTyped
-
-    private void jCBAmbitoPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jCBAmbitoPopupMenuWillBecomeVisible
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCBAmbitoPopupMenuWillBecomeVisible
 
     public boolean verificarCorreo(String correo) {
         // se compara con la expresion regular
