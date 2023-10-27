@@ -256,4 +256,20 @@ public class CitaData {
         return citas;
     }
 
+      public int cantCitasDisponibles() {
+        int cantidad = 0;
+        try {
+            String sql = "SELECT COUNT(*) FROM cita WHERE estado = 0 ";
+            PreparedStatement ps = con.prepareStatement(sql);
+      
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                cantidad = rs.getInt(1);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla citas");
+        }
+        return cantidad;
+    }
 }

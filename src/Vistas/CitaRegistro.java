@@ -24,13 +24,33 @@ import javax.swing.JOptionPane;
  * @author Editor
  */
 public class CitaRegistro extends javax.swing.JInternalFrame {
-
+    
     /**
      * Creates new form Cita
      */
     public CitaRegistro() {
         initComponents();
         llenarcombo();
+       validarCantidades();
+    }
+    public boolean validarCantidades(){
+        //si Citas son mayores no se pueden dar mas citas
+    CitaData cdglo= new CitaData();
+    VacunaData vaglo= new VacunaData();
+    int citasdisp= cdglo.cantCitasDisponibles();
+    int vacudis= vaglo.cantVacunasDisponibles();
+        return  citasdisp > vacudis ;
+       
+        
+    }
+    public void LimpiarCampos(){
+    jtdni.setText("");
+    jCBCentroVacunacion.setSelectedItem(null);
+    jCBCodigoRefuerzo.setSelectedItem(null);
+    jDCfechaCal.setCalendar(null);
+    jSFMinutos.setValue(0);
+    jSFhora.setValue(0);
+    
     }
 
     public void llenarcombo() {
@@ -223,8 +243,10 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
             }
 
         } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(this, "No existen centros de vacunacion en la localidad " + cd.buscarCiudadano(Integer.parseInt(jtdni.getText())).getLocalidad());
+            JOptionPane.showMessageDialog(this, "No existen centros de vacunacion en la localidad ");
+            LimpiarCampos();
         } catch (NumberFormatException ex) {
+            LimpiarCampos();
         }
     }//GEN-LAST:event_jCBCentroVacunacionPopupMenuWillBecomeVisible
 
@@ -246,6 +268,11 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
             ct.setCentro_vacunacion(((CentroVacunacion) jCBCentroVacunacion.getSelectedItem()).getIdCV());
             ct.setCodigo_refuerzo((int) jCBCodigoRefuerzo.getSelectedItem());
             //ct.setVacuna(vac);
+            if (validarCantidades()) {
+                JOptionPane.showMessageDialog(this, "No se puede registrar una cita No hay Vacunas disponibles");
+             LimpiarCampos();
+                return;
+            }
             for (Entidades.Cita cit : cd.listarCitasCiudadano(ciuD.buscarCiudadano(Integer.parseInt(jtdni.getText())))) {
                 if (cit.getEstado() == 0){
                     JOptionPane.showMessageDialog(this, "El ciudadano tiene una cita en proceso");
@@ -272,12 +299,14 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
             } if (verif) {
                     
                   ct.setEstado(0);
-                  cd.guardarCita(ct);  
-                }
+                  cd.guardarCita(ct);
+                  LimpiarCampos();
+                   }
+        
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(this, "Verifica los datos ingresados " + ex);
+        
         }
-
 
     }//GEN-LAST:event_jBGenerarCitaActionPerformed
 

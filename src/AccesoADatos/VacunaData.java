@@ -221,4 +221,22 @@ public class VacunaData {
         }
         return cantidad;
     }
+    
+    public int cantVacunasDisponibles() {
+        int cantidad = 0;
+        try {
+            String sql = "SELECT COUNT(*) FROM vacuna WHERE aplicada = 0 ";
+            PreparedStatement ps = con.prepareStatement(sql);
+      
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                cantidad = rs.getInt(1);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Vacuna");
+        }
+        return cantidad;
+    }
+    
 }
