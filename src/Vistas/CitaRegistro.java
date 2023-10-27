@@ -8,6 +8,7 @@ package Vistas;
 import AccesoADatos.CentroVacunacionData;
 import AccesoADatos.CitaData;
 import AccesoADatos.CiudadanoData;
+import AccesoADatos.VacunaData;
 import Entidades.CentroVacunacion;
 import Entidades.Cita;
 import Entidades.Ciudadano;
@@ -238,18 +239,43 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy, MM, dd");
         CentroVacunacionData cvd = new CentroVacunacionData();
         CentroVacunacion cv = new CentroVacunacion();
-        Vacuna vac = new Vacuna();
-       
-
+        VacunaData vdt = new VacunaData();
+        boolean verif = true;
         try {
+            
             ct.setCiudadano(ciuD.buscarCiudadano(Integer.parseInt(jtdni.getText())));
             ct.setFecha_cita(LocalDateTime.of(LocalDate.parse(fecha, dtf), LocalTime.of(jSFhora.getValue(), jSFMinutos.getValue())));
-            ct.setCentro_vacunacion(((CentroVacunacion)jCBCentroVacunacion.getSelectedItem()).getIdCV());
+            ct.setCentro_vacunacion(((CentroVacunacion) jCBCentroVacunacion.getSelectedItem()).getIdCV());
             ct.setCodigo_refuerzo((int) jCBCodigoRefuerzo.getSelectedItem());
             //ct.setVacuna(vac);
-            ct.setEstado(0);
-            cd.guardarCita(ct);
-
+            for (Entidades.Cita cit : cd.listarCitasCiudadano(ciuD.buscarCiudadano(Integer.parseInt(jtdni.getText())))) {
+                if (cit.getEstado() == 0){
+                    JOptionPane.showMessageDialog(this, "El ciudadano tiene una cita en proceso");
+                     verif=false;
+                     break;
+                }
+                else if (cit.getEstado() == 1 && cit.getCodigo_refuerzo() < 3) {
+                    LocalDateTime fechaCita = cit.getFecha_cita();
+                    LocalDateTime nuevaFechaCita = fechaCita.plusWeeks(4);
+                    cit.setFecha_cita(nuevaFechaCita);
+                    if (cit.getCodigo_refuerzo() == 1) {
+                        ct.setCodigo_refuerzo(2);
+                    } else if (cit.getCodigo_refuerzo() == 2) {
+                        ct.setCodigo_refuerzo(3);
+                    }
+                    verif=true;
+                    JOptionPane.showMessageDialog(this, "El ciudadano ya tiene una dosis aplicada, \n"
+                            + "se genera cita automaticamente con fecha: " + nuevaFechaCita);
+                } else if (cit.getCodigo_refuerzo() == 3) {
+                    JOptionPane.showMessageDialog(this, "El Ciudadano ya tiene 3 dosis");
+                    verif=false;
+                    break;
+                } 
+            } if (verif) {
+                    
+                  ct.setEstado(0);
+                  cd.guardarCita(ct);  
+                }
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(this, "Verifica los datos ingresados " + ex);
         }
@@ -258,7 +284,7 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBGenerarCitaActionPerformed
 
     private void jtdniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtdniKeyTyped
-       int tecla = evt.getKeyChar();
+        int tecla = evt.getKeyChar();
         boolean numeros = tecla >= 48 && tecla <= 57;
         if (!(numeros)) {
             evt.consume();

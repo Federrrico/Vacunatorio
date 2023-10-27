@@ -346,7 +346,7 @@ public class VacunaRegistro extends javax.swing.JInternalFrame {
 
     private void jCentrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCentrosActionPerformed
         VacunaData vd = new VacunaData();
-        
+       try{ 
         String fecha = getFecha(jDCFechaColocacion);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy, MM, dd");
         CitaData cd = new CitaData();
@@ -361,7 +361,7 @@ public class VacunaRegistro extends javax.swing.JInternalFrame {
         jCentros.setEnabled(false);
         jCPostergar.setEnabled(false);
         jCancelar.setEnabled(false);
-
+       }catch(NullPointerException ex){}
 
     }//GEN-LAST:event_jCentrosActionPerformed
 
