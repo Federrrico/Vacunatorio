@@ -26,11 +26,16 @@ public class ListadoDeCitas extends javax.swing.JInternalFrame {
 
     public ListadoDeCitas() {
         initComponents();
-        modelo.addColumn("ID");
-        modelo.addColumn("CIUDADANO");
-        modelo.addColumn("FECHA");
-        modelo.addColumn("CENTRO VACUNACION");
+        modelo.addColumn("Id");
+        modelo.addColumn("Ciudadano");
+        modelo.addColumn("Fecha");
+        modelo.addColumn("Centro Vacunación");
         jTable1.setModel(modelo);
+        
+        jTable1.getColumnModel().getColumn(0).setPreferredWidth(70);
+        jTable1.getColumnModel().getColumn(1).setPreferredWidth(120);
+        jTable1.getColumnModel().getColumn(2).setPreferredWidth(130);
+        jTable1.getColumnModel().getColumn(3).setPreferredWidth(180);
     }
     
     private void borrarFilas(){
@@ -181,7 +186,6 @@ public class ListadoDeCitas extends javax.swing.JInternalFrame {
                     if (cita.getEstado() == 1 && fechaCita - 1 == jMonthChooser1.getMonth()) {
                         modelo.addRow(new Object[]{cita.getId_cita(), cita.getCiudadano().getDni(), cita.getFecha_colocacion().format(dtfT), cvd.buscarCentroVacunacion(cita.getCentro_vacunacion()).getNombre()});
                     }
-
                 }
             } catch (NullPointerException ex) {
                 JOptionPane.showMessageDialog(this, "Seleccione una opcion para obtener las citas deseadas");
@@ -200,7 +204,6 @@ public class ListadoDeCitas extends javax.swing.JInternalFrame {
                     if (cita.getEstado() == 2 && fechaCita - 1 == jMonthChooser1.getMonth()) {
                         modelo.addRow(new Object[]{cita.getId_cita(), cita.getCiudadano().getDni(), cita.getFecha_cita().format(dtfTCV), cvd.buscarCentroVacunacion(cita.getCentro_vacunacion()).getNombre()});
                     }
-
                 }
             } catch (NullPointerException ex) {
                 JOptionPane.showMessageDialog(this, "Seleccione una opcion para obtener las citas deseadas");
@@ -221,7 +224,6 @@ public class ListadoDeCitas extends javax.swing.JInternalFrame {
                     if (ChronoUnit.DAYS.between(fechaCita, fechaActual) > 15 && cita.getEstado() != 1 && cita.getEstado() != 2 && fechaCita2 - 1 == jMonthChooser1.getMonth()) {
                         modelo.addRow(new Object[]{cita.getId_cita(), cita.getCiudadano().getDni(), cita.getFecha_cita().format(dtfTCV), cvd.buscarCentroVacunacion(cita.getCentro_vacunacion()).getNombre()});
                     }
-
                 }
             } catch (NullPointerException ex) {
                 JOptionPane.showMessageDialog(this, "Seleccione una opcion para obtener las citas deseadas");
@@ -247,7 +249,6 @@ public class ListadoDeCitas extends javax.swing.JInternalFrame {
                 if (cita.getEstado() == 1 && fechaCita - 1 == jMonthChooser1.getMonth()) {
                     modelo.addRow(new Object[]{cita.getId_cita(), cita.getCiudadano().getDni(), cita.getFecha_colocacion().format(dtfT), cvd.buscarCentroVacunacion(cita.getCentro_vacunacion()).getNombre()});
                 }
-
             }
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(this, "Seleccione una opcion para obtener las citas deseadas");
@@ -270,7 +271,6 @@ public class ListadoDeCitas extends javax.swing.JInternalFrame {
                 if (cita.getEstado() == 2 && fechaCita - 1 == jMonthChooser1.getMonth()) {
                     modelo.addRow(new Object[]{cita.getId_cita(), cita.getCiudadano().getDni(), cita.getFecha_cita().format(dtfT), cvd.buscarCentroVacunacion(cita.getCentro_vacunacion()).getNombre()});
                 }
-
             }
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(this, "Seleccione una opcion para obtener las citas deseadas");
@@ -295,7 +295,6 @@ public class ListadoDeCitas extends javax.swing.JInternalFrame {
                 if (ChronoUnit.DAYS.between(fechaCita, fechaActual) > 15 && cita.getEstado() != 1 && cita.getEstado() == 0 && fechaCita2 - 1 == jMonthChooser1.getMonth()) {
                     modelo.addRow(new Object[]{cita.getId_cita(), cita.getCiudadano().getDni(), cita.getFecha_cita().format(dtfT), cvd.buscarCentroVacunacion(cita.getCentro_vacunacion()).getNombre()});
                 }
-
             }
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(this, "Seleccione una opcion para obtener las citas deseadas");

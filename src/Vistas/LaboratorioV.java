@@ -44,6 +44,12 @@ public class LaboratorioV extends javax.swing.JInternalFrame {
         modelo.addColumn("Pais");
         modelo.addColumn("Domicilio");
         jTable1.setModel(modelo);
+        
+        jTable1.getColumnModel().getColumn(0).setPreferredWidth(120);
+        jTable1.getColumnModel().getColumn(1).setPreferredWidth(120);
+        jTable1.getColumnModel().getColumn(2).setPreferredWidth(70);
+        jTable1.getColumnModel().getColumn(3).setPreferredWidth(180);
+        
         jEditar.setEnabled(false);
         llenarTabla();
     }

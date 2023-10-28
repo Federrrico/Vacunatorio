@@ -15,13 +15,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Enumeration;
 import javax.swing.JOptionPane;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.TableColumnModelListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
+
 
 /**
  *
@@ -34,12 +30,7 @@ public class VacunaRegistro extends javax.swing.JInternalFrame {
         public boolean isCellEditable(int row, int column) {
             return false; //To change body of generated methods, choose Tools | Templates.
         }
-        
-
     };
-    
-  
-
     
     //private SpinnerNumberModel spm = new SpinnerNumberModel();
 
@@ -51,19 +42,17 @@ public class VacunaRegistro extends javax.swing.JInternalFrame {
         modelo.addColumn("ID Cita");
         modelo.addColumn("Dosis");
         modelo.addColumn("Estado");
-        modelo.addColumn("Colocacion");
+        modelo.addColumn("Colocación");
         jTable1.setModel(modelo);
         
-        jTable1.getColumnModel().getColumn(0).setPreferredWidth(80);
-        jTable1.getColumnModel().getColumn(1).setPreferredWidth(70);
+        jTable1.getColumnModel().getColumn(0).setPreferredWidth(70);
+        jTable1.getColumnModel().getColumn(1).setPreferredWidth(100);
         jTable1.getColumnModel().getColumn(2).setPreferredWidth(90);
-        jTable1.getColumnModel().getColumn(3).setPreferredWidth(155);
+        jTable1.getColumnModel().getColumn(3).setPreferredWidth(125);
         
         jCentros.setEnabled(false);
         jCPostergar.setEnabled(false);
         jCancelar.setEnabled(false);
-        
-
     }
 
     private void borrarFilas() {
@@ -122,7 +111,6 @@ public class VacunaRegistro extends javax.swing.JInternalFrame {
                                 fechaCol});
                         }
                     }
-
                 }
             }
         } catch (NullPointerException ex) {
@@ -277,39 +265,33 @@ public class VacunaRegistro extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(jCPostergar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(jCentros, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(33, 33, 33)
-                                .addComponent(jcCiudadano, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel2))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jcCiudadano, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                         .addComponent(jDCFechaColocacion, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(60, 60, 60)
                                         .addComponent(jSFHoraColocacion, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(27, 27, 27)
                                         .addComponent(jSFMinColocacion, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jCVacuna, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
-                        .addGap(47, 47, 47))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33)
-                                .addComponent(jCPostergar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jCentros, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22))))
+                                    .addComponent(jCVacuna, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(47, 47, 47))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -361,23 +343,23 @@ public class VacunaRegistro extends javax.swing.JInternalFrame {
 
     private void jCentrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCentrosActionPerformed
         VacunaData vd = new VacunaData();
-       try{ 
-        String fecha = getFecha(jDCFechaColocacion);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy, MM, dd");
-        CitaData cd = new CitaData();
-        Entidades.Cita cita = cd.buscarCita(Integer.parseInt(modelo.getValueAt(jTable1.getSelectedRow(), 0).toString()));
-        cita.setFecha_colocacion(LocalDateTime.of(LocalDate.parse(fecha, dtf), LocalTime.of(jSFHoraColocacion.getValue(), jSFMinColocacion.getValue())));
-        cita.setEstado(1);
-        cita.setVacuna((Entidades.Vacuna)jCVacuna.getSelectedItem());
-        cd.modificarCita(cita);
-        Entidades.Vacuna vac = cita.getVacuna();
-        vd.colocarVacuna(vac);
-        
-        llenarTabla();
-        jCentros.setEnabled(false);
-        jCPostergar.setEnabled(false);
-        jCancelar.setEnabled(false);
-       }catch(NullPointerException ex){}
+        try {
+            String fecha = getFecha(jDCFechaColocacion);
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy, MM, dd");
+            CitaData cd = new CitaData();
+            Entidades.Cita cita = cd.buscarCita(Integer.parseInt(modelo.getValueAt(jTable1.getSelectedRow(), 0).toString()));
+            cita.setFecha_colocacion(LocalDateTime.of(LocalDate.parse(fecha, dtf), LocalTime.of(jSFHoraColocacion.getValue(), jSFMinColocacion.getValue())));
+            cita.setEstado(1);
+            cita.setVacuna((Entidades.Vacuna) jCVacuna.getSelectedItem());
+            cd.modificarCita(cita);
+            Entidades.Vacuna vac = cita.getVacuna();
+            vd.colocarVacuna(vac);
+
+            llenarTabla();
+            jCentros.setEnabled(false);
+            jCPostergar.setEnabled(false);
+            jCancelar.setEnabled(false);
+        } catch(NullPointerException ex){}
 
     }//GEN-LAST:event_jCentrosActionPerformed
 
@@ -392,7 +374,6 @@ public class VacunaRegistro extends javax.swing.JInternalFrame {
             }
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(this, "No existen ciudadanos en la BD");
-
         }
     }//GEN-LAST:event_jcCiudadanoPopupMenuWillBecomeVisible
 
@@ -408,11 +389,8 @@ public class VacunaRegistro extends javax.swing.JInternalFrame {
         if (!modelo.getValueAt(jTable1.getSelectedRow(), 2).equals("Colocada")) {
             jCentros.setEnabled(true);
             jCPostergar.setEnabled(true);
-            jCancelar.setEnabled(true);
-            
+            jCancelar.setEnabled(true);   
         }
-        
-
     }//GEN-LAST:event_jTable1MousePressed
 
     private void jCPostergarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCPostergarActionPerformed
@@ -443,8 +421,6 @@ public class VacunaRegistro extends javax.swing.JInternalFrame {
         jCentros.setEnabled(false);
         jCPostergar.setEnabled(false);
         jCancelar.setEnabled(false);
-
-
     }//GEN-LAST:event_jCancelarActionPerformed
 
     private void jCVacunaPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jCVacunaPopupMenuWillBecomeVisible
@@ -458,7 +434,6 @@ public class VacunaRegistro extends javax.swing.JInternalFrame {
             }
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(this, "No hay vacunas disponibles");
-
         }
     }//GEN-LAST:event_jCVacunaPopupMenuWillBecomeVisible
 
