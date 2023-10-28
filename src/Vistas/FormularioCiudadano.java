@@ -428,13 +428,11 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
                 } else {
                     JOptionPane.showMessageDialog(this, "Tenes que completar todos los campos");
                 }
-            } catch (NullPointerException e) {
-                JOptionPane.showMessageDialog(this, "Revisar los datos ingresados!!");
-            } catch (NumberFormatException ex) {
+            } catch (NullPointerException | NumberFormatException e) {
                 if (jtDni.getText().length() > 8) {
                     JOptionPane.showMessageDialog(this, "Excediste los digitos permitidos");
                 } else {
-                    JOptionPane.showMessageDialog(this, "Solo tenes que ingresar numeros" + ex.getMessage());
+                    JOptionPane.showMessageDialog(this, "Revisar los datos ingresados!!");
                 }
             }
         } else {

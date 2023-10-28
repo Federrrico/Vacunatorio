@@ -46,7 +46,7 @@ public class LaboratorioData {
             
           
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Laboratorio existente " + ex);
+            JOptionPane.showMessageDialog(null, "Laboratorio existente ");
         }
     }
     

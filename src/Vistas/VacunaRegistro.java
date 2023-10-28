@@ -15,8 +15,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Enumeration;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.TableColumnModelListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -29,8 +34,12 @@ public class VacunaRegistro extends javax.swing.JInternalFrame {
         public boolean isCellEditable(int row, int column) {
             return false; //To change body of generated methods, choose Tools | Templates.
         }
+        
 
     };
+    
+  
+
     
     //private SpinnerNumberModel spm = new SpinnerNumberModel();
 
@@ -44,7 +53,12 @@ public class VacunaRegistro extends javax.swing.JInternalFrame {
         modelo.addColumn("Estado");
         modelo.addColumn("Colocacion");
         jTable1.setModel(modelo);
-
+        
+        jTable1.getColumnModel().getColumn(0).setPreferredWidth(80);
+        jTable1.getColumnModel().getColumn(1).setPreferredWidth(70);
+        jTable1.getColumnModel().getColumn(2).setPreferredWidth(90);
+        jTable1.getColumnModel().getColumn(3).setPreferredWidth(155);
+        
         jCentros.setEnabled(false);
         jCPostergar.setEnabled(false);
         jCancelar.setEnabled(false);
@@ -182,6 +196,7 @@ public class VacunaRegistro extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jTable1MousePressed(evt);
@@ -357,6 +372,7 @@ public class VacunaRegistro extends javax.swing.JInternalFrame {
         cd.modificarCita(cita);
         Entidades.Vacuna vac = cita.getVacuna();
         vd.colocarVacuna(vac);
+        
         llenarTabla();
         jCentros.setEnabled(false);
         jCPostergar.setEnabled(false);
@@ -382,6 +398,7 @@ public class VacunaRegistro extends javax.swing.JInternalFrame {
 
     private void jcCiudadanoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcCiudadanoItemStateChanged
         llenarTabla();
+        
         jCentros.setEnabled(false);
         jCPostergar.setEnabled(false);
         jCancelar.setEnabled(false);

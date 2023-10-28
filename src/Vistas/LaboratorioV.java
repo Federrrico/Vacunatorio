@@ -10,8 +10,6 @@ import Entidades.Laboratorio;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
-
 /**
  *
  * @author Editor
@@ -23,13 +21,18 @@ public class LaboratorioV extends javax.swing.JInternalFrame {
     private DefaultTableModel modelo = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int rowIndex, int columnIndex) {
-            if (rowIndex == edit) {
-                return true;
-            } else {
+            if (columnIndex == 0) {
                 return false;
+            } else {
+                return true;
             }
         }
     };
+    
+    private String cuit;
+    private String nombre;
+    private String pais;
+    private String domicilio;
 
     /**
      * Creates new form Laboratorio
@@ -41,6 +44,7 @@ public class LaboratorioV extends javax.swing.JInternalFrame {
         modelo.addColumn("Pais");
         modelo.addColumn("Domicilio");
         jTable1.setModel(modelo);
+        jEditar.setEnabled(false);
         llenarTabla();
     }
 
@@ -124,6 +128,11 @@ public class LaboratorioV extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable1MousePressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -179,29 +188,62 @@ public class LaboratorioV extends javax.swing.JInternalFrame {
             if (jEditar.getText().equals("Guardar")) {
                 LaboratorioData ld = new LaboratorioData();
                 Laboratorio lab = new Laboratorio();
-
+                
                 lab.setCuit(Long.parseLong(modelo.getValueAt(jTable1.getSelectedRow(), 0).toString()));
                 lab.setNombre(modelo.getValueAt(jTable1.getSelectedRow(), 1).toString());
                 lab.setPais_origen(modelo.getValueAt(jTable1.getSelectedRow(), 2).toString());
                 lab.setDireccion_fiscal(modelo.getValueAt(jTable1.getSelectedRow(), 3).toString());
-                ld.modificarLaboratorio(lab);
-
+                if (!cuit.equalsIgnoreCase(modelo.getValueAt(jTable1.getSelectedRow(), 0).toString()) || 
+                        !nombre.equalsIgnoreCase(modelo.getValueAt(jTable1.getSelectedRow(), 1).toString()) ||
+                        !pais.equalsIgnoreCase(modelo.getValueAt(jTable1.getSelectedRow(), 2).toString()) ||
+                        !domicilio.equalsIgnoreCase(modelo.getValueAt(jTable1.getSelectedRow(), 3).toString())){
+                    ld.modificarLaboratorio(lab);
+                    llenarTabla();
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se ha realizado ninguna modificacion");
+                }
                 jEditar.setText("Editar");
+                jAgregar.setEnabled(true);
+                jTable1.clearSelection();
+                jEditar.setEnabled(false);
                 edit = -1;
                 modelo.isCellEditable(jTable1.getSelectedRow(), jTable1.getSelectedColumn());
             } else {
                 edit = jTable1.getSelectedRow();
                 modelo.isCellEditable(jTable1.getSelectedRow(), jTable1.getSelectedColumn());
                 jEditar.setText("Guardar");
+                jAgregar.setEnabled(false);
             }
+
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(this, "Revisar los datos ingresados!!");
+            if (jEditar.getText().equals("Guardar")) {
+                jEditar.setText("Editar");
+                jAgregar.setEnabled(true);
+            }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Solo tenes que ingresar numeros" + ex.getMessage());
-        }catch(ArrayIndexOutOfBoundsException ex){
+            if (jEditar.getText().equals("Guardar")) {
+                jEditar.setText("Editar");
+                jAgregar.setEnabled(true);
+            }
+        } catch (ArrayIndexOutOfBoundsException ex) {
             JOptionPane.showMessageDialog(this, "Selecione una opcion para Guardar");
+            if (jEditar.getText().equals("Guardar")) {
+                jEditar.setText("Editar");
+                jAgregar.setEnabled(true);
+            }
         }
     }//GEN-LAST:event_jEditarActionPerformed
+
+    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
+        jEditar.setEnabled(true);
+        jAgregar.setEnabled(false);
+        cuit = modelo.getValueAt(jTable1.getSelectedRow(), 0).toString();
+        nombre = modelo.getValueAt(jTable1.getSelectedRow(), 1).toString();
+        pais = modelo.getValueAt(jTable1.getSelectedRow(), 2).toString();
+        domicilio = modelo.getValueAt(jTable1.getSelectedRow(), 3).toString();
+    }//GEN-LAST:event_jTable1MousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

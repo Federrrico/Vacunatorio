@@ -110,7 +110,7 @@ public class Ciudadano {
 
     @Override
     public String toString() {
-        return "Ciudadano{" + "dni=" + dni + ", nombre_completo=" + nombre_completo + ", correo_electronico=" + correo_electronico + ", telefono=" + telefono + ", patologia=" + patologia + ", ambito_laboral=" + ambito_laboral + ", provincia=" + provincia + ", localidad=" + localidad + '}';
+        return "Dni: " + dni + ", Nombre: " + nombre_completo;
     }
 
       

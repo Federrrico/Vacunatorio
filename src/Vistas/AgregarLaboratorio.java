@@ -209,8 +209,8 @@ public class AgregarLaboratorio extends javax.swing.JInternalFrame {
         LaboratorioData lD = new LaboratorioData();
 
         try {
-            if (!(jTCuit.getText().isEmpty() && jTDomicilio.getText().isEmpty()
-                    && jTNombre.getText().isEmpty() && jTPais.getText().isEmpty())) {
+            if (!jTCuit.getText().isEmpty() && !jTDomicilio.getText().isEmpty()
+                    && !jTNombre.getText().isEmpty() && !jTPais.getText().isEmpty() && jTCuit.getText().length() >= 10) {
                 la.setCuit(Long.parseLong(jTCuit.getText()));
                 la.setNombre(jTNombre.getText());
                 la.setDireccion_fiscal(jTDomicilio.getText());
@@ -218,16 +218,11 @@ public class AgregarLaboratorio extends javax.swing.JInternalFrame {
                 lD.guardarLaboratorio(la);
                 limpiarCampos();
             } else {
-                JOptionPane.showMessageDialog(this, "Verifique que los campos no esten vacios");
+                JOptionPane.showMessageDialog(this, "Verifique los datos ingresados");
+                System.out.println("CUIT: " + jTCuit.getText() + "Length: " + jTCuit.getText().length());
             }
-        } catch (NullPointerException ex) {
+        } catch (NullPointerException | NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Verifique los datos ingresados");
-        } catch (NumberFormatException ex) {
-            if (jTCuit.getText().length() > 11 || jTCuit.getText().length() < 10) {
-                JOptionPane.showMessageDialog(this, "Revea la longitud del CUIT");
-            } else {
-                JOptionPane.showMessageDialog(this, "Solo tenes que ingresar numeros" + ex.getMessage());
-            }
         }
     }//GEN-LAST:event_jBGuardarActionPerformed
 
