@@ -414,6 +414,7 @@ public class VacunaRegistro extends javax.swing.JInternalFrame {
         cita.setFecha_cita(nuevaFechaCita);
         cita.setEstado(0);
         cd.modificarCita(cita);
+        LimpiarCampos();
 
         llenarTabla();
         jVacunar.setEnabled(false);
@@ -426,6 +427,7 @@ public class VacunaRegistro extends javax.swing.JInternalFrame {
     private void jCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCancelarActionPerformed
         CitaData cd = new CitaData();
         cd.eliminarCita(Integer.parseInt(modelo.getValueAt(jTable1.getSelectedRow(), 0).toString()));
+        LimpiarCampos();
         llenarTabla();
         jVacunar.setEnabled(false);
         jCPostergar.setEnabled(false);
