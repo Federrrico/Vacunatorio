@@ -249,7 +249,7 @@
               </Border>
             </Property>
             <Property name="maximum" type="int" value="17"/>
-            <Property name="minimum" type="int" value="10"/>
+            <Property name="minimum" type="int" value="8"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>

@@ -216,7 +216,7 @@ public class VacunaRegistro extends javax.swing.JInternalFrame {
 
         jSFHoraColocacion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jSFHoraColocacion.setMaximum(17);
-        jSFHoraColocacion.setMinimum(10);
+        jSFHoraColocacion.setMinimum(8);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("Fecha y Hora:");
