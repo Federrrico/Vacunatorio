@@ -152,6 +152,11 @@ public class Menu extends javax.swing.JFrame {
         jMenuBar1.add(jCita);
 
         jCentroDeVacunacion.setText("Centro de Vacunacion");
+        jCentroDeVacunacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCentroDeVacunacionActionPerformed(evt);
+            }
+        });
 
         jFormularioCentroVacunacion.setText("Formulario Centro Vacunacion");
         jFormularioCentroVacunacion.addActionListener(new java.awt.event.ActionListener() {
@@ -305,6 +310,17 @@ public class Menu extends javax.swing.JFrame {
         escritorio.add(lc);
         escritorio.moveToFront(lc);
     }//GEN-LAST:event_jConsultasActionPerformed
+
+    private void jCentroDeVacunacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCentroDeVacunacionActionPerformed
+         for (JInternalFrame iframe : escritorio.getAllFrames()) {
+            escritorio.remove(iframe);
+        }
+         escritorio.repaint();
+         ListadoDiario ld= new ListadoDiario();
+        ld.setVisible(true);
+        escritorio.add(ld);
+        escritorio.moveToFront(ld);
+    }//GEN-LAST:event_jCentroDeVacunacionActionPerformed
 
     /**
      * @param args the command line arguments

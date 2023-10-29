@@ -14,6 +14,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -34,8 +36,7 @@ public class CitaData {
         ciudadanoD = new CiudadanoData();
         vacunaD = new VacunaData();
     }
-    
-    
+
     public void guardarCita(Cita cita) {
 
         String sql = "INSERT INTO cita (ciudadano, fecha_cita, centro_vacunacion, codigo_refuerzo, estado) VALUES (?, ?, ?, ?, ?)";
@@ -57,7 +58,7 @@ public class CitaData {
                 JOptionPane.showMessageDialog(null, "Cita registrada con exito. Cita nro: " + cita.getId_cita());
             }
             ps.close();
-        
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Cita existente");
         }
@@ -78,10 +79,10 @@ public class CitaData {
                 //LocalDateTime.of(LocalDate.of(2023, 12, 10), LocalTime.MIN)
                 cita.setFecha_cita(rs.getTimestamp(3).toLocalDateTime());
                 cita.setCentro_vacunacion(rs.getInt(4));
-                if (rs.getTimestamp(5) != null){
+                if (rs.getTimestamp(5) != null) {
                     cita.setFecha_colocacion(rs.getTimestamp(5).toLocalDateTime());
                 }
-                if (rs.getInt(6) != 0){
+                if (rs.getInt(6) != 0) {
                     cita.setVacuna(vacunaD.buscarVacuna(rs.getInt(6)));
                 }
                 cita.setCodigo_refuerzo(rs.getInt(7));
@@ -115,10 +116,10 @@ public class CitaData {
                     cita.setFecha_colocacion(rs.getTimestamp("fecha_colocacion").toLocalDateTime());
                 }
                 //System.out.println(rs.getInt("vacuna"));
-                if (rs.getInt("vacuna")!=0) {
+                if (rs.getInt("vacuna") != 0) {
                     cita.setVacuna(vacunaD.buscarVacuna(rs.getInt("vacuna")));
                 }
-               
+
                 cita.setCodigo_refuerzo(rs.getInt("codigo_refuerzo"));
                 cita.setEstado(rs.getInt("estado"));
                 citas.add(cita);
@@ -140,17 +141,17 @@ public class CitaData {
             ps.setInt(1, cita.getCiudadano().getDni());
             ps.setTimestamp(2, Timestamp.valueOf(cita.getFecha_cita()));
             ps.setInt(3, cita.getCentro_vacunacion());
-            if (cita.getFecha_colocacion() != null){
+            if (cita.getFecha_colocacion() != null) {
                 ps.setTimestamp(4, Timestamp.valueOf(cita.getFecha_colocacion()));
             } else {
                 ps.setNull(4, 0);
             }
-            if (cita.getVacuna()!=null) {
+            if (cita.getVacuna() != null) {
                 ps.setInt(5, cita.getVacuna().getNro_serie());
-            }else{
-              ps.setNull(5, 0);
+            } else {
+                ps.setNull(5, 0);
             }
-           
+
             ps.setInt(6, cita.getCodigo_refuerzo());
             ps.setInt(7, cita.getEstado());
             ps.setInt(8, cita.getId_cita());
@@ -165,7 +166,7 @@ public class CitaData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cita ");
         }
     }
-    
+
     public void eliminarCita(int cita) {
         String sql = "UPDATE cita SET estado = 2 WHERE id_cita = ?";
         PreparedStatement ps = null;
@@ -185,7 +186,7 @@ public class CitaData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cita ");
         }
     }
-    
+
     public List<Cita> listarCitasCentroVac(CentroVacunacion cv) {
         List<Cita> citas = new ArrayList<>();
 
@@ -196,7 +197,7 @@ public class CitaData {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                
+
                 Cita cita = new Cita();
                 cita.setId_cita(rs.getInt("id_cita"));
                 cita.setCiudadano(ciudadanoD.buscarCiudadano(rs.getInt("ciudadano")));
@@ -206,10 +207,10 @@ public class CitaData {
                     cita.setFecha_colocacion(rs.getTimestamp("fecha_colocacion").toLocalDateTime());
                 }
                 //System.out.println(rs.getInt("vacuna"));
-                if (rs.getInt("vacuna")!=0) {
+                if (rs.getInt("vacuna") != 0) {
                     cita.setVacuna(vacunaD.buscarVacuna(rs.getInt("vacuna")));
                 }
-               
+
                 cita.setCodigo_refuerzo(rs.getInt("codigo_refuerzo"));
                 cita.setEstado(rs.getInt("estado"));
                 citas.add(cita);
@@ -220,8 +221,8 @@ public class CitaData {
         }
         return citas;
     }
-    
-     public List<Cita> listarCitasCiudadano(Ciudadano cv) {
+
+    public List<Cita> listarCitasCiudadano(Ciudadano cv) {
         List<Cita> citas = new ArrayList<>();
 
         try {
@@ -231,7 +232,7 @@ public class CitaData {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                
+
                 Cita cita = new Cita();
                 cita.setId_cita(rs.getInt("id_cita"));
                 cita.setCiudadano(ciudadanoD.buscarCiudadano(rs.getInt("ciudadano")));
@@ -241,10 +242,10 @@ public class CitaData {
                     cita.setFecha_colocacion(rs.getTimestamp("fecha_colocacion").toLocalDateTime());
                 }
                 //System.out.println(rs.getInt("vacuna"));
-                if (rs.getInt("vacuna")!=0) {
+                if (rs.getInt("vacuna") != 0) {
                     cita.setVacuna(vacunaD.buscarVacuna(rs.getInt("vacuna")));
                 }
-               
+
                 cita.setCodigo_refuerzo(rs.getInt("codigo_refuerzo"));
                 cita.setEstado(rs.getInt("estado"));
                 citas.add(cita);
@@ -256,12 +257,12 @@ public class CitaData {
         return citas;
     }
 
-      public int cantCitasDisponibles() {
+    public int cantCitasDisponibles() {
         int cantidad = 0;
         try {
             String sql = "SELECT COUNT(*) FROM cita WHERE estado = 0 ";
             PreparedStatement ps = con.prepareStatement(sql);
-      
+
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 cantidad = rs.getInt(1);
@@ -269,6 +270,26 @@ public class CitaData {
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla citas");
+        }
+        return cantidad;
+    }
+
+    public int cantVacunasAplicadasPorCentro( int ct, LocalDateTime fecha) {
+        int cantidad = 0;
+        try {
+            String sql = "SELECT COUNT(*) FROM cita WHERE centro_vacunacion = ? AND fecha_colocacion = ?  AND estado = 1 ";
+            PreparedStatement ps = con.prepareStatement(sql);
+           
+            ps.setInt(1, ct);
+            ps.setTimestamp(2, Timestamp.valueOf(fecha));
+          
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                cantidad = rs.getInt(1);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Cita");
         }
         return cantidad;
     }

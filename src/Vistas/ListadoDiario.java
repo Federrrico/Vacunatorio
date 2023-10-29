@@ -5,8 +5,18 @@
  */
 package Vistas;
 
+import AccesoADatos.CentroVacunacionData;
+import AccesoADatos.CitaData;
+import AccesoADatos.VacunaData;
+import Entidades.Cita;
+import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JDayChooser;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -14,7 +24,9 @@ import javax.swing.table.DefaultTableModel;
  * @author Editor
  */
 public class ListadoDiario extends javax.swing.JInternalFrame {
-private DefaultTableModel modelo= new DefaultTableModel();
+
+    private DefaultTableModel modelo = new DefaultTableModel();
+
     /**
      * Creates new form ListadoDiario
      */
@@ -23,6 +35,22 @@ private DefaultTableModel modelo= new DefaultTableModel();
         modelo.addColumn("Centro de Vacunación");
         modelo.addColumn("Dosis aplicadas");
         jTCentroDosis.setModel(modelo);
+    }
+
+    private void borrarFilas() {
+        int f = modelo.getRowCount() - 1;
+        for (; f >= 0; f--) {
+            modelo.removeRow(f);
+        }
+    }
+    SimpleDateFormat formato = new SimpleDateFormat("dd,MM,yyyy");
+
+    private String getFecha(JDateChooser jd) {
+        if (jd.getDate() != null) {
+            return formato.format(jd.getDate());
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -116,12 +144,29 @@ private DefaultTableModel modelo= new DefaultTableModel();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jDiaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDiaPropertyChange
-//        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-//        System.out.println("fecha chooser: " + jDia.getDateFormatString() + jDia.getDate());
-//        
-//        for (Object object : col) {
-//            
-//        }
+
+        DateTimeFormatter dtfTCV = DateTimeFormatter.ofPattern("dd,MM,yyyy");
+        try {
+            borrarFilas();
+            CitaData cd = new CitaData();
+            String fecho = getFecha(jDia);
+            CentroVacunacionData cvd = new CentroVacunacionData();
+            for (Entidades.Cita cita : cd.listarCitas()) {
+                LocalDate fechabase = cita.getFecha_colocacion().toLocalDate();
+                String fechaenString= fechabase.format(dtfTCV);
+                if (fecho.equals(fechaenString)) {
+                    modelo.addRow(new Object[]{cvd.buscarCentroVacunacion(cita.getCentro_vacunacion()),
+                        cd.cantVacunasAplicadasPorCentro(cita.getCentro_vacunacion(),
+                        cita.getFecha_colocacion())});
+
+                }
+                System.out.println(fechaenString + " fecha base datos");
+                System.out.println(fecho + " fecha date choser");
+
+            }
+        } catch (NullPointerException ex) {
+        }
+
     }//GEN-LAST:event_jDiaPropertyChange
 
 
