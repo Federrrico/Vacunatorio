@@ -48,12 +48,12 @@ public class Menu extends javax.swing.JFrame {
         jLaboratorio = new javax.swing.JMenu();
         jFormularioLaboratorio = new javax.swing.JMenuItem();
         jConsultas = new javax.swing.JMenuItem();
-        jVacuna = new javax.swing.JMenu();
-        jFormularioVacuna = new javax.swing.JMenuItem();
-        jCargaVacuna = new javax.swing.JMenuItem();
         jCita = new javax.swing.JMenu();
         jtCita = new javax.swing.JMenuItem();
         jListadoCitas = new javax.swing.JMenuItem();
+        jVacuna = new javax.swing.JMenu();
+        jFormularioVacuna = new javax.swing.JMenuItem();
+        jCargaVacuna = new javax.swing.JMenuItem();
         jCentroDeVacunacion = new javax.swing.JMenu();
         jFormularioCentroVacunacion = new javax.swing.JMenuItem();
         jListadoDiario = new javax.swing.JMenuItem();
@@ -111,26 +111,6 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jLaboratorio);
 
-        jVacuna.setText("Vacuna");
-
-        jFormularioVacuna.setText("Formulario Vacuna");
-        jFormularioVacuna.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormularioVacunaActionPerformed(evt);
-            }
-        });
-        jVacuna.add(jFormularioVacuna);
-
-        jCargaVacuna.setText("Carga de Vacuna");
-        jCargaVacuna.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCargaVacunaActionPerformed(evt);
-            }
-        });
-        jVacuna.add(jCargaVacuna);
-
-        jMenuBar1.add(jVacuna);
-
         jCita.setText("Cita");
 
         jtCita.setText("Registro de Cita");
@@ -150,6 +130,26 @@ public class Menu extends javax.swing.JFrame {
         jCita.add(jListadoCitas);
 
         jMenuBar1.add(jCita);
+
+        jVacuna.setText("Vacuna");
+
+        jFormularioVacuna.setText("Formulario Vacuna");
+        jFormularioVacuna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormularioVacunaActionPerformed(evt);
+            }
+        });
+        jVacuna.add(jFormularioVacuna);
+
+        jCargaVacuna.setText("Carga de Vacuna");
+        jCargaVacuna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCargaVacunaActionPerformed(evt);
+            }
+        });
+        jVacuna.add(jCargaVacuna);
+
+        jMenuBar1.add(jVacuna);
 
         jCentroDeVacunacion.setText("Centro de Vacunacion");
         jCentroDeVacunacion.addActionListener(new java.awt.event.ActionListener() {
