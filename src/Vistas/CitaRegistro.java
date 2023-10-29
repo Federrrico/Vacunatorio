@@ -318,7 +318,9 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
                 if (cit.getEstado() == 0){
                     JOptionPane.showMessageDialog(this, "El ciudadano tiene una cita en proceso");
                      verif=false;
+                     LimpiarCampos();
                      break;
+                     
                 }
                 else if (cit.getEstado() == 1 && cit.getCodigo_refuerzo() < 3) {
                     LocalDateTime fechaCita = cit.getFecha_cita();

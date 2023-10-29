@@ -445,7 +445,7 @@ public class FormularioCiudadano extends javax.swing.JInternalFrame {
         jCBLocalidad.removeAllItems();
         switch (provincia) {
             case "Cordoba":
-                jCBLocalidad.addItem("Carloz Paz");
+                jCBLocalidad.addItem("Carlos Paz");
                 jCBLocalidad.addItem("Capilla del Monte");
                 break;
             case "Entre Rios":
