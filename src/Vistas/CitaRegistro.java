@@ -181,6 +181,11 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
         numSTock.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         numSTock.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         numSTock.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        numSTock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numSTockActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -269,6 +274,7 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
             for (CentroVacunacion cv : cvd.listarCentroVacunacionsPorLocalidad(cd.buscarCiudadano(Integer.parseInt(jtdni.getText())).getLocalidad())) {
                 jCBCentroVacunacion.addItem(cv);
             }
+
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(this, "No existen centros de vacunacion en la localidad ");
             LimpiarCampos();
@@ -294,6 +300,7 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
             ct.setFecha_cita(LocalDateTime.of(LocalDate.parse(fecha, dtf), LocalTime.of(jSFhora.getValue(), jSFMinutos.getValue())));
             ct.setCentro_vacunacion(((CentroVacunacion) jCBCentroVacunacion.getSelectedItem()).getIdCV());
             ct.setCodigo_refuerzo((int) jCBCodigoRefuerzo.getSelectedItem());
+            //ct.setVacuna(vac);
             if (validarCantidades()) {
                 JOptionPane.showMessageDialog(this, "No se puede registrar una cita No hay Vacunas disponibles\n"
                         + "Para Generar una nueva Cita, debe cancelar una existente"
@@ -339,7 +346,7 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
                   LimpiarCampos();
                    }       
         } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(this, "Verifica los datos ingresados ");       
+            JOptionPane.showMessageDialog(this, "Verifica los datos ingresados " + ex);       
         }
     }//GEN-LAST:event_jBGenerarCitaActionPerformed
 
@@ -353,6 +360,10 @@ public class CitaRegistro extends javax.swing.JInternalFrame {
             evt.consume();
         }
     }//GEN-LAST:event_jtdniKeyTyped
+
+    private void numSTockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numSTockActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_numSTockActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
