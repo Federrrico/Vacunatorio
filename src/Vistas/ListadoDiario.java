@@ -148,21 +148,22 @@ public class ListadoDiario extends javax.swing.JInternalFrame {
         DateTimeFormatter dtfTCV = DateTimeFormatter.ofPattern("dd,MM,yyyy");
         try {
             borrarFilas();
-            CitaData cd = new CitaData();            
+            CitaData cd = new CitaData();
             String fecho = getFecha(jDia);
-            int cont=0;
             CentroVacunacionData cvd = new CentroVacunacionData();
             for (Entidades.Cita cita : cd.listarCitas()) {
                 LocalDate fechabase = cita.getFecha_colocacion().toLocalDate();
                 String fechaenString= fechabase.format(dtfTCV);
-                if (fecho.equals(fechaenString)&& cita.getFecha_colocacion()!=null&& cita.getVacuna()!=null) { 
-                
-                    cd.cantVacunasAplicadasPorCentro(cita.getCentro_vacunacion(),cita.getFecha_colocacion());
-                     cont++;
-                         modelo.addRow(new Object[]{cvd.buscarCentroVacunacion(cita.getCentro_vacunacion()),
-                        cont});                    
-                }                
-            }            
+                if (fecho.equals(fechaenString)) {
+                    modelo.addRow(new Object[]{cvd.buscarCentroVacunacion(cita.getCentro_vacunacion()),
+                        cd.cantVacunasAplicadasPorCentro(cita.getCentro_vacunacion(),
+                        cita.getFecha_colocacion())});
+
+                }
+                System.out.println(fechaenString + " fecha base datos");
+                System.out.println(fecho + " fecha date choser");
+
+            }
         } catch (NullPointerException ex) {
         }
 
