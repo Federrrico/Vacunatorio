@@ -152,19 +152,20 @@ public class ListadoDiario extends javax.swing.JInternalFrame {
             String fecho = getFecha(jDia);
             CentroVacunacionData cvd = new CentroVacunacionData();
             for (Entidades.Cita cita : cd.listarCitas()) {
-                LocalDate fechabase = cita.getFecha_colocacion().toLocalDate();
-                String fechaenString= fechabase.format(dtfTCV);
-                if (fecho.equals(fechaenString)) {
-                    modelo.addRow(new Object[]{cvd.buscarCentroVacunacion(cita.getCentro_vacunacion()),
-                        cd.cantVacunasAplicadasPorCentro(cita.getCentro_vacunacion(),
-                        cita.getFecha_colocacion())});
 
+                if (cita.getEstado() == 1) {
+                    LocalDate fechabase = cita.getFecha_colocacion().toLocalDate();
+                    String fechaenString = fechabase.format(dtfTCV);
+                    if (fecho.equals(fechaenString)) {
+                        modelo.addRow(new Object[]{cvd.buscarCentroVacunacion(cita.getCentro_vacunacion()),
+                            cd.cantVacunasAplicadasPorCentro(cita.getCentro_vacunacion(),
+                            cita.getFecha_colocacion())});
+                    }
                 }
-                System.out.println(fechaenString + " fecha base datos");
-                System.out.println(fecho + " fecha date choser");
 
             }
         } catch (NullPointerException ex) {
+            System.out.println("Hay un error al generar el listado por dia");
         }
 
     }//GEN-LAST:event_jDiaPropertyChange

@@ -120,7 +120,7 @@ public class Cita {
 
     @Override
     public String toString() {
-        return "Cita{" + "id_cita=" + id_cita + ", ciudadano=" + ciudadano.getDni() + ", fecha_cita=" + fecha_cita + ", centro_vacunacion=" + centro_vacunacion + ", fecha_colocacion=" + fecha_colocacion + ", vacuna=" + vacuna.getNombre_vacuna() + ", codigo_refuerzo=" + codigo_refuerzo + " Estado "+ estado+'}';
+        return "Cita: " + id_cita + " - Ciudadano: " + ciudadano.getNombre_completo() + " - Fecha Cita: " + fecha_cita + " - Centro Vacunacion: " + centro_vacunacion;
     }
 
 

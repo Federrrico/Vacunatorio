@@ -277,7 +277,7 @@ public class CitaData {
     public int cantVacunasAplicadasPorCentro( int ct, LocalDateTime fecha) {
         int cantidad = 0;
         try {
-            String sql = "SELECT COUNT(*) FROM cita WHERE centro_vacunacion = ? AND fecha_colocacion = ?  AND estado = 1 ";
+            String sql = "SELECT COUNT(*) FROM cita WHERE centro_vacunacion = ? AND fecha_colocacion = ? AND estado = 1";
             PreparedStatement ps = con.prepareStatement(sql);
            
             ps.setInt(1, ct);
